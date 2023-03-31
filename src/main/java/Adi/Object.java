@@ -208,11 +208,11 @@ public class Object extends ShaderProgram {
 
     // Buat Rotasi
     public void rotateObject(float degree, float x, float y, float z) {
-        model = new Matrix4f().rotate(degree, x, y, z).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)Math.toRadians(degree), x, y, z).mul(new Matrix4f(model));
 
         updateCenterPoint();
         for (Object child : childObject) {
-            child.rotateObject(degree, x, y, z);
+            child.rotateObject((float)Math.toRadians(degree), x, y, z);
         }
     }
 

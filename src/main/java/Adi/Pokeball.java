@@ -15,8 +15,8 @@ public class Pokeball {
             = new ArrayList<>();
 
     public void init() {
-        // Sphere Kuning
-        objects.add(new Sphere(
+        // Atas
+        objects.add(new HalfSphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -27,8 +27,24 @@ public class Pokeball {
                 0.1f,
                 36,
                 36,
-                new Vector4f(1.0f, 1.0f, 0.0f, 0.0f)
+                new Vector4f(1.0f, 0.0f, 0.0f, 0.0f)
         ));
+
+        // Bawah
+        objects.get(0).getChildObject().add(new HalfSphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector3f(0, 0, 0),
+                0.1f,
+                0.1f,
+                0.1f,
+                36,
+                36,
+                new Vector4f(1.0f, 1.0f, 1.0f, 0.0f)
+        ));
+        objects.get(0).getChildObject().get(0).rotateObject(180.0f, 0, 0, 1);
     }
 
     public void loop() {

@@ -31,7 +31,7 @@ public class HalfSphere extends Object {
 //        setupVAOVBO();
 //    }
 
-    // Constructor untuk Box
+    // Constructor untuk HalfSphere
     public HalfSphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int stackCount, int sectorCount, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
 
