@@ -1,8 +1,9 @@
+import Adi.Object;
 import Engine.*;
 import Adi.*;
-import Louis.*;
-import Ryan.*;
-//import Engine.Object;
+//import Louis.*;
+//import Ryan.*;
+
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -28,14 +29,32 @@ public class Main {
     private ArrayList<Object> objectsPointsControl
             = new ArrayList<>();
 
+    private Pokeball pokeball = new Pokeball();
+
     private MouseInput mouseInput;
     int countDegree = 0;
+
     public void init(){
         window.init();
         GL.createCapabilities();
         mouseInput = window.getMouseInput();
-        //code
 
+        //code
+        pokeball.init();
+//        // Matahari
+//        objects.add(new Sphere(
+//                Arrays.asList(
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+//                ),
+//                new Vector3f(0, 0, 0),
+//                0.1f,
+//                0.1f,
+//                0.1f,
+//                36,
+//                36,
+//                new Vector4f(1.0f, 1.0f, 0.0f, 0.0f)
+//        ));
     }
 
     public void input(){
@@ -80,6 +99,7 @@ public class Main {
 //        }
 
     }
+
     public void loop(){
         while (window.isOpen()) {
             window.update();
@@ -87,9 +107,10 @@ public class Main {
                     0.0f, 0.0f,
                     0.0f);
             GL.createCapabilities();
-            input();
+//            input();
 
             //code
+            pokeball.loop();
 //            for(Object object: objects){
 //                object.draw();
 //            }
