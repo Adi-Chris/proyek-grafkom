@@ -1,1 +1,8 @@
-(Placeholder)
+Adi Christian C14210091
+
+- Membuat Pokeball -> Kombinasi Sphere yang setengah bola, Torus, Sphere yang dipotong
+- Membuat Pokemon: Regice ->
+
+Catatan:
+Sphere:
+sectorCount -> Lingkaran 2Dnya

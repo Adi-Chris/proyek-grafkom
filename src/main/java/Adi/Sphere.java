@@ -10,33 +10,49 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL20C.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30C.glGenVertexArrays;
 
-public class Sphere extends Object {
-//    // Constructor
-//    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, int amountOfVertices, Vector4f color) {
-//        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
-//
-//        // Set the actual vertice value
-//        this.vertices = calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices);
-//        // Call Setup
-//        setupVAOVBO();
-//    }
-//
-//    // Constructor dengan angle (untuk Star)
-//    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, int amountOfVertices, Vector4f color, float rotation) {
-//        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
-//
-//        // Set the actual vertice value
-//        this.vertices = calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices, rotation);
-//        // Call Setup
-//        setupVAOVBO();
-//    }
+/*
+stackAngle = v
+sectorAngle = u
 
+sectorCount: Di tiap lingkaran yang atasbawah itu jumlahnya berapa (column)
+stackCount, ada berapa row dari sector
+*/
+
+public class Sphere extends Object {
     // Constructor untuk Sphere
-    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int stackCount, int sectorCount, Vector4f color) {
+    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
 
         // Set the actual vertice value
-        this.vertices = calculateSphereVertices(center, radiusX, radiusY, radiusZ, stackCount, sectorCount);
+        this.vertices = calculateSphereVertices(center, radiusX, radiusY, radiusZ, sectorCount, stackCount);
+
+        this.setCenterPoint(center);
+
+        // Call Setup
+        setupVAOVBO();
+    }
+
+    // Constructor untuk Sphere yang Egg Shell
+    // Frustum = ada berapa row yang diambil
+    // Asumsi: bottom frustum tidak negatif dan topfrustum < stackCount
+    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, int bottomFrustum, int topFrustum, Vector4f color) {
+        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
+
+        // Set the actual vertice value
+        this.vertices = calculateSphereVerticesWithFrustum(center, radiusX, radiusY, radiusZ, sectorCount, stackCount, bottomFrustum, topFrustum);
+
+        this.setCenterPoint(center);
+
+        // Call Setup
+        setupVAOVBO();
+    }
+
+    // Constructor untuk Sphere yang float
+    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, float sectorAngleRadian, float stackAngleRadian, Vector4f color) {
+        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
+
+        // Set the actual vertice value
+        this.vertices = calculateSphereVertices(center, radiusX, radiusY, radiusZ, sectorCount, stackCount, sectorAngleRadian, stackAngleRadian);
 
         this.setCenterPoint(center);
 
@@ -64,41 +80,7 @@ public class Sphere extends Object {
 //        // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
 //    }
 
-//    // Ellipse Vertices tanpa rotation
-//    public List<Vector3f> calculateEllipseVertices(Vector3f center, float radiusX, float radiusY, int amountOfVertices) {
-//        return calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices, 0);
-//    }
-//
-//    // Ellipse Vertices dengan rotation
-//    public List<Vector3f> calculateEllipseVertices(Vector3f center, float radiusX, float radiusY, int amountOfVertices, float rotation) {
-//        List<Vector3f> ellipseVertices = new ArrayList<Vector3f>();
-//        Vector3f secondVertice = new Vector3f(0, 0, 0);
-//
-//        // Hitung incTetha
-//        float incTetha = (float)360/amountOfVertices;
-//
-//        // Add centernya ke vertices
-//        ellipseVertices.add(center);
-//
-//        // Generate vertices
-//        for (int i = 0; i < amountOfVertices; i++) {
-//            double currentTethaRadians = Math.toRadians(i * incTetha + rotation);
-//            float posX = center.x + radiusX * (float)Math.cos(currentTethaRadians);
-//            float posY = center.y + radiusY * (float)Math.sin(currentTethaRadians);
-//
-//            ellipseVertices.add(new Vector3f(posX, posY, 0));
-//            if (i == 0) {
-//                secondVertice = new Vector3f(posX, posY, 0);
-//            }
-//        }
-//
-//        // Add Second Vertice ke vertices agar menjadi lingkaran penuh
-//        ellipseVertices.add(secondVertice);
-//
-//        // Return list verticenya
-//        return ellipseVertices;
-//    }
-
+    // TODO: Ini coba seperti rumus ellipsoid dipaskan v dan u rangenya
     public List<Vector3f> calculateSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount) {
         ArrayList<Vector3f> sphereVertices = new ArrayList<>();
 
@@ -111,7 +93,40 @@ public class Sphere extends Object {
 
         for(int i = 0; i <= stackCount; ++i)
         {
-            stackAngle = pi / 2 - i * stackStep;        // starting from pi/2 to -pi/2
+            stackAngle = - 1 * pi / 2 + i * stackStep;        // starting from -pi/2 to pi/2
+            x = radiusX * (float)Math.cos(stackAngle);
+            y = radiusY * (float)Math.cos(stackAngle);
+            z = radiusZ * (float)Math.sin(stackAngle);
+
+            // add (sectorCount+1) vertices per stack
+            // the first and last vertices have same position and normal, but different tex coords
+            for(int j = 0; j <= sectorCount; ++j)
+            {
+                sectorAngle = -1 * pi + j * sectorStep;           // starting from -pi to pi
+                Vector3f tempVector = new Vector3f();
+
+                tempVector.x = center.x + x * (float)Math.cos(sectorAngle);
+                tempVector.y = center.y + y * (float)Math.sin(sectorAngle);
+                tempVector.z = center.z + z;
+                sphereVertices.add(tempVector);
+            }
+        }
+        return sphereVertices;
+    }
+
+    public List<Vector3f> calculateSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, float sectorAngleRadian, float stackAngleRadian) {
+        ArrayList<Vector3f> sphereVertices = new ArrayList<>();
+
+        float pi = (float)Math.PI;
+
+        float sectorStep = sectorAngleRadian / sectorCount;
+        float stackStep = stackAngleRadian / stackCount;
+        float sectorAngle, stackAngle;
+        float x, y, z;
+
+        for(int i = 0; i <= stackCount; ++i)
+        {
+            stackAngle = i * stackStep;        // starting from 0 to 2pi ?
             x = radiusX * (float)Math.cos(stackAngle);
             y = radiusY * (float)Math.cos(stackAngle);
             z = radiusZ * (float)Math.sin(stackAngle);
@@ -131,4 +146,27 @@ public class Sphere extends Object {
         }
         return sphereVertices;
     }
+
+    // Frustum = ada berapa row yang diambil
+    // Asumsi: bottom frustum tidak negatif dan topfrustum < stackCount
+    public List<Vector3f> calculateSphereVerticesWithFrustum(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, int bottomFrustum, int topFrustum) {
+        List<Vector3f> sphereVertices = calculateSphereVertices(center, radiusX, radiusY, radiusZ, sectorCount, stackCount);
+        List<Vector3f> cutSphereVertices = new ArrayList<>();
+
+        System.out.println("Size: " + sphereVertices.size());
+
+        for (int i = bottomFrustum; i < topFrustum + 1; i++) {
+            System.out.println("i: " + i);
+            for (int j = 0; j < sectorCount + 1; j++) {
+                cutSphereVertices.add(sphereVertices.get(((sectorCount + 1) * i) + j));
+                System.out.println(((sectorCount + 1) * i) + j);
+            }
+        }
+
+        System.out.println("Size:" + cutSphereVertices.size());
+        System.out.println(cutSphereVertices);
+
+        return cutSphereVertices;
+    }
 }
+

@@ -11,26 +11,6 @@ import static org.lwjgl.opengl.GL20C.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30C.glGenVertexArrays;
 
 public class HalfSphere extends Object {
-    //    // Constructor
-//    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, int amountOfVertices, Vector4f color) {
-//        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
-//
-//        // Set the actual vertice value
-//        this.vertices = calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices);
-//        // Call Setup
-//        setupVAOVBO();
-//    }
-//
-//    // Constructor dengan angle (untuk Star)
-//    public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, int amountOfVertices, Vector4f color, float rotation) {
-//        super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
-//
-//        // Set the actual vertice value
-//        this.vertices = calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices, rotation);
-//        // Call Setup
-//        setupVAOVBO();
-//    }
-
     // Constructor untuk HalfSphere
     public HalfSphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int stackCount, int sectorCount, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
@@ -62,41 +42,6 @@ public class HalfSphere extends Object {
 //        // POINT
 //        // Parameter first dan end itu, vertices yang digambar mulai dari index keberapa, terus dari first ngegambar berapa kali.
 //        // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
-//    }
-
-//    // Ellipse Vertices tanpa rotation
-//    public List<Vector3f> calculateEllipseVertices(Vector3f center, float radiusX, float radiusY, int amountOfVertices) {
-//        return calculateEllipseVertices(center, radiusX, radiusY, amountOfVertices, 0);
-//    }
-//
-//    // Ellipse Vertices dengan rotation
-//    public List<Vector3f> calculateEllipseVertices(Vector3f center, float radiusX, float radiusY, int amountOfVertices, float rotation) {
-//        List<Vector3f> ellipseVertices = new ArrayList<Vector3f>();
-//        Vector3f secondVertice = new Vector3f(0, 0, 0);
-//
-//        // Hitung incTetha
-//        float incTetha = (float)360/amountOfVertices;
-//
-//        // Add centernya ke vertices
-//        ellipseVertices.add(center);
-//
-//        // Generate vertices
-//        for (int i = 0; i < amountOfVertices; i++) {
-//            double currentTethaRadians = Math.toRadians(i * incTetha + rotation);
-//            float posX = center.x + radiusX * (float)Math.cos(currentTethaRadians);
-//            float posY = center.y + radiusY * (float)Math.sin(currentTethaRadians);
-//
-//            ellipseVertices.add(new Vector3f(posX, posY, 0));
-//            if (i == 0) {
-//                secondVertice = new Vector3f(posX, posY, 0);
-//            }
-//        }
-//
-//        // Add Second Vertice ke vertices agar menjadi lingkaran penuh
-//        ellipseVertices.add(secondVertice);
-//
-//        // Return list verticenya
-//        return ellipseVertices;
 //    }
 
     public List<Vector3f> calculateHalfSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount) {

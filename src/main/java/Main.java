@@ -58,6 +58,11 @@ public class Main {
     }
 
     public void input(){
+                if (window.isKeyPressed(GLFW_KEY_W)) {
+                    countDegree++;
+                    //rotasi terhadap matahari
+                    pokeball.rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, 0.0f);
+                }
 //        if (window.isKeyPressed(GLFW_KEY_W)) {
 //            countDegree++;
 //            //rotasi terhadap matahari
@@ -103,11 +108,11 @@ public class Main {
     public void loop(){
         while (window.isOpen()) {
             window.update();
-            glClearColor(0.0f,
-                    0.0f, 0.0f,
+            glClearColor(1.0f,
+                    0.3f, 0.95f,
                     0.0f);
             GL.createCapabilities();
-//            input();
+            input();
 
             //code
             pokeball.loop();
