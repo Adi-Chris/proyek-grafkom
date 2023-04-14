@@ -19,25 +19,25 @@ public class Torus extends Object {
     int ibo;
 
     // Constructor untuk Torus
-    public Torus(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusToCenterTube, float radiusofTube, int stackCount, int sectorCount, Vector4f color) {
+    public Torus(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusToCenterTube, float radiusofTube, int sectorCount, int stackCount, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
 
         // Set the actual vertice value
-        this.vertices = calculateTorusVertices(center, radiusToCenterTube, radiusofTube, stackCount, sectorCount, (float) (2 * Math.PI));
+        this.vertices = calculateTorusVertices(center, radiusToCenterTube, radiusofTube, sectorCount, stackCount, (float) (2 * Math.PI));
 
         this.setCenterPoint(center);
 
         // Call Setup
         setupVAOVBO();
-        setupIBO(stackCount, sectorCount);
+        setupIBO(sectorCount, stackCount);
     }
 
     // Constructor untuk Torus dengan custom torusStackAngleRadian (Bisa untuk half torus, dll)
-    public Torus(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusToCenterTube, float radiusofTube, int stackCount, int sectorCount, float torusSectorAngleRadian, Vector4f color) {
+    public Torus(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusToCenterTube, float radiusofTube, int sectorCount, int stackCount, float torusSectorAngleRadian, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);
 
         // Set the actual vertice value
-        this.vertices = calculateTorusVertices(center, radiusToCenterTube, radiusofTube, stackCount, sectorCount, torusSectorAngleRadian);
+        this.vertices = calculateTorusVertices(center, radiusToCenterTube, radiusofTube, sectorCount, stackCount, torusSectorAngleRadian);
 
         this.setCenterPoint(center);
 
@@ -150,7 +150,7 @@ public class Torus extends Object {
         return torusVertices;
     }
 
-    public void setupIBO(int stackCount, int sectorCount) {
+    public void setupIBO(int sectorCount, int stackCount) {
         // Setup urutan index dan ibo
 //        index = Arrays.asList(0, 3, 3, 1, 1, 4, 4, 2, 2, 0);
 
@@ -195,12 +195,10 @@ public class Torus extends Object {
 
 
         }
-        System.out.println(index);
+//        System.out.println(index);
 
         ibo = glGenBuffers();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, Utils.listoInt(index), GL_STATIC_DRAW);
     }
 }
-
-// TODO: CEK INI KEBALIK ATAU GAK STACK DAN SECTORNYA

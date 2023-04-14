@@ -80,7 +80,6 @@ public class Sphere extends Object {
 //        // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
 //    }
 
-    // TODO: Ini coba seperti rumus ellipsoid dipaskan v dan u rangenya
     public List<Vector3f> calculateSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount) {
         ArrayList<Vector3f> sphereVertices = new ArrayList<>();
 
@@ -114,6 +113,7 @@ public class Sphere extends Object {
         return sphereVertices;
     }
 
+    // TODO: Ini coba seperti rumus ellipsoid dipaskan v dan u rangenya
     public List<Vector3f> calculateSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, float sectorAngleRadian, float stackAngleRadian) {
         ArrayList<Vector3f> sphereVertices = new ArrayList<>();
 
@@ -152,19 +152,17 @@ public class Sphere extends Object {
     public List<Vector3f> calculateSphereVerticesWithFrustum(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, int bottomFrustum, int topFrustum) {
         List<Vector3f> sphereVertices = calculateSphereVertices(center, radiusX, radiusY, radiusZ, sectorCount, stackCount);
         List<Vector3f> cutSphereVertices = new ArrayList<>();
-
-        System.out.println("Size: " + sphereVertices.size());
+//        System.out.println("Size: " + sphereVertices.size());
 
         for (int i = bottomFrustum; i < topFrustum + 1; i++) {
-            System.out.println("i: " + i);
+//            System.out.println("i: " + i);
             for (int j = 0; j < sectorCount + 1; j++) {
                 cutSphereVertices.add(sphereVertices.get(((sectorCount + 1) * i) + j));
-                System.out.println(((sectorCount + 1) * i) + j);
+//                System.out.println(((sectorCount + 1) * i) + j);
             }
         }
-
-        System.out.println("Size:" + cutSphereVertices.size());
-        System.out.println(cutSphereVertices);
+//        System.out.println("Size:" + cutSphereVertices.size());
+//        System.out.println(cutSphereVertices);
 
         return cutSphereVertices;
     }

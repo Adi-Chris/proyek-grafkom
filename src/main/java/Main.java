@@ -20,7 +20,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class Main {
     private Window window =
             new Window
-                    (800,800,"Hello World");
+                    (800, 800, "Hello World");
     private ArrayList<Object> objects
             = new ArrayList<>();
     private ArrayList<Object> objectsRectangle
@@ -29,12 +29,13 @@ public class Main {
     private ArrayList<Object> objectsPointsControl
             = new ArrayList<>();
 
+    // Object Adi
     private Pokeball pokeball = new Pokeball();
 
     private MouseInput mouseInput;
     int countDegree = 0;
 
-    public void init(){
+    public void init() {
         window.init();
         GL.createCapabilities();
         mouseInput = window.getMouseInput();
@@ -57,12 +58,23 @@ public class Main {
 //        ));
     }
 
-    public void input(){
-                if (window.isKeyPressed(GLFW_KEY_W)) {
-                    countDegree++;
-                    //rotasi terhadap matahari
-                    pokeball.rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, 0.0f);
-                }
+    public void input() {
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            // Rotasi
+            pokeball.rotateObject(10f, 1.0f, 0.0f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            // Rotasi
+            pokeball.rotateObject(10f, 0.0f, 1.0f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_S)) {
+            // Rotasi
+            pokeball.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_D)) {
+            // Rotasi
+            pokeball.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
+        }
 //        if (window.isKeyPressed(GLFW_KEY_W)) {
 //            countDegree++;
 //            //rotasi terhadap matahari
@@ -105,7 +117,7 @@ public class Main {
 
     }
 
-    public void loop(){
+    public void loop() {
         while (window.isOpen()) {
             window.update();
             glClearColor(1.0f,
@@ -135,6 +147,7 @@ public class Main {
             glfwPollEvents();
         }
     }
+
     public void run() {
 
         init();
@@ -145,6 +158,7 @@ public class Main {
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
+
     public static void main(String[] args) {
         new Main().run();
     }

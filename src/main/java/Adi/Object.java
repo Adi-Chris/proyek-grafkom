@@ -212,7 +212,7 @@ public class Object extends ShaderProgram {
 
         updateCenterPoint();
         for (Object child : childObject) {
-            child.rotateObject((float)Math.toRadians(degree), x, y, z);
+            child.rotateObject(degree, x, y, z);
         }
     }
 

@@ -14,55 +14,44 @@ public class Pokeball {
     private ArrayList<Object> objects = new ArrayList<>();
 
     public void init() {
-//        // Atas
-                objects.add(new Sphere(
+        // Atas
+        objects.add(new Sphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
                 ),
                 new Vector3f(0, 0, 0),
-                0.25f,
-                0.25f,
-                0.25f,
-                36,
-                36,
-        0,
-                        1,
-//                (float)Math.PI,
-//                (float)Math.PI / 2,
-                new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
+                1f,
+                1f,
+                1f,
+                180,
+                180,
+                0,
+                80,
+                new Vector4f(1.0f, 0.0f, 0.0f, 0.0f)
         ));
-//                objects.get(0).rotateObject(90.0f, 0, 1, 0);
-//        objects.add(new HalfSphere(
-//                Arrays.asList(
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
-//                ),
-//                new Vector3f(0, 0, 0),
-//                0.1f,
-//                0.1f,
-//                0.1f,
-//                36,
-//                36,
-//                new Vector4f(1.0f, 0.0f, 0.0f, 0.0f)
-//        ));
-//
-//        // Bawah
-//        objects.get(0).getChildObject().add(new HalfSphere(
-//                Arrays.asList(
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
-//                ),
-//                new Vector3f(0, 0, 0),
-//                0.1f,
-//                0.1f,
-//                0.1f,
-//                36,
-//                36,
-//                new Vector4f(1.0f, 1.0f, 1.0f, 0.0f)
-//        ));
-//        objects.get(0).getChildObject().get(0).rotateObject(180.0f, 0, 0, 1);
-//
+        objects.get(0).scaleObject(0.1f, 0.1f, 0.1f);
+        objects.get(0).rotateObject(90.0f, 1, 0, 0);
+
+        // Bawah
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector3f(0, 0, 0),
+                1f,
+                1f,
+                1f,
+                180,
+                180,
+                0,
+                80,
+                new Vector4f(1.0f, 1.0f, 1.0f, 0.0f)
+        ));
+        objects.get(0).getChildObject().get(0).scaleObject(0.1f, 0.1f, 0.1f);
+        objects.get(0).getChildObject().get(0).rotateObject(-90.0f, 1, 0, 0);
+
         // Ring
         objects.get(0).getChildObject().add(new Torus(
                 Arrays.asList(
@@ -70,13 +59,51 @@ public class Pokeball {
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
                 ),
                 new Vector3f(0, 0, 0),
-                0.5f,
-                0.2f,
-                36,
-                36,
+                0.0875f,
+                0.0175f,
+                180,
+                180,
                 new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
         ));
-//        objects.get(0).getChildObject().get(1).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(1).rotateObject(90.0f, 1, 0, 0);
+
+        // Depan Hitam
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector3f(0, 0, 0),
+                1f,
+                1f,
+                1f,
+                180,
+                180,
+                0,
+                30,
+                new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
+        ));
+        objects.get(0).getChildObject().get(2).scaleObject(0.075f, 0.075f, 0.075f);
+        objects.get(0).getChildObject().get(2).translateObject(0.0f, 0.0f, -0.0375f);
+
+        // Depan Putih
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector3f(0, 0, 0),
+                1f,
+                1f,
+                1f,
+                180,
+                180,
+                0,
+                20,
+                new Vector4f(1.0f, 1.0f, 1.0f, 0.0f)
+        ));
+        objects.get(0).getChildObject().get(3).scaleObject(0.075f, 0.075f, 0.075f);
+        objects.get(0).getChildObject().get(3).translateObject(0.0f, 0.0f, -0.04f);
     }
 
     public void loop() {
