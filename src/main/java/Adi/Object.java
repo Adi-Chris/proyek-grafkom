@@ -313,7 +313,7 @@ public class Object extends ShaderProgram {
         Vector3f destTemp = new Vector3f();
         model.transformPosition(0.0f,0.0f,0.0f,destTemp);
         centerPoint.set(destTemp.x, destTemp.y, destTemp.z);
-        System.out.println(centerPoint.get(0) + " " + centerPoint.get(1));
+//        System.out.println(centerPoint.get(0) + " " + centerPoint.get(1));
     }
 
     public List<Object> getChildObject() {
