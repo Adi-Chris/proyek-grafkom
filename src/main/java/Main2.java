@@ -2,6 +2,8 @@ import Engine.*;
 import Louis.*;
 
 import Louis.Object;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 
@@ -12,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL30.*;
 
-// TODO: bezier curve, rotasi pada poros, gerakan tambahan
+// TODO: rotasi objek keseluruhan, gerakan tambahan, curve manual tanpa klik mouse, laporan (sisa animasi), video
 public class Main2 {
     private Window window = new Window(800, 800, "Window");
 
@@ -22,10 +24,15 @@ public class Main2 {
     ArrayList<Cube> objectCube = new ArrayList<>();
     ArrayList<HalfSphere> objectsHalfSphere = new ArrayList<>();
     ArrayList<Cylinder> objectsCylinder = new ArrayList<>();
+    ArrayList<Object> objectsPointsControl = new ArrayList<>();
+    ArrayList <Circle> objectsCircle = new ArrayList<>();
+    boolean overlap;
+    boolean isTouched;
 
     public void init() {
         window.init();
         GL.createCapabilities();
+        glEnable(GL_DEPTH_TEST);
 
         // badan
         objectsSphere.add(new Sphere(
@@ -203,7 +210,7 @@ public class Main2 {
         objectsHalfTorus.get(1).rotateObject((float) Math.toRadians(180f), 0.0f, 1.0f, 0.0f);
         objectsHalfTorus.get(1).translateObject(0.35f, 0.0f, 0.0f);
 
-        // cube kanan atas
+//        // cube kanan atas
         objectCube.add(new Cube(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -342,71 +349,130 @@ public class Main2 {
                 0.0f, 0.0f, 0.0f, 0.02f, 0.07f, 0.02f
         ));
         objectsCylinder.get(0).translateObject(0.0f, 0.275f, 0.0f);
+
+        // warna garis antar titik
+        objectsPointsControl.add(new Object(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 1.0f, 1.0f, 1.0f)
+        ));
     }
 
     public void input() {
         // Rotate kiri kanan
         if (window.isKeyPressed(GLFW_KEY_1)) {
             for (int i = 0; i < objectsSphere.size(); i++) {
+//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
+//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+//                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
+//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
+//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
+//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
+//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
+//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
+//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
+//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
+//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // rotate atas bawah
         } else if (window.isKeyPressed(GLFW_KEY_2)) {
             for (int i = 0; i < objectsSphere.size(); i++) {
+//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
+//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
+//                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
+//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
+//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
+//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
+//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
+//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
+//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
+//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
+//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
+//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
+//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
+//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
+//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // rotate depan belakang
         } else if (window.isKeyPressed(GLFW_KEY_3)) {
             for (int i = 0; i < objectsSphere.size(); i++) {
+//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
+//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
+//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
+//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
+//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
+//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
+//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
+//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
             }
+//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
+//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
+//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // geser atas
         } else if (window.isKeyPressed(GLFW_KEY_W)) {
@@ -416,7 +482,6 @@ public class Main2 {
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
                 objectsHalfTorus.get(i).translateObject(0.0f, 0.01f, 0.0f);
-                objectsHalfTorus.get(i).setCenterY(objectsHalfTorus.get(i).getCenterY() + 0.01f);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
@@ -536,6 +601,55 @@ public class Main2 {
                 objectsCylinder.get(i).scaleObject(1.001f, 1.001f, 1.001f);
             }
         }
+
+        if (window.getMouseInput().isLeftButtonPressed()) {
+            Vector2f pos = window.getMouseInput().getCurrentPos();
+
+            pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
+            pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
+
+            if ((!(pos.x > 1 || pos.x < -0.97) && !(pos.y > 0.97 || pos.y < -1))) {
+                // print x y tempat diklik
+                // System.out.println("x : " + pos.x + " y : " + pos.y);
+                overlap = false;
+                int index = 0;
+
+                for (Circle object : objectsCircle) {
+                    overlap = object.isOverlap(pos.x, pos.y);
+                    if (overlap) {
+                        break;
+                    }
+                }
+
+                for (Circle object : objectsCircle) {
+                    isTouched = object.isTouched(pos.x, pos.y);
+                    if (isTouched) {
+                        objectsPointsControl.get(0).update(index, new Vector3f(pos.x, pos.y, 0));
+                        object.moveKotak(pos.x, pos.y, 0.01f);
+                    }
+                    index++;
+                }
+
+                if (!overlap) {
+                    objectsPointsControl.get(0).addVertices(new Vector3f(pos.x, pos.y, 0));
+                    // warna titik kontrol
+                    objectsCircle.add(new Circle(
+                            Arrays.asList(
+                                    //shaderFile lokasi menyesuaikan objectnya
+                                    new ShaderProgram.ShaderModuleData
+                                            ("resources/shaders/scene.vert"
+                                                    , GL_VERTEX_SHADER),
+                                    new ShaderProgram.ShaderModuleData
+                                            ("resources/shaders/scene.frag"
+                                                    , GL_FRAGMENT_SHADER)
+                            ),
+                            new ArrayList<>(),
+                            new Vector4f(0.0f, 1.0f, 0.0f, 0.0f),
+                            pos.x, pos.y, 0.01f, 0.01f
+                    ));
+                }
+            }
+        }
     }
 
     public void loop() {
@@ -543,6 +657,7 @@ public class Main2 {
             window.update();
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
             GL.createCapabilities();
+            glEnable(GL_DEPTH_TEST);
             input();
 
             //code
@@ -570,9 +685,64 @@ public class Main2 {
                 object.draw();
             }
 
+//            for (Object object : objectsPointsControl) {
+//                object.drawLine();
+//            }
+
+            ArrayList<Object> objectsCurve = calculatePoint(objectsCircle);
+            for (Object object : objectsCurve) {
+                object.drawLine();
+            }
+
+//            for (Circle object : objectsCircle) {
+//                object.draw();
+//            }
+
             glDisableVertexAttribArray(0);
             glfwPollEvents();
         }
+    }
+
+    public static ArrayList<Object> calculatePoint(ArrayList<Circle> arr) {
+        int n = arr.size() - 1;
+        ArrayList<Object> objectsCurve = new ArrayList<>();
+
+        // warna curve
+        objectsCurve.add(new Object(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert"
+                                        , GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag"
+                                        , GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(1.0f, 0.0f, 0.0f, 0.0f)
+        ));
+
+        for (float j = 0; j <= 1; j += 0.01f) {
+            float x = 0;
+            float y = 0;
+            for (int i = 0; i <= n; i++) {
+                double factor = combination(n, i) * Math.pow(1 - j, n - i) * Math.pow(j, i);
+                x += factor * arr.get(i).getCenterX();
+                y += factor * arr.get(i).getCenterY();
+            }
+            objectsCurve.get(0).addVertices((new Vector3f(x, y, 0)));
+        }
+
+        return objectsCurve;
+    }
+
+    public static int combination(int n, int k) {
+        int result = 1;
+        for (int i = 1; i <= k; i++) {
+            result *= n - i + 1;
+            result /= i;
+        }
+        return result;
     }
 
     public void run() {

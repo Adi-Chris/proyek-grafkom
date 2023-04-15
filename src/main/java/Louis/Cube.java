@@ -1,14 +1,10 @@
 package Louis;
 
-import Engine.*;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
 
 public class Cube extends Object {
     float centerX;

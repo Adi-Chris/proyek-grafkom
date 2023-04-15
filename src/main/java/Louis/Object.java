@@ -21,8 +21,6 @@ public class Object extends ShaderProgram {
     int vbo;
     Vector4f color;
     UniformsMap uniformsMap;
-    List<Vector3f> verticesColor;
-    int vboColor;
     Matrix4f model;
     List <Object> childObject;
 
@@ -80,9 +78,9 @@ public class Object extends ShaderProgram {
     }
 
     public void drawLine() {
-//        drawSetup();
+        drawSetup();
         // Draw the vertices
-        glLineWidth(1);
+        glLineWidth(2);
         glPointSize(0);
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
     }
