@@ -97,10 +97,27 @@ public class Sphere extends Object {
         vertices = temp;
     }
 
-//    public void drawIndices() {
-//        drawSetup();
-//        //Bind IBO & draw
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-//        glDrawElements(GL_LINE_STRIP, index.size(), GL_UNSIGNED_INT, 0);
-//    }
+    public void setCenterX(float centerX) {
+        this.centerX = centerX;
+    }
+
+    public void setCenterY(float centerY) {
+        this.centerY = centerY;
+    }
+
+    public void setCenterZ(float centerZ) {
+        this.centerZ = centerZ;
+    }
+
+    public float getCenterX() {
+        return centerX;
+    }
+
+    public float getCenterY() {
+        return centerY;
+    }
+
+    public float getCenterZ() {
+        return centerZ;
+    }
 }
