@@ -14,7 +14,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL30.*;
 
-// TODO: rotasi objek keseluruhan, gerakan tambahan, curve manual tanpa klik mouse, laporan (sisa animasi), video
+// TODO: gerakan tambahan, curve manual tanpa klik mouse, laporan (sisa animasi), video
 public class Main2 {
     private Window window = new Window(800, 800, "Window");
 
@@ -369,110 +369,112 @@ public class Main2 {
     public void input() {
         // Rotate kiri kanan
         if (window.isKeyPressed(GLFW_KEY_1)) {
-            for (int i = 0; i < objectsSphere.size(); i++) {
-//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
-//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+            objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
+
+            for (int i = 1; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-//                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
-//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
-//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
-//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
-//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
-//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
-//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
-//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
-//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // rotate atas bawah
         } else if (window.isKeyPressed(GLFW_KEY_2)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+            objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
+
             for (int i = 0; i < objectsSphere.size(); i++) {
-//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
-//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-//                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
-//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
-//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
-//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
-//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
-//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
-//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
-//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
-//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // rotate depan belakang
         } else if (window.isKeyPressed(GLFW_KEY_3)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+            objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
+
             for (int i = 0; i < objectsSphere.size(); i++) {
-//                Vector3f tmp = objectsSphere.get(i).updateCenterPoint();
-//                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfTorus.size(); i++) {
-//                Vector3f tmp = objectsHalfTorus.get(i).updateCenterPoint();
-//                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-//                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectCube.size(); i++) {
-//                Vector3f tmp = objectCube.get(i).updateCenterPoint();
-//                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-//                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
-//                Vector3f tmp = objectsHalfSphere.get(i).updateCenterPoint();
-//                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-//                objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+
 
             for (int i = 0; i < objectsCylinder.size(); i++) {
-//                Vector3f tmp = objectsCylinder.get(i).updateCenterPoint();
-//                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+                objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
                 objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-//                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+                objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
             // geser atas
         } else if (window.isKeyPressed(GLFW_KEY_W)) {
