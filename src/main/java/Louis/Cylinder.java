@@ -26,40 +26,7 @@ public class Cylinder extends Object {
         setupVAOVBO();
     }
 
-    public void createCylinderu() {
-        vertices.clear();
-        ArrayList<Vector3f> temp = new ArrayList<>();
-
-        // Create sides of cylinder
-        for (double theta = 0; theta <= Math.PI * 2; theta += Math.PI / 180) {
-            for (double v = 0; v <= 1; v += 1 / 180) {
-                float x = radiusX * (float) Math.cos(theta);
-                float y = radiusY * (float) v;
-                float z = radiusZ * (float) Math.sin(theta);
-                temp.add(new Vector3f(x, y - (radiusY / 2.0f), z));
-            }
-        }
-
-        // Create top cap of cylinder
-        for (double theta = 0; theta <= Math.PI * 2; theta += Math.PI / 180) {
-            float x = radiusX * (float) Math.cos(theta);
-            float y = radiusY / 2.0f;
-            float z = radiusZ * (float) Math.sin(theta);
-            temp.add(new Vector3f(x, y, z));
-        }
-
-        // Create bottom cap of cylinder
-        for (double theta = 0; theta <= Math.PI * 2; theta += Math.PI / 180) {
-            float x = radiusX * (float) Math.cos(theta);
-            float y = -radiusY / 2.0f;
-            float z = radiusZ * (float) Math.sin(theta);
-            temp.add(new Vector3f(x, y, z));
-        }
-
-        vertices = temp;
-    }
-
-
+    // kalau mau keliatan pakai line strip, pembaginya ganti 16
     public void createCylinder() {
         vertices.clear();
         ArrayList<Vector3f> temp = new ArrayList<>();
@@ -73,5 +40,29 @@ public class Cylinder extends Object {
             }
         }
         vertices = temp;
+    }
+
+    public void setCenterX(float centerX) {
+        this.centerX = centerX;
+    }
+
+    public void setCenterY(float centerY) {
+        this.centerY = centerY;
+    }
+
+    public void setCenterZ(float centerZ) {
+        this.centerZ = centerZ;
+    }
+
+    public float getCenterX() {
+        return centerX;
+    }
+
+    public float getCenterY() {
+        return centerY;
+    }
+
+    public float getCenterZ() {
+        return centerZ;
     }
 }

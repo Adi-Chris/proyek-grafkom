@@ -145,4 +145,28 @@ public class Cube extends Object {
         vertices.add(tempVertices.get(1));
         vertices.add(tempVertices.get(5));
     }
+
+    public void setCenterX(float centerX) {
+        this.centerX = centerX;
+    }
+
+    public void setCenterY(float centerY) {
+        this.centerY = centerY;
+    }
+
+    public void setCenterZ(float centerZ) {
+        this.centerZ = centerZ;
+    }
+
+    public float getCenterX() {
+        return centerX;
+    }
+
+    public float getCenterY() {
+        return centerY;
+    }
+
+    public float getCenterZ() {
+        return centerZ;
+    }
 }
