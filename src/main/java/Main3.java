@@ -1,6 +1,4 @@
 import Engine.*;
-import Adi.*;
-//import Louis.*;
 import Louis.HalfTorus;
 import Louis.Object;
 import Ryan.*;
@@ -30,7 +28,17 @@ public class Main3 {
     ArrayList<Ellipsoid> objectEllipsoid = new ArrayList<>();
     ArrayList<HalfSphere> objectsHS = new ArrayList<>();
     ArrayList<EllipticParaboloid> objectEP = new ArrayList<>();
-
+    ArrayList<Ryan.Object> berzier1 = new ArrayList<>();
+    ArrayList<Ryan.Object> berzier2 = new ArrayList<>();
+    int tes;
+    private static float[][] controlBerzier1 = {
+            { -0.0675f, 0.2925f, -0.2229f},
+            { -0.01f, 0.3325f, -0.2229f}
+    };
+    private static float[][] controlBerzier2 = {
+            { -0.01f, 0.3325f, -0.2229f},
+            { 0.0675f, 0.2925f, -0.2229f}
+    };
     private MouseInput mouseInput;
     int countDegree = 0;
 
@@ -39,7 +47,28 @@ public class Main3 {
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
         mouseInput = window.getMouseInput();
-
+        berzier1.add(new Ryan.Object(
+                Arrays.asList(
+                //shaderFile lokasi menyesuaikan objectnya
+                new ShaderProgram.ShaderModuleData
+                        ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                new ShaderProgram.ShaderModuleData
+                        ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+        ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
+        ));
+        berzier2.add(new Ryan.Object(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
+        ));
         //code
         // Kepala
         objectsSphere.add(new Sphere(
@@ -168,6 +197,12 @@ public class Main3 {
         objectsSphere.get(0).getChildObject().get(6).scaleObject(0.06f, 0.03f, 0.009f);
         objectsSphere.get(0).getChildObject().get(6).translateObject(0.11f,0.42f,-0.24f);
         objectsSphere.get(0).getChildObject().get(6).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+
+        // mulut
+        berzierMulut(controlBerzier1,0);
+        objectsSphere.get(0).getChildObject().add(berzier1.get(0));
+        berzierMulut(controlBerzier2,1);
+        objectsSphere.get(0).getChildObject().add(berzier2.get(0));
 
         // Badan
         objectEllipsoid.add(new Ellipsoid(
@@ -327,6 +362,31 @@ public class Main3 {
         objectEllipsoid.get(4).translateObject(-0.08f,-0.02f,0.15f);
     }
 
+    public void berzierMulut(float[][] floats, int pilihan) {
+        int indexBerzier = 0;
+        for (float t = 0; t <= 1; t += 0.01f) {
+            float x = 0;
+            float y = 0;
+            float z = 0;
+            int n = floats.length - 1;
+            for (int i = 0; i <= n; i++) {
+                int koefisien = koefSegitigaPascal(n, i);
+                float term = koefisien * (float) Math.pow(1 - t, n - i) * (float) Math.pow(t, i);
+                x += term * floats[i][0];
+                y += term * floats[i][1];
+                z += term * floats[i][2];
+            }
+            if (tes == 0) {
+                if (pilihan == 0){
+                    berzier1.get(0).addVertices(new Vector3f(x, y, z));
+                }
+                if (pilihan == 1){
+                    berzier2.get(0).addVertices(new Vector3f(x, y, z));
+                }
+            }
+        }
+    }
+
     public void input() {
         if (window.isKeyPressed(GLFW_KEY_UP) || window.isKeyPressed(GLFW_KEY_W)) {
             objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
@@ -364,7 +424,14 @@ public class Main3 {
             objectEllipsoid.get(3).rotateObject((float) Math.toRadians(-0.5f), 0.0f, 1.0f, 0.0f);
             objectEllipsoid.get(4).rotateObject((float) Math.toRadians(-0.5f), 0.0f, 1.0f, 0.0f);
         }
+        if (window.getMouseInput().isLeftButtonPressed()) {
+            Vector2f pos = window.getMouseInput().getCurrentPos();
+            System.out.println("x : " + pos.x + "y : " + pos.y);
 
+            // dinormalisasi biar titik 0,0 itu di tengah
+            pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
+            pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
+        }
     }
 
     public void loop() {
@@ -392,6 +459,12 @@ public class Main3 {
             for(HalfSphere object: objectsHS){
                 object.draw();
             }
+            for (Ryan.Object object: berzier1){
+                object.drawLine();
+            }
+            for (Ryan.Object object: berzier2){
+                object.drawLine();
+            }
             // Restore state
             glDisableVertexAttribArray(0);
 
@@ -401,7 +474,6 @@ public class Main3 {
             glfwPollEvents();
         }
     }
-
     public void run() {
 
         init();
@@ -412,6 +484,19 @@ public class Main3 {
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
+
+    public int koefSegitigaPascal(int n, int k) {
+        if (k < 0 || k > n) {
+            return 0;
+        }
+        int koef = 1;
+        for (int i = 0; i < k; i++) {
+            koef *= (n - i);
+            koef /= (i + 1);
+        }
+        return koef;
+    }
+
 
     public static void main(String[] args) {
         new Main3().run();
