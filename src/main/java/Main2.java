@@ -2,14 +2,11 @@ import Engine.*;
 import Louis.*;
 
 import Louis.Object;
-import org.joml.Vector2f;
-import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
@@ -23,7 +20,7 @@ public class Main2 {
     ArrayList<HalfTorus> objectsHalfTorus = new ArrayList<>();
     ArrayList<Cube> objectCube = new ArrayList<>();
     ArrayList<HalfSphere> objectsHalfSphere = new ArrayList<>();
-
+    ArrayList<Cylinder> objectsCylinder = new ArrayList<>();
 
     public void init() {
         window.init();
@@ -261,7 +258,7 @@ public class Main2 {
         ));
         objectCube.get(7).translateObject(0.45f, -0.0775f, 0.0f);
 
-        // kepala
+        // half sphere paling atas
         objectsHalfSphere.add(new HalfSphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData
@@ -277,7 +274,7 @@ public class Main2 {
                 180,
                 180
         ));
-        objectsHalfSphere.get(0).translateObject(0.0f, 0.325f, 0.0f);
+        objectsHalfSphere.get(0).translateObject(0.0f, 0.3f, 0.0f);
 
         // + kaki kiri
         objectCube.add(new Cube(
@@ -332,6 +329,20 @@ public class Main2 {
                 0.0f, 0.0f, 0.0f, 0.04f, 0.015f, 0.01f
         ));
         objectCube.get(11).translateObject(0.17f, -0.14f, -0.2f);
+
+        // silinder penyambung
+        objectsCylinder.add(new Cylinder(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ), new ArrayList<>(),
+                new Vector4f(0.435f, 0.42f, 0.467f, 0.0f),
+                0.0f, 0.0f, 0.0f, 0.02f, 0.07f, 0.02f
+        ));
+        objectsCylinder.get(0).translateObject(0.0f, 0.275f, 0.0f);
     }
 
     public void input() {
@@ -348,6 +359,10 @@ public class Main2 {
 
             for (int i = 0; i < objectsHalfSphere.size(); i++) {
                 objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
             }
 
 //            for (Object child : objectsSphere.get(0).getChildObject()) {
@@ -391,6 +406,10 @@ public class Main2 {
             }
 
             for (HalfSphere object : objectsHalfSphere) {
+                object.draw();
+            }
+
+            for (Cylinder object : objectsCylinder) {
                 object.draw();
             }
 
