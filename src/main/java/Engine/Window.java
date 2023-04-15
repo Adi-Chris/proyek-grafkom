@@ -139,5 +139,4 @@ public class Window {
     public MouseInput getMouseInput() {
         return mouseInput;
     }
-
 }
