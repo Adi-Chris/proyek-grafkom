@@ -1,8 +1,12 @@
 Adi Christian C14210091
 
-- Membuat Pokeball -> Kombinasi Sphere yang setengah bola, Torus, Sphere yang dipotong
-- Membuat Pokemon: Regice ->
+- Membuat Pokeball -> Kombinasi Sphere dengan frustum dan Torus
+- Membuat Pokemon-Regice -> Kombinasi Cone dengan frustum, Cylinder dengan frustum, dan Bezier Curve
 
 Catatan:
 Sphere:
-sectorCount -> Lingkaran 2Dnya
+sectorCount -> Lingkaran 2Dnya (O)
+
+Torus:
+sectorCount: Seberapa banyak sisi di lingkaran 2Dnya (O)
+stackCount: Seberapa banyak sisi di tiap sectornya

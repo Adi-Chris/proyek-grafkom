@@ -104,6 +104,8 @@ public class Pokeball {
         ));
         objects.get(0).getChildObject().get(3).scaleObject(0.075f, 0.075f, 0.075f);
         objects.get(0).getChildObject().get(3).translateObject(0.0f, 0.0f, -0.04f);
+
+
     }
 
     public void loop() {
