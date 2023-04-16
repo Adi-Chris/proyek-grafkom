@@ -90,11 +90,6 @@ public class Object extends ShaderProgram {
         setupVAOVBO();
     }
 
-    public void changeVertices(int i, Vector3f newVector){
-        vertices.set(i, newVector);
-        setupVAOVBO();
-    }
-
     public void update(int index, Vector3f newVector) {
         vertices.set(index, newVector);
         setupVAOVBO();
