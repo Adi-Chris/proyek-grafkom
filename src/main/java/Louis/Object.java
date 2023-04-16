@@ -80,13 +80,18 @@ public class Object extends ShaderProgram {
     public void drawLine() {
         drawSetup();
         // Draw the vertices
-        glLineWidth(2);
-        glPointSize(0);
+        glLineWidth(5);
+        glPointSize(1);
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
     }
 
     public void addVertices(Vector3f newVector) {
         vertices.add(newVector);
+        setupVAOVBO();
+    }
+
+    public void changeVertices(int i, Vector3f newVector){
+        vertices.set(i, newVector);
         setupVAOVBO();
     }
 
