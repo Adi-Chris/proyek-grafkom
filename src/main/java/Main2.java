@@ -29,286 +29,75 @@ public class Main2 {
     }
 
     public void input() {
-        // rotate offsetY
+        // rotate offsetY (hadap kiri)
         if (window.isKeyPressed(GLFW_KEY_1) && animated == false) {
-            Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
-            magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-            magnemite.objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-
-            for (int i = 1; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                magnemite.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                magnemite.objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
+            magnemite.rotateMagnemite("yPlus");
         }
 
-        // rotate offsetX
+        // rotate offsetY (hadap kanan)
         if (window.isKeyPressed(GLFW_KEY_2) && animated == false) {
-            Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
-            magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-            magnemite.objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                magnemite.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                magnemite.objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
+            magnemite.rotateMagnemite("yMin");
         }
 
-        // rotate offsetZ
+        // rotate offsetX (muter atas)
         if (window.isKeyPressed(GLFW_KEY_3) && animated == false) {
-            Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
-            magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-            magnemite.objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
+            magnemite.rotateMagnemite("xPlus");
+        }
 
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-                magnemite.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
+        // rotate offsetX (muter bawah)
+        if (window.isKeyPressed(GLFW_KEY_4) && animated == false) {
+            magnemite.rotateMagnemite("xMin");
+        }
 
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-                magnemite.objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
+        // rotate offsetZ (muter kiri)
+        if (window.isKeyPressed(GLFW_KEY_5) && animated == false) {
+            magnemite.rotateMagnemite("zPlus");
+        }
 
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-                magnemite.objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
-                magnemite.objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
+        // rotate offsetZ (muter kanan)
+        if (window.isKeyPressed(GLFW_KEY_6) && animated == false) {
+            magnemite.rotateMagnemite("zMin");
         }
 
         // geser atas
         if (window.isKeyPressed(GLFW_KEY_W) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
+            magnemite.translateMagnemite("W");
         }
 
         // geser kiri
         if (window.isKeyPressed(GLFW_KEY_A) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
+            magnemite.translateMagnemite("A");
         }
 
         // geser kanan
         if (window.isKeyPressed(GLFW_KEY_D) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
+            magnemite.translateMagnemite("D");
         }
 
         // geser bawah
         if (window.isKeyPressed(GLFW_KEY_S) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
+            magnemite.translateMagnemite("S");
         }
 
         // kecilin
-        if (window.isKeyPressed(GLFW_KEY_4) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
+        if (window.isKeyPressed(GLFW_KEY_7) && animated == false) {
+            magnemite.scaleMagnemite("smaller");
         }
 
         // besarin
-        if (window.isKeyPressed(GLFW_KEY_5) && animated == false) {
-            for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                magnemite.objectsSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                magnemite.objectsHalfTorus.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                magnemite.objectCube.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
+        if (window.isKeyPressed(GLFW_KEY_8) && animated == false) {
+            magnemite.scaleMagnemite("bigger");
         }
 
         // animasi preparing to attack
-        // saat key 6 pertama kali dipencet
-        if (window.isKeyPressed(GLFW_KEY_6) && keyPressed == false) {
+        // saat key 9 pertama kali dipencet
+        if (window.isKeyPressed(GLFW_KEY_9) && keyPressed == false) {
             if (animated == false) {
                 keyPressed = true;
                 animated = true;
 
                 // magnemite terbang (naik dari posisi semula)
-                for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
-                    magnemite.objectsSphere.get(i).translateObject(0.0f, 0.2f, 0.0f);
-                }
-
-                for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                    magnemite.objectsHalfTorus.get(i).translateObject(0.0f, 0.2f, 0.0f);
-                }
-
-                for (int i = 0; i < magnemite.objectCube.size(); i++) {
-                    magnemite.objectCube.get(i).translateObject(0.0f, 0.2f, 0.0f);
-                }
-
-                for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                    magnemite.objectsHalfSphere.get(i).translateObject(0.0f, 0.2f, 0.0f);
-                }
-
-                for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                    magnemite.objectsCylinder.get(i).translateObject(0.0f, 0.2f, 0.0f);
-                }
+                magnemite.fly(0.3f);
 
                 // bola mata membesar
                 magnemite.objectsSphere.get(2).scaleObject(1.1f, 1.1f, 1.0f);
@@ -374,8 +163,9 @@ public class Main2 {
                 magnemite.drawCurve(bezierDots4, 4);
                 magnemite.drawCurve(bezierDots5, 5);
                 magnemite.drawCurve(bezierDots6, 6);
-                // animasi saat key 6 telah dilepas lalu dihold lagi
+                // animasi saat key 9 telah dilepas lalu dihold lagi
             } else {
+                // tangan gerak
                 Vector3f tmp = magnemite.objectsHalfTorus.get(0).updateCenterPoint();
                 Vector3f tmp2 = magnemite.objectsHalfTorus.get(1).updateCenterPoint();
 
@@ -402,10 +192,25 @@ public class Main2 {
                         magnemite.objectCube.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
                     }
                 }
+
+                // antena rotate pada poros
+                Vector3f tmp3 = magnemite.objectsCylinder.get(0).updateCenterPoint();
+                Vector3f tmp4 = magnemite.objectsHalfSphere.get(0).updateCenterPoint();
+                for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
+                    magnemite.objectsCylinder.get(i).translateObject(tmp3.x * -1, tmp3.y * -1, tmp3.z * -1);
+                    magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
+                    magnemite.objectsCylinder.get(i).translateObject(tmp3.x, tmp3.y, tmp3.z);
+                }
+
+                for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
+                    magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x * -1, tmp4.y * -1, tmp4.z * -1);
+                    magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
+                    magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x, tmp4.y, tmp4.z);
+                }
             }
         }
 
-        // animasi saat key 6 dihold
+        // animasi saat key 9 dihold
         if (keyPressed) {
             // tangan gerak
             Vector3f tmp = magnemite.objectsHalfTorus.get(0).updateCenterPoint();
@@ -434,14 +239,29 @@ public class Main2 {
                     magnemite.objectCube.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
                 }
             }
+
+            // antena rotate pada poros
+            Vector3f tmp3 = magnemite.objectsCylinder.get(0).updateCenterPoint();
+            Vector3f tmp4 = magnemite.objectsHalfSphere.get(0).updateCenterPoint();
+            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
+                magnemite.objectsCylinder.get(i).translateObject(tmp3.x * -1, tmp3.y * -1, tmp3.z * -1);
+                magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
+                magnemite.objectsCylinder.get(i).translateObject(tmp3.x, tmp3.y, tmp3.z);
+            }
+
+            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
+                magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x * -1, tmp4.y * -1, tmp4.z * -1);
+                magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
+                magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x, tmp4.y, tmp4.z);
+            }
         }
 
-        if (window.isKeyReleased(GLFW_KEY_6)) {
+        if (window.isKeyReleased(GLFW_KEY_9)) {
             keyPressed = false;
         }
 
         // animasi bola mata gerak
-        if (window.isKeyPressed(GLFW_KEY_7)) {
+        if (window.isKeyPressed(GLFW_KEY_0)) {
             Vector3f tmp = magnemite.objectsSphere.get(1).updateCenterPoint();
 
             magnemite.objectsSphere.get(2).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -461,51 +281,8 @@ public class Main2 {
         }
 
         // reset ke posisi default
-        if (window.isKeyPressed(GLFW_KEY_0)) {
-            for (int i = magnemite.objectsSphere.size() - 1; i >= 0; i--) {
-                magnemite.objectsSphere.remove(i);
-            }
-
-            for (int i = magnemite.objectsHalfTorus.size() - 1; i >= 0; i--) {
-                magnemite.objectsHalfTorus.remove(i);
-            }
-
-            for (int i = magnemite.objectCube.size() - 1; i >= 0; i--) {
-                magnemite.objectCube.remove(i);
-            }
-
-            for (int i = magnemite.objectsHalfSphere.size() - 1; i >= 0; i--) {
-                magnemite.objectsHalfSphere.remove(i);
-            }
-
-            for (int i = magnemite.objectsCylinder.size() - 1; i >= 0; i--) {
-                magnemite.objectsCylinder.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier1.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier1.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier2.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier2.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier3.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier3.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier4.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier4.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier5.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier5.remove(i);
-            }
-
-            for (int i = magnemite.objectsBezier6.size() - 1; i >= 0; i--) {
-                magnemite.objectsBezier6.remove(i);
-            }
-
+        if (window.isKeyPressed(GLFW_KEY_R)) {
+            magnemite.deleteObject();
             magnemite.init();
             keyPressed = false;
             animated = false;
@@ -515,8 +292,10 @@ public class Main2 {
     public void loop() {
         while (window.isOpen()) {
             window.update();
-            glClearColor(0.0f, 1.0f, 0.5f, 0.0f);
+//            glClearColor(0.0f, 1.0f, 0.5f, 0.0f);
+            glClearColor(15f,192/255f,203/255f,0.0f);
             GL.createCapabilities();
+            glEnable(GL_DEPTH_TEST);
             input();
 
             environtment.loop();
