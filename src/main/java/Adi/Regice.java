@@ -13,7 +13,8 @@ import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 public class Regice {
     private ArrayList<Object> objects = new ArrayList<>();
 
-    int frameCount = 0;
+    int adiFrameCount = 0;
+    boolean isAnimating = false;
 
     public void init() {
         // Main Body
@@ -293,7 +294,7 @@ public class Regice {
         objects.get(0).getChildObject().get(13).translateObject(-0.375f, 0.25f, 0.0f);
 
         // Jari kiri 1
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(13).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -308,13 +309,13 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(14).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(14).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(14).rotateObject(-65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(14).translateObject(-0.55f, 0.24f, 0.0f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(0).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(0).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(13).getChildObject().get(0).rotateObject(-65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(13).getChildObject().get(0).translateObject(-0.55f, 0.24f, 0.0f);
 
         // Jari kiri 2
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(13).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -329,13 +330,13 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(15).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(15).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(15).rotateObject(-65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(15).translateObject(-0.5f, 0.15f, -0.04f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(1).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(1).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(13).getChildObject().get(1).rotateObject(-65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(13).getChildObject().get(1).translateObject(-0.5f, 0.15f, -0.04f);
 
         // Jari kiri 3
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(13).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -350,10 +351,10 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(16).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(16).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(16).rotateObject(-65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(16).translateObject(-0.5f, 0.15f, 0.04f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(2).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(13).getChildObject().get(2).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(13).getChildObject().get(2).rotateObject(-65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(13).getChildObject().get(2).translateObject(-0.5f, 0.15f, 0.04f);
 
         // Lengan kanan
         objects.get(0).getChildObject().add(new Cylinder(
@@ -371,14 +372,14 @@ public class Regice {
                 2f,
                 new Vector4f(0.0f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(17).scaleObject(0.1f, 0.1f, 0.1f);
-        objects.get(0).getChildObject().get(17).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(17).rotateObject(30.0f, 0, 1, 0);
-        objects.get(0).getChildObject().get(17).rotateObject(65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(17).translateObject(0.375f, 0.25f, 0.0f);
+        objects.get(0).getChildObject().get(14).scaleObject(0.1f, 0.1f, 0.1f);
+        objects.get(0).getChildObject().get(14).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(14).rotateObject(30.0f, 0, 1, 0);
+        objects.get(0).getChildObject().get(14).rotateObject(65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(14).translateObject(0.375f, 0.25f, 0.0f);
 
         // Jari kanan 1
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(14).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -393,13 +394,13 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(18).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(18).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(18).rotateObject(65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(18).translateObject(0.55f, 0.24f, 0.0f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(0).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(0).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(14).getChildObject().get(0).rotateObject(65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(14).getChildObject().get(0).translateObject(0.55f, 0.24f, 0.0f);
 
         // Jari kanan 2
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(14).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -414,13 +415,13 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(19).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(19).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(19).rotateObject(65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(19).translateObject(0.5f, 0.15f, -0.04f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(1).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(1).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(14).getChildObject().get(1).rotateObject(65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(14).getChildObject().get(1).translateObject(0.5f, 0.15f, -0.04f);
 
         // Jari kanan 3
-        objects.get(0).getChildObject().add(new Cylinder(
+        objects.get(0).getChildObject().get(14).getChildObject().add(new Cylinder(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
@@ -435,10 +436,10 @@ public class Regice {
                 2f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(20).scaleObject(0.025f, 0.025f, 0.025f);
-        objects.get(0).getChildObject().get(20).rotateObject(90.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(20).rotateObject(65f, 0, 0, 1);
-        objects.get(0).getChildObject().get(20).translateObject(0.5f, 0.15f, 0.04f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(2).scaleObject(0.025f, 0.025f, 0.025f);
+        objects.get(0).getChildObject().get(14).getChildObject().get(2).rotateObject(90.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(14).getChildObject().get(2).rotateObject(65f, 0, 0, 1);
+        objects.get(0).getChildObject().get(14).getChildObject().get(2).translateObject(0.5f, 0.15f, 0.04f);
 
         // Kristal punggung, Row 1, Col 1
         objects.get(0).getChildObject().add(new Cylinder(
@@ -456,10 +457,10 @@ public class Regice {
                 2.5f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(21).scaleObject(0.05f, 0.05f, 0.05f);
-        objects.get(0).getChildObject().get(21).rotateObject(-45.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(21).rotateObject(45.0f, 0, 1, 0);
-        objects.get(0).getChildObject().get(21).translateObject(0.125f, 0.45f, 0.175f);
+        objects.get(0).getChildObject().get(15).scaleObject(0.05f, 0.05f, 0.05f);
+        objects.get(0).getChildObject().get(15).rotateObject(-45.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(15).rotateObject(45.0f, 0, 1, 0);
+        objects.get(0).getChildObject().get(15).translateObject(0.125f, 0.45f, 0.175f);
 
         // Kristal punggung, Row 2, Col 1
         objects.get(0).getChildObject().add(new Cylinder(
@@ -477,10 +478,10 @@ public class Regice {
                 2.5f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(22).scaleObject(0.05f, 0.05f, 0.05f);
-        objects.get(0).getChildObject().get(22).rotateObject(-45.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(22).rotateObject(60.0f, 0, 1, 0);
-        objects.get(0).getChildObject().get(22).translateObject(0.175f, 0.3f, 0.175f);
+        objects.get(0).getChildObject().get(16).scaleObject(0.05f, 0.05f, 0.05f);
+        objects.get(0).getChildObject().get(16).rotateObject(-45.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(16).rotateObject(60.0f, 0, 1, 0);
+        objects.get(0).getChildObject().get(16).translateObject(0.175f, 0.3f, 0.175f);
 
         // Kristal punggung, Row 1, Col 2
         objects.get(0).getChildObject().add(new Cylinder(
@@ -498,10 +499,10 @@ public class Regice {
                 2.5f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(23).scaleObject(0.05f, 0.05f, 0.05f);
-        objects.get(0).getChildObject().get(23).rotateObject(-45.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(23).rotateObject(-45.0f, 0, 1, 0);
-        objects.get(0).getChildObject().get(23).translateObject(-0.125f, 0.45f, 0.175f);
+        objects.get(0).getChildObject().get(17).scaleObject(0.05f, 0.05f, 0.05f);
+        objects.get(0).getChildObject().get(17).rotateObject(-45.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(17).rotateObject(-45.0f, 0, 1, 0);
+        objects.get(0).getChildObject().get(17).translateObject(-0.125f, 0.45f, 0.175f);
 
         // Kristal punggung, Row 2, Col 2
         objects.get(0).getChildObject().add(new Cylinder(
@@ -519,13 +520,32 @@ public class Regice {
                 2.5f,
                 new Vector4f(0.3f, 0.9f, 0.9f, 0.0f)
         ));
-        objects.get(0).getChildObject().get(24).scaleObject(0.05f, 0.05f, 0.05f);
-        objects.get(0).getChildObject().get(24).rotateObject(-45.0f, 1, 0, 0);
-        objects.get(0).getChildObject().get(24).rotateObject(-60.0f, 0, 1, 0);
-        objects.get(0).getChildObject().get(24).translateObject(-0.175f, 0.3f, 0.175f);
+        objects.get(0).getChildObject().get(18).scaleObject(0.05f, 0.05f, 0.05f);
+        objects.get(0).getChildObject().get(18).rotateObject(-45.0f, 1, 0, 0);
+        objects.get(0).getChildObject().get(18).rotateObject(-60.0f, 0, 1, 0);
+        objects.get(0).getChildObject().get(18).translateObject(-0.175f, 0.3f, 0.175f);
+
+        // Ice Beam Attack
+        // (Awalnya memang kecil ukurannya)
+        objects.get(0).getChildObject().add(new Sphere(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector3f(0, 0, 0),
+                1f,
+                1f,
+                1f,
+                180,
+                180,
+                new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
+        ));
+        objects.get(0).getChildObject().get(19).scaleObject(0.001f, 0.001f, 0.001f);
     }
 
-    public void loop() {
+    public void loop(boolean trigger) {
+        attackAnimation(trigger);
+
         for (Object object : objects) {
             object.draw();
         }
@@ -537,11 +557,49 @@ public class Regice {
         }
     }
 
-    public void attackAnimation() {
-//        this.frameCount = 0;
-//
-//        while (frameCount < 60) {
-//
-//        }
+    public void attackAnimation(boolean trigger) {
+        // Kalau trigger, tapi belum animating, reset adiFrameCount
+        if (trigger && !isAnimating) {
+            this.adiFrameCount = 0;
+            isAnimating = true;
+            System.out.println("Reset");
+        }
+
+        // Kalau tidak ditrigger dan tidak animating, langsung return saja (animasi tidak jalan)
+        if (!trigger && !isAnimating) {
+            System.out.println("Donothing");
+            return;
+        }
+
+        // Code dibawah ini hanya berjalan ketika isAnimating = true
+
+        // Tangan bergerak ke depan
+        if (this.adiFrameCount < 180) {
+            objects.get(0).getChildObject().get(13).rotateObject(-0.2f, 0, 1, 0);
+            objects.get(0).getChildObject().get(14).rotateObject(0.2f, 0, 1, 0);
+            this.adiFrameCount++;
+            System.out.println(adiFrameCount);
+            return;
+        }
+
+        // Spawn sphere ice beam
+        if (this.adiFrameCount == 180) {
+            objects.get(0).getChildObject().get(19).scaleObject(25f, 25f, 25f);
+            objects.get(0).getChildObject().get(19).translateObject(0.0f, 0.35f, -0.5f);
+            System.out.println("Appear pls");
+        }
+
+        // Charging sphere ice beam
+        if ((this.adiFrameCount >= 180) && (this.adiFrameCount <= 300)) {
+            objects.get(0).getChildObject().get(19).scaleObjectByCenter(1.01f, 1.01f, 1.01f);
+            adiFrameCount++;
+        }
+
+        // Muncul Bezier ice beam
+        if ((this.adiFrameCount >= 180) && (this.adiFrameCount <= 300)) {
+            objects.get(0).getChildObject().get(19).scaleObjectByCenter(1.01f, 1.01f, 1.01f);
+            adiFrameCount++;
+        }
+
     }
 }

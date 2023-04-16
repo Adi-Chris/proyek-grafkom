@@ -31,3 +31,16 @@ IBO terinspirasi materi kelas dan https://faun.pub/draw-circle-in-opengl-c-2da8d
 Referensi animasi attack ice-beam:
 https://youtu.be/MOrBeCIe24g?t=42 (Dari anime ori)
 https://www.artstation.com/artwork/zDNdx6 (Buatan artist)
+
+Hierarchy
+Main body
+    ..
+    Lengan kiri
+        jari 1
+        jari 2
+        jari 3
+    Lengan kanan
+        jari 1
+        jari 2
+        jari 3
+    ...

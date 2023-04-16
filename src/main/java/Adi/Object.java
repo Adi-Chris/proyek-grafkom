@@ -247,6 +247,10 @@ public class Object extends ShaderProgram {
         // Wait this is illegal. Harusnya get (3, 0), (3, 1), (3, 2) tapi kok kalau diubah begitu jadi bug
 //        System.out.println("New + Rotated: ");
 //        System.out.println(model);
+        updateCenterPoint();
+        for (Object child : childObject) {
+            child.rotateObjectByCenter(degree, x, y, z);
+        }
     }
 
     // Buat Rotasi berdasarkan titik pusat object lain (Untuk bulan)
@@ -299,9 +303,45 @@ public class Object extends ShaderProgram {
         System.out.println(model);
     }
 
-    // Buat Translasi
+    // Buat Scale
     public void scaleObject(float scaleX, float scaleY, float scaleZ) {
         model = new Matrix4f().scale(scaleX, scaleY, scaleZ).mul(new Matrix4f(model));
+
+        updateCenterPoint();
+        for (Object child : childObject) {
+            child.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
+
+    // Buat Scale berdasarkan Center
+    public void scaleObjectByCenter(float scaleX, float scaleY, float scaleZ) {
+        //        System.out.println("Initial: ");
+        //        System.out.println(model);
+
+        // Cari Translation
+        Vector3f translationMinus = new Vector3f();
+        Vector3f translation = new Vector3f();
+        model.getTranslation(translation);
+        translationMinus = new Vector3f(new Vector3f(translation).mul(-1.0f));
+
+        // Kembalikan ke origin
+        model = new Matrix4f(model).translate(translationMinus);
+//        System.out.println("Back to origin: ");
+//        System.out.println(model);
+
+        // Discale
+        model = new Matrix4f().scale(scaleX, scaleY, scaleZ).mul(new Matrix4f(model));
+
+        // Kembalikan ke awal
+//        model = new Matrix4f(model).translate(translation.x, translation.y, translation.z);
+        // For some reason, .translate() itu ngebug ketika menambah row 03, 13, dan 23, hahaha
+        // Lebih baik dimanual saja :))
+        model.setRowColumn(0, 3, model.get(0, 3) + translation.x);
+        model.setRowColumn(1, 3, model.get(1, 3) + translation.y);
+        model.setRowColumn(2, 3, model.get(2, 3) + translation.z);
+        // Wait this is illegal. Harusnya get (3, 0), (3, 1), (3, 2) tapi kok kalau diubah begitu jadi bug
+//        System.out.println("New + Rotated: ");
+//        System.out.println(model);
 
         updateCenterPoint();
         for (Object child : childObject) {

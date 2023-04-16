@@ -34,7 +34,6 @@ public class Main {
     private Regice regice = new Regice();
 
     private MouseInput mouseInput;
-    int countDegree = 0;
 
     public void init() {
         window.init();
@@ -161,7 +160,7 @@ public class Main {
 
             //code
 //            pokeball.loop();
-            regice.loop();
+            regice.loop(window.isKeyPressed(GLFW_KEY_B));
 
 //            for(Object object: objects){
 //                object.draw();
