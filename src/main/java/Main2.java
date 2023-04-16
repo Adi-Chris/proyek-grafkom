@@ -8,12 +8,9 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL30.*;
-
-// TODO: laporan (sisa animasi), video
 public class Main2 {
     private Window window = new Window(800, 800, "Window");
     private Magnemite magnemite = new Magnemite();
-
     boolean keyPressed = false;
     boolean animated = false;
 
@@ -28,7 +25,7 @@ public class Main2 {
     }
 
     public void input() {
-        // Rotate kiri kanan
+        // rotate offsetY
         if (window.isKeyPressed(GLFW_KEY_1) && animated == false) {
             Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
             magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -66,11 +63,11 @@ public class Main2 {
             }
         }
 
-        // rotate atas bawah
+        // rotate offsetX
         if (window.isKeyPressed(GLFW_KEY_2) && animated == false) {
             Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
             magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
             magnemite.objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
 
             for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
@@ -104,11 +101,11 @@ public class Main2 {
             }
         }
 
-        // rotate depan belakang
+        // rotate offsetZ
         if (window.isKeyPressed(GLFW_KEY_3) && animated == false) {
             Vector3f tmp = magnemite.objectsSphere.get(0).updateCenterPoint();
             magnemite.objectsSphere.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
+            magnemite.objectsSphere.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
             magnemite.objectsSphere.get(0).translateObject(tmp.x, tmp.y, tmp.z);
 
             for (int i = 0; i < magnemite.objectsSphere.size(); i++) {
@@ -309,7 +306,7 @@ public class Main2 {
                     magnemite.objectsCylinder.get(i).translateObject(0.0f, 0.2f, 0.0f);
                 }
 
-                // mata membesar
+                // bola mata membesar
                 magnemite.objectsSphere.get(2).scaleObject(1.1f, 1.1f, 1.0f);
 
                 // show listrik pakai bezier
@@ -444,7 +441,7 @@ public class Main2 {
             Vector3f tmp = magnemite.objectsSphere.get(1).updateCenterPoint();
 
             magnemite.objectsSphere.get(2).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            magnemite.objectsSphere.get(2).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+            magnemite.objectsSphere.get(2).rotateObject((float) Math.toRadians(5f), 0.0f, 0.0f, 1.0f);
             magnemite.objectsSphere.get(2).translateObject(tmp.x, tmp.y, tmp.z);
         }
 
