@@ -1,4 +1,4 @@
-package Louis;
+package Ryan;
 
 import Engine.*;
 import org.joml.Matrix4f;
@@ -21,6 +21,8 @@ public class Object extends ShaderProgram {
     int vbo;
     Vector4f color;
     UniformsMap uniformsMap;
+    List<Vector3f> verticesColor;
+    int vboColor;
     Matrix4f model;
     List <Object> childObject;
 
@@ -72,6 +74,7 @@ public class Object extends ShaderProgram {
         glLineWidth(1);
         glPointSize(0);
         glDrawArrays(GL_POLYGON, 0, vertices.size());
+//        glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
         for(Object child : childObject) {
             child.draw();
         }
@@ -89,7 +92,6 @@ public class Object extends ShaderProgram {
         vertices.add(newVector);
         setupVAOVBO();
     }
-
     public void changeVertices(int i, Vector3f newVector){
         vertices.set(i, newVector);
         setupVAOVBO();

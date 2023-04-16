@@ -6,17 +6,15 @@ import org.joml.Vector4f;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sphere extends Object {
+public class Cylinder extends Object {
     float centerX;
     float centerY;
     float centerZ;
     float radiusX;
     float radiusY;
     float radiusZ;
-    List<Integer> index;
-    int ibo;
 
-    public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, float centerX, float centerY, float centerZ, float radiusX, float radiusY, float radiusZ) {
+    public Cylinder(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, float centerX, float centerY, float centerZ, float radiusX, float radiusY, float radiusZ) {
         super(shaderModuleDataList, vertices, color);
         this.centerX = centerX;
         this.centerY = centerY;
@@ -24,20 +22,21 @@ public class Sphere extends Object {
         this.radiusX = radiusX;
         this.radiusY = radiusY;
         this.radiusZ = radiusZ;
-        createSphere();
+        createCylinder();
         setupVAOVBO();
     }
 
-    public void createSphere() {
+    // kalau mau keliatan pakai line strip, pembaginya ganti 16
+    public void createCylinder() {
         vertices.clear();
         ArrayList<Vector3f> temp = new ArrayList<>();
 
-        for (double v = -Math.PI / 2; v <= Math.PI / 2; v += Math.PI / 180) {
-            for (double u = -Math.PI; u <= Math.PI; u += Math.PI / 16) {
-                float x = radiusX * (float) (Math.cos(v) * Math.cos(u));
-                float y = radiusY * (float) (Math.cos(v) * Math.sin(u));
-                float z = radiusZ * (float) (Math.sin(v));
-                temp.add(new Vector3f(x, y, z));
+        for (double theta = 0; theta <= Math.PI * 2; theta += Math.PI / 180) {
+            for (double v = 0; v <= 1; v += 1 / 16.0) {
+                float x = radiusX * (float) Math.cos(theta);
+                float y = radiusY * (float) v;
+                float z = radiusZ * (float) Math.sin(theta);
+                temp.add(new Vector3f(x, y - (radiusY / 2.0f), z));
             }
         }
         vertices = temp;

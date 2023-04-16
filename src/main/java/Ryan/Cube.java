@@ -1,10 +1,14 @@
-package Louis;
+package Ryan;
 
+import Engine .*;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
 
 public class Cube extends Object {
     float centerX;
@@ -140,29 +144,5 @@ public class Cube extends Object {
         vertices.add(tempVertices.get(2));
         vertices.add(tempVertices.get(1));
         vertices.add(tempVertices.get(5));
-    }
-
-    public void setCenterX(float centerX) {
-        this.centerX = centerX;
-    }
-
-    public void setCenterY(float centerY) {
-        this.centerY = centerY;
-    }
-
-    public void setCenterZ(float centerZ) {
-        this.centerZ = centerZ;
-    }
-
-    public float getCenterX() {
-        return centerX;
-    }
-
-    public float getCenterY() {
-        return centerY;
-    }
-
-    public float getCenterZ() {
-        return centerZ;
     }
 }
