@@ -98,11 +98,10 @@ public class Oshawott {
                 new Vector4f(0.0f, 0.0f, 0.0f, 0.0f),
                 0.0f, 0.0f, 0.0f, 0.08f, 0.073f, 0.035f
         ));
-
-        // hidung
         objectsSphere.get(0).getChildObject().get(1).scaleObject(0.2f, 0.1f, 0.06f);
         objectsSphere.get(0).getChildObject().get(1).translateObject(0.12f,0.4f,-0.21f);
         objectsSphere.get(0).getChildObject().get(1).rotateObject((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+        // hidung
         objectsSphere.get(0).getChildObject().add(new Ellipsoid(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -204,6 +203,7 @@ public class Oshawott {
         objectEllipsoid.get(0).translateObject(0.0f, 0.06f, 0.0f);
 
         // Kerang
+        // Kerang atas
         objectsHS.add(new HalfSphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData
@@ -220,6 +220,8 @@ public class Oshawott {
                 180
         ));
         objectsHS.get(0).translateObject(0.0f, -0.02f, -0.20f);
+
+        // Kerang bawah
         objectsHS.get(0).getChildObject().add(new HalfSphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData
@@ -237,6 +239,8 @@ public class Oshawott {
         ));
         objectsHS.get(0).getChildObject().get(0).translateObject(0.0f, 0.02f, 0.20f);
         objectsHS.get(0).getChildObject().get(0).rotateObject((float) Math.toRadians(180),0.0f, 0.1f, 0.0f);
+
+        // Garis
         objectsHS.get(0).getChildObject().add(new Cube(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -263,6 +267,8 @@ public class Oshawott {
         ));
         objectsHS.get(0).getChildObject().get(2).translateObject(0.04f, 0.0f, -0.23f);
         objectsHS.get(0).getChildObject().get(2).rotateObject((float) Math.toRadians(-13), 0.0f, 0.0f, 1.0f);
+
+        // Bagian paling bawah kerang
         objectsHS.get(0).getChildObject().add(new Ellipsoid(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya

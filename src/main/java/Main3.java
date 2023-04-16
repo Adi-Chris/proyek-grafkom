@@ -1,19 +1,12 @@
+import Adi.Pokeball;
 import Engine.*;
-import Louis.HalfTorus;
-import Louis.Object;
 import Ryan.*;
 
-import Ryan.HalfSphere;
-import Ryan.Sphere;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
@@ -25,6 +18,7 @@ public class Main3 {
                     (800, 800, "Hello World");
     private Oshawott Oshawott = new Oshawott();
     private Environtment envi = new Environtment();
+    private Pokeball pokeball = new Pokeball();
     int checkTangan = 0;
     boolean checkArahTangan = true;
     int checkKaki = 0;
@@ -38,6 +32,8 @@ public class Main3 {
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
         mouseInput = window.getMouseInput();
+        pokeball.init();
+        pokeball.translateObject(0.7825f, 0.81f, -0.5f);
         Oshawott.init();
         envi.init();
     }
@@ -159,7 +155,6 @@ public class Main3 {
             Oshawott.objectsHS.get(0).translateObject(0.0f, -0.01f, 0.0f);
             Oshawott.objectsCylinder.get(0).translateObject(0.0f, -0.01f, 0.0f);
         }
-
         // Pindah kiri
         if (window.isKeyPressed(GLFW_KEY_A)) {
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
@@ -183,13 +178,16 @@ public class Main3 {
             Oshawott.objectsHS.get(0).translateObject(0.01f, 0.0f, 0.0f);
             Oshawott.objectsCylinder.get(0).translateObject(0.01f, 0.0f, 0.0f);
         }
+
+        // Mencari koordinat
         if (window.getMouseInput().isLeftButtonPressed()) {
             Vector2f pos = window.getMouseInput().getCurrentPos();
-            System.out.println("x : " + pos.x + "y : " + pos.y);
+//            System.out.println("x : " + pos.x + "y : " + pos.y);
 
             // dinormalisasi biar titik 0,0 itu di tengah
             pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
             pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
+//            System.out.println(pos.x + "f, " + pos.y + "f, 0.0f");
         }
 
         // Gerakan Tangan
@@ -262,6 +260,7 @@ public class Main3 {
                 Oshawott.objectsSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
             }
             Oshawott.objectsHS.get(0).scaleObject(1.001f, 1.001f, 1.001f);
+            Oshawott.objectsCylinder.get(0).scaleObject(1.001f, 1.001f, 1.001f);
         }
 
         // Mandur
@@ -273,6 +272,7 @@ public class Main3 {
                 Oshawott.objectsSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
             }
             Oshawott.objectsHS.get(0).scaleObject(0.999f, 0.999f, 0.999f);
+            Oshawott.objectsCylinder.get(0).scaleObject(0.999f, 0.999f, 0.999f);
         }
 
         // Gerakan Ekor
@@ -324,8 +324,60 @@ public class Main3 {
             Oshawott.objectsCylinder.get(0).translateObject(tmp.x, tmp.y, tmp.z);
 
         }
-    }
 
+        // Masuk pokeball
+        if(window.isKeyPressed(GLFW_KEY_7)){
+            for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+                Oshawott.objectEllipsoid.get(i).translateObject(0.01f, 0.01f, 0.0f);
+            }
+            for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+                Oshawott.objectsSphere.get(i).translateObject(0.01f, 0.01f, 0.0f);
+            }
+            Oshawott.objectsHS.get(0).translateObject(0.01f, 0.01f, 0.0f);
+            Oshawott.objectsCylinder.get(0).translateObject(0.01f, 0.01f, 0.0f);
+            for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+                Oshawott.objectEllipsoid.get(i).scaleObject(0.989f, 0.989f, 0.989f);
+            }
+            for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+                Oshawott.objectsSphere.get(i).scaleObject(0.989f, 0.989f, 0.989f);
+            }
+            Oshawott.objectsHS.get(0).scaleObject(0.989f, 0.989f, 0.989f);
+            Oshawott.objectsCylinder.get(0).scaleObject(0.989f, 0.989f, 0.989f);
+        }
+
+        // Keluar pokeball
+        if(window.isKeyPressed(GLFW_KEY_8)){
+            for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+                Oshawott.objectEllipsoid.get(i).translateObject(-0.01f, -0.01f, 0.0f);
+            }
+            for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+                Oshawott.objectsSphere.get(i).translateObject(-0.01f, -0.01f, 0.0f);
+            }
+            Oshawott.objectsHS.get(0).translateObject(-0.01f, -0.01f, 0.0f);
+            Oshawott.objectsCylinder.get(0).translateObject(-0.01f, -0.01f, 0.0f);
+            for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+                Oshawott.objectEllipsoid.get(i).scaleObject(1.011f, 1.011f, 1.011f);
+            }
+            for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+                Oshawott.objectsSphere.get(i).scaleObject(1.011f, 1.011f, 1.011f);
+            }
+            Oshawott.objectsHS.get(0).scaleObject(1.011f, 1.011f, 1.011f);
+            Oshawott.objectsCylinder.get(0).scaleObject(1.011f, 1.011f, 1.011f);
+        }
+
+        // reset ke posisi default
+        if (window.isKeyPressed(GLFW_KEY_R)) {
+            Oshawott.objects.clear();
+            Oshawott.objectsHS.clear();
+            Oshawott.objectEllipsoid.clear();
+            Oshawott.objectsCylinder.clear();
+            Oshawott.objectEP.clear();
+            Oshawott.objectsSphere.clear();
+            Oshawott.berzier1.clear();
+            Oshawott.berzier2.clear();
+            Oshawott.init();
+        }
+    }
     public void loop() {
         while (window.isOpen()) {
             window.update();
@@ -335,6 +387,7 @@ public class Main3 {
             GL.createCapabilities();
             input();
 
+            pokeball.loop();
             Oshawott.loop();
             envi.loop();
 
