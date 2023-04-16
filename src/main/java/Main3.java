@@ -1,19 +1,9 @@
 import Engine.*;
-import Louis.HalfTorus;
-import Louis.Object;
 import Ryan.*;
 
-import Ryan.HalfSphere;
-import Ryan.Sphere;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
@@ -185,11 +175,12 @@ public class Main3 {
         }
         if (window.getMouseInput().isLeftButtonPressed()) {
             Vector2f pos = window.getMouseInput().getCurrentPos();
-            System.out.println("x : " + pos.x + "y : " + pos.y);
+//            System.out.println("x : " + pos.x + "y : " + pos.y);
 
             // dinormalisasi biar titik 0,0 itu di tengah
             pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
             pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
+            System.out.println(pos.x + "f, " + pos.y + "f, 0.0f");
         }
 
         // Gerakan Tangan

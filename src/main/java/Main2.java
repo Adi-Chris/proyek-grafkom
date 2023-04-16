@@ -11,6 +11,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class Main2 {
     private Window window = new Window(800, 800, "Window");
     private Magnemite magnemite = new Magnemite();
+    private Environtment environtment = new Environtment();
     boolean keyPressed = false;
     boolean animated = false;
 
@@ -19,6 +20,9 @@ public class Main2 {
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
         MouseInput mouseInput = window.getMouseInput();
+
+        // init environment
+        environtment.init();
 
         // init object magnemite
         magnemite.init();
@@ -511,10 +515,11 @@ public class Main2 {
     public void loop() {
         while (window.isOpen()) {
             window.update();
-            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            glClearColor(0.0f, 1.0f, 0.5f, 0.0f);
             GL.createCapabilities();
             input();
 
+            environtment.loop();
             magnemite.loop();
 
             glDisableVertexAttribArray(0);
