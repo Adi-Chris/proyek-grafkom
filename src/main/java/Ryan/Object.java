@@ -119,7 +119,7 @@ public class Object extends ShaderProgram {
     public void scaleObject(Float x, Float y, Float z) {
         model = new Matrix4f().scale(x, y, z).mul(new Matrix4f(model));
         for (Object child : childObject) {
-            child.translateObject(x, y, z);
+            child.scaleObject(x, y, z);
         }
     }
 
