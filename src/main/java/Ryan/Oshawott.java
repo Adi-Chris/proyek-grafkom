@@ -1,16 +1,10 @@
 package Ryan;
 
-import Engine.MouseInput;
-import Engine.ShaderProgram;
+import Engine.*;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-import org.lwjgl.opengl.GL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
@@ -22,10 +16,7 @@ public class Oshawott {
     public ArrayList<EllipticParaboloid> objectEP = new ArrayList<>();
     public ArrayList<Ryan.Object> berzier1 = new ArrayList<>();
     public ArrayList<Ryan.Object> berzier2 = new ArrayList<>();
-    int checkTangan = 0;
-    boolean checkArahTangan = true;
-    int checkKaki = 0;
-    boolean checkArahKaki = true;
+    public ArrayList<Cylinder> objectsCylinder = new ArrayList<>();
     int tes;
     public static float[][] controlBerzier1 = {
             { -0.0675f, 0.2925f, -0.2229f},
@@ -228,7 +219,6 @@ public class Oshawott {
                 180,
                 180
         ));
-//        objectsHS.get(0).scaleObject(0.0f,0.0f,0.0f);
         objectsHS.get(0).translateObject(0.0f, -0.02f, -0.20f);
         objectsHS.get(0).getChildObject().add(new HalfSphere(
                 Arrays.asList(
@@ -245,7 +235,6 @@ public class Oshawott {
                 180,
                 180
         ));
-//        objectsHS.get(0).scaleObject(0.0f,0.0f,0.0f);
         objectsHS.get(0).getChildObject().get(0).translateObject(0.0f, 0.02f, 0.20f);
         objectsHS.get(0).getChildObject().get(0).rotateObject((float) Math.toRadians(180),0.0f, 0.1f, 0.0f);
         objectsHS.get(0).getChildObject().add(new Cube(
@@ -352,6 +341,8 @@ public class Oshawott {
         objectEllipsoid.get(4).translateObject(-0.2f,-0.15f,0.0f);
         objectEllipsoid.get(4).rotateObject((float) Math.toRadians(-90), 0.0f, 1.0f, 0.0f);
         objectEllipsoid.get(4).translateObject(-0.08f,-0.02f,0.15f);
+
+        // titik pusat
         objectsSphere.add(new Sphere(
                 Arrays.asList(
                         //shaderFile lokasi menyesuaikan objectnya
@@ -364,6 +355,44 @@ public class Oshawott {
                 new Vector4f(1.0f, 1.0f, 1.0f, 0.0f),
                 0.0f, 0.0f, 0.0f, 0.05f, 0.05f, 0.05f
         ));
+
+        // Ekor
+        objectsCylinder.add(new Cylinder(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ), new ArrayList<>(),
+                new Vector4f(77/225f,106/225f,153/225f, 0.0f),
+                0.0f, 0.0f, 0.0f, 0.12f, 0.03f, 0.06f
+        ));
+        objectsCylinder.get(0).rotateObject((float) Math.toRadians(90), 0.0f, 1.0f, 0.0f);
+        objectsCylinder.get(0).translateObject(0.0f,0.0f,0.3f);
+    }
+    public void loop() {
+        for (Sphere object : objectsSphere) {
+            object.draw();
+        }
+        for (Ellipsoid object : objectEllipsoid) {
+            object.draw();
+        }
+        for (EllipticParaboloid object : objectEP) {
+            object.draw();
+        }
+        for (HalfSphere object : objectsHS) {
+            object.draw();
+        }
+        for (Ryan.Object object : berzier1) {
+            object.drawLine();
+        }
+        for (Ryan.Object object : berzier2) {
+            object.drawLine();
+        }
+        for (Cylinder object : objectsCylinder) {
+            object.draw();
+        }
     }
 
     public void berzierMulut(float[][] floats, int pilihan) {
