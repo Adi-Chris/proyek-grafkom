@@ -131,4 +131,10 @@ public class Pokeball {
             object.scaleObject(scaleX, scaleY, scaleZ);
         }
     }
+    
+    public void translateObject(float x, float y, float z) {
+        for (Object object : objects) {
+            object.translateObject(x, y, z);
+        }
+    }
 }
