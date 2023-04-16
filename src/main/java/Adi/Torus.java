@@ -175,7 +175,7 @@ public class Torus extends Object {
 //            torusStacks.add(this.vertices.subList(sectorCount * i, sectorCount * (i + 1)));
 //        }
 
-        System.out.println("Size: " + this.vertices.size());
+//        System.out.println("Size: " + this.vertices.size());
         // Buat masukin ke indexnya
         for (int i = 0; i < stackCount; i++) {
             for (int j = 0; j < sectorCount; j++) {
@@ -221,7 +221,7 @@ public class Torus extends Object {
 //        index.add(0 + j + 1);
 //        }
 
-        System.out.println(index);
+//        System.out.println(index);
 
         ibo = glGenBuffers();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);

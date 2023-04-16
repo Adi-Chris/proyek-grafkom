@@ -31,6 +31,7 @@ public class Main {
 
     // Object Adi
     private Pokeball pokeball = new Pokeball();
+    private Regice regice = new Regice();
 
     private MouseInput mouseInput;
     int countDegree = 0;
@@ -42,6 +43,7 @@ public class Main {
 
         //code
         pokeball.init();
+        regice.init();
 //        // Matahari
 //        objects.add(new Sphere(
 //                Arrays.asList(
@@ -62,18 +64,22 @@ public class Main {
         if (window.isKeyPressed(GLFW_KEY_W)) {
             // Rotasi
             pokeball.rotateObject(10f, 1.0f, 0.0f, 0.0f);
+            regice.rotateObject(10f, 1.0f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
             // Rotasi
             pokeball.rotateObject(10f, 0.0f, 1.0f, 0.0f);
+            regice.rotateObject(10f, 0.0f, 1.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_S)) {
             // Rotasi
             pokeball.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
+            regice.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_D)) {
             // Rotasi
             pokeball.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
+            regice.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
         }
 //        if (window.isKeyPressed(GLFW_KEY_W)) {
 //            countDegree++;
@@ -127,7 +133,9 @@ public class Main {
             input();
 
             //code
-            pokeball.loop();
+//            pokeball.loop();
+            regice.loop();
+
 //            for(Object object: objects){
 //                object.draw();
 //            }

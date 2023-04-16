@@ -119,4 +119,10 @@ public class Pokeball {
             object.rotateObject(degree, x, y, z);
         }
     }
+
+    public void scaleObject(float scaleX, float scaleY, float scaleZ) {
+        for (Object object : objects) {
+            object.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
 }
