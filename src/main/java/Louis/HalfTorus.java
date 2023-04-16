@@ -16,6 +16,7 @@ public class HalfTorus extends Object {
     List<Integer> index = new ArrayList<>();
     int ibo;
 
+    // https://mathworld.wolfram.com/Torus.html
     // Constructor untuk Torus dengan custom startSector dan endSector (bisa untuk half torus tanpa handle)
     public HalfTorus(List<ShaderModuleData> shaderModuleDataList, float centerX, float centerY, float centerZ, float radiusToCenterTube, float radiusofTube, int sectorCount, int stackCount, int startSector, int endSector, Vector4f color) {
         super(shaderModuleDataList, Utils.dummyVerticeValue(), color);

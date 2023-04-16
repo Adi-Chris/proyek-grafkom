@@ -3,10 +3,13 @@ package Louis;
 import Engine.*;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
 import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
+
 public class Magnemite {
     public ArrayList<Object> objects = new ArrayList<>();
     public ArrayList<Sphere> objectsSphere = new ArrayList<>();
@@ -347,8 +350,6 @@ public class Magnemite {
                 new ArrayList<>(),
                 new Vector4f(0.475f, 0.549f, 0.937f, 0.0f)
         ));
-//        drawCurve(bezierDots1, 1);
-//        objectCube.get(2).getChildObject().add(objectsBezier1.get(0));
 
         objectsBezier2.add(new Object(
                 Arrays.asList(
@@ -361,8 +362,6 @@ public class Magnemite {
                 new ArrayList<>(),
                 new Vector4f(0.475f, 0.549f, 0.937f, 0.0f)
         ));
-//        drawCurve(bezierDots2, 2);
-//        objectCube.get(6).getChildObject().add(objectsBezier2.get(0));
 
         objectsBezier3.add(new Object(
                 Arrays.asList(
@@ -462,6 +461,7 @@ public class Magnemite {
             object.drawLine();
         }
     }
+
     public int koefSegitigaPascal(int n, int k) {
         if (k < 0 || k > n) {
             return 0;
@@ -493,14 +493,272 @@ public class Magnemite {
             } else if (pilihan == 2) {
                 objectsBezier2.get(0).addVertices(new Vector3f(x, y, z));
             } else if (pilihan == 3) {
-               objectsBezier3.get(0).addVertices(new Vector3f(x, y, z));
-            }  else if (pilihan == 4) {
+                objectsBezier3.get(0).addVertices(new Vector3f(x, y, z));
+            } else if (pilihan == 4) {
                 objectsBezier4.get(0).addVertices(new Vector3f(x, y, z));
             } else if (pilihan == 5) {
                 objectsBezier5.get(0).addVertices(new Vector3f(x, y, z));
             } else if (pilihan == 6) {
                 objectsBezier6.get(0).addVertices(new Vector3f(x, y, z));
             }
+        }
+    }
+
+    // rotate magnemite
+    public void rotateMagnemite(String offset) {
+        Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+        float x = 0.0f;
+        float y = 0.0f;
+        float z = 0.0f;
+
+        // hadap kiri
+        if (offset == "yPlus") {
+            y = 1.0f;
+        // hadap kanan
+        } else if (offset == "yMin") {
+            y = -1.0f;
+        // muter atas
+        } else if (offset == "xPlus") {
+            x = 1.0f;
+        // muter bawah
+        } else if (offset == "xMin") {
+            x = -1.0f;
+        // muter kiri
+        } else if (offset == "zPlus") {
+            z = 1.0f;
+        // muter kanan
+        } else if (offset == "zMin") {
+            z = -1.0f;
+        }
+
+        for (int i = 0; i < objectsSphere.size(); i++) {
+            objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsHalfTorus.size(); i++) {
+            objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectCube.size(); i++) {
+            objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsHalfSphere.size(); i++) {
+            objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsCylinder.size(); i++) {
+            objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+    }
+
+    // translate magnemite position
+    public void translateMagnemite(String keyword) {
+        if (keyword == "W") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.0f, 0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).translateObject(0.0f, 0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).translateObject(0.0f, 0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).translateObject(0.0f, 0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).translateObject(0.0f, 0.01f, 0.0f);
+            }
+        } else if (keyword == "A") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).translateObject(-0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).translateObject(-0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).translateObject(-0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).translateObject(-0.01f, 0.0f, 0.0f);
+            }
+        } else if (keyword == "D") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).translateObject(0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).translateObject(0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).translateObject(0.01f, 0.0f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).translateObject(0.01f, 0.0f, 0.0f);
+            }
+        } else if (keyword == "S") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.0f, -0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).translateObject(0.0f, -0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).translateObject(0.0f, -0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).translateObject(0.0f, -0.01f, 0.0f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).translateObject(0.0f, -0.01f, 0.0f);
+            }
+        }
+    }
+
+    // scale magnemite size
+    public void scaleMagnemite(String keyword) {
+        if (keyword == "smaller") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+        } else if (keyword == "bigger") {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+
+            for (int i = 0; i < objectsHalfTorus.size(); i++) {
+                objectsHalfTorus.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+
+            for (int i = 0; i < objectCube.size(); i++) {
+                objectCube.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+
+            for (int i = 0; i < objectsHalfSphere.size(); i++) {
+                objectsHalfSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+
+            for (int i = 0; i < objectsCylinder.size(); i++) {
+                objectsCylinder.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+        }
+    }
+
+    // clear all arraylist
+    public void deleteObject() {
+        for (int i = objectsSphere.size() - 1; i >= 0; i--) {
+            objectsSphere.remove(i);
+        }
+
+        for (int i = objectsHalfTorus.size() - 1; i >= 0; i--) {
+            objectsHalfTorus.remove(i);
+        }
+
+        for (int i = objectCube.size() - 1; i >= 0; i--) {
+            objectCube.remove(i);
+        }
+
+        for (int i = objectsHalfSphere.size() - 1; i >= 0; i--) {
+            objectsHalfSphere.remove(i);
+        }
+
+        for (int i = objectsCylinder.size() - 1; i >= 0; i--) {
+            objectsCylinder.remove(i);
+        }
+
+        for (int i = objectsBezier1.size() - 1; i >= 0; i--) {
+            objectsBezier1.remove(i);
+        }
+
+        for (int i = objectsBezier2.size() - 1; i >= 0; i--) {
+            objectsBezier2.remove(i);
+        }
+
+        for (int i = objectsBezier3.size() - 1; i >= 0; i--) {
+            objectsBezier3.remove(i);
+        }
+
+        for (int i = objectsBezier4.size() - 1; i >= 0; i--) {
+            objectsBezier4.remove(i);
+        }
+
+        for (int i = objectsBezier5.size() - 1; i >= 0; i--) {
+            objectsBezier5.remove(i);
+        }
+
+        for (int i = objectsBezier6.size() - 1; i >= 0; i--) {
+            objectsBezier6.remove(i);
+        }
+    }
+
+    // fly
+    public void fly(Float distance) {
+        for (int i = 0; i < objectsSphere.size(); i++) {
+            objectsSphere.get(i).translateObject(0.0f, distance, 0.0f);
+        }
+
+        for (int i = 0; i <objectsHalfTorus.size(); i++) {
+            objectsHalfTorus.get(i).translateObject(0.0f, distance, 0.0f);
+        }
+
+        for (int i = 0; i < objectCube.size(); i++) {
+            objectCube.get(i).translateObject(0.0f, distance, 0.0f);
+        }
+
+        for (int i = 0; i < objectsHalfSphere.size(); i++) {
+            objectsHalfSphere.get(i).translateObject(0.0f, distance, 0.0f);
+        }
+
+        for (int i = 0; i < objectsCylinder.size(); i++) {
+            objectsCylinder.get(i).translateObject(0.0f, distance, 0.0f);
         }
     }
 }
