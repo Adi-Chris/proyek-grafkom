@@ -1,64 +1,52 @@
-import Engine.*;
-import Louis.HalfTorus;
-import Louis.Object;
-import Ryan.*;
+package Ryan;
 
-import Ryan.HalfSphere;
-import Ryan.Sphere;
-import org.joml.Vector2f;
+import Engine.MouseInput;
+import Engine.ShaderProgram;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
+import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
-public class Main3 {
-    private Window window =
-            new Window
-                    (800, 800, "Hello World");
-    ArrayList<Object> objects = new ArrayList<>();
-    ArrayList<Sphere> objectsSphere = new ArrayList<>();
-    ArrayList<Ellipsoid> objectEllipsoid = new ArrayList<>();
-    ArrayList<HalfSphere> objectsHS = new ArrayList<>();
-    ArrayList<EllipticParaboloid> objectEP = new ArrayList<>();
-    ArrayList<Ryan.Object> berzier1 = new ArrayList<>();
-    ArrayList<Ryan.Object> berzier2 = new ArrayList<>();
+public class Oshawott {
+    public ArrayList<Louis.Object> objects = new ArrayList<>();
+    public ArrayList<Sphere> objectsSphere = new ArrayList<>();
+    public ArrayList<Ellipsoid> objectEllipsoid = new ArrayList<>();
+    public ArrayList<HalfSphere> objectsHS = new ArrayList<>();
+    public ArrayList<EllipticParaboloid> objectEP = new ArrayList<>();
+    public ArrayList<Ryan.Object> berzier1 = new ArrayList<>();
+    public ArrayList<Ryan.Object> berzier2 = new ArrayList<>();
     int checkTangan = 0;
     boolean checkArahTangan = true;
     int checkKaki = 0;
     boolean checkArahKaki = true;
     int tes;
-    private static float[][] controlBerzier1 = {
+    public static float[][] controlBerzier1 = {
             { -0.0675f, 0.2925f, -0.2229f},
             { -0.01f, 0.3325f, -0.2229f}
     };
-    private static float[][] controlBerzier2 = {
+    public static float[][] controlBerzier2 = {
             { -0.01f, 0.3325f, -0.2229f},
             { 0.0675f, 0.2925f, -0.2229f}
     };
-    private MouseInput mouseInput;
+    public MouseInput mouseInput;
     int countDegree = 0;
 
     public void init() {
-        window.init();
-        GL.createCapabilities();
-        glEnable(GL_DEPTH_TEST);
-        mouseInput = window.getMouseInput();
         berzier1.add(new Ryan.Object(
                 Arrays.asList(
-                //shaderFile lokasi menyesuaikan objectnya
-                new ShaderProgram.ShaderModuleData
-                        ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData
-                        ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
                 new ArrayList<>(),
                 new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
         ));
@@ -412,228 +400,5 @@ public class Main3 {
             koef /= (i + 1);
         }
         return koef;
-    }
-    public static void main(String[] args) {
-        new Main3().run();
-    }
-
-    public void input() {
-        if (window.isKeyPressed(GLFW_KEY_UP)) {
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            objectsHS.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHS.get(0).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-            objectsHS.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-        if (window.isKeyPressed(GLFW_KEY_DOWN)) {
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(i).rotateObject((float) Math.toRadians(-0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectsSphere.get(i).rotateObject((float) Math.toRadians(-0.5f), 1.0f, 0.0f, 0.0f);
-                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            objectsHS.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHS.get(0).rotateObject((float) Math.toRadians(-0.5f), 1.0f, 0.0f, 0.0f);
-            objectsHS.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                objectEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            objectsHS.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHS.get(0).rotateObject((float) Math.toRadians(0.5f), 0.0f, 1.0f, 0.0f);
-            objectsHS.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(i).rotateObject((float) Math.toRadians(-0.5f), 0.0f, 1.0f, 0.0f);
-                objectEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectsSphere.get(i).rotateObject((float) Math.toRadians(-0.5f), 0.0f, 1.0f, 0.0f);
-                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-            }
-            objectsHS.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHS.get(0).rotateObject((float) Math.toRadians(-0.5f), 0.0f, 1.0f, 0.0f);
-            objectsHS.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-        if (window.isKeyPressed(GLFW_KEY_W)) {
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(0.0f, 0.01f, 0.0f);
-            }
-            objectsHS.get(0).translateObject(0.0f, 0.01f, 0.0f);
-        }
-        if (window.isKeyPressed(GLFW_KEY_S)) {
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(0.0f, -0.01f, 0.0f);
-            }
-            objectsHS.get(0).translateObject(0.0f, -0.01f, 0.0f);
-        }
-        if (window.isKeyPressed(GLFW_KEY_A)) {
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(-0.01f, 0.0f, 0.0f);
-            }
-            objectsHS.get(0).translateObject(-0.01f, 0.0f, 0.0f);
-        }
-        if (window.isKeyPressed(GLFW_KEY_D)) {
-            for (int i = 0; i < objectEllipsoid.size(); i++) {
-                objectEllipsoid.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).translateObject(0.01f, 0.0f, 0.0f);
-            }
-            objectsHS.get(0).translateObject(0.01f, 0.0f, 0.0f);
-        }
-        if (window.getMouseInput().isLeftButtonPressed()) {
-            Vector2f pos = window.getMouseInput().getCurrentPos();
-            System.out.println("x : " + pos.x + "y : " + pos.y);
-
-            // dinormalisasi biar titik 0,0 itu di tengah
-            pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
-            pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
-        }
-        if(window.isKeyPressed(GLFW_KEY_1)){
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            if(checkTangan < 30 && checkArahTangan){
-                objectEllipsoid.get(1).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(1).rotateObject((float) Math.toRadians(0.23f), 0.0f, 0.0f, -1.0f);
-                objectEllipsoid.get(1).translateObject(tmp.x, tmp.y, tmp.z);
-                objectEllipsoid.get(2).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(2).rotateObject((float) Math.toRadians(-0.23f), 0.0f, 0.0f, 1.0f);
-                objectEllipsoid.get(2).translateObject(tmp.x, tmp.y, tmp.z);
-                checkTangan++;
-            }
-            if(checkTangan > -30 && !checkArahTangan){
-                objectEllipsoid.get(1).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(1).rotateObject((float) Math.toRadians(0.23f), 0.0f, 0.0f, 1.0f);
-                objectEllipsoid.get(1).translateObject(tmp.x, tmp.y, tmp.z);
-                objectEllipsoid.get(2).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(2).rotateObject((float) Math.toRadians(-0.23f), 0.0f, 0.0f, -1.0f);
-                objectEllipsoid.get(2).translateObject(tmp.x, tmp.y, tmp.z);
-                checkTangan--;
-            }
-            if(checkTangan >= 30){
-                checkTangan = 30;
-                checkArahTangan = false;
-            }
-            if(checkTangan <= -30){
-                checkTangan = -30;
-                checkArahTangan = true;
-            }
-        }
-        if(window.isKeyPressed(GLFW_KEY_2)){
-            Vector3f tmp = objectsSphere.get(1).updateCenterPoint();
-            if(checkKaki < 30 && checkArahKaki){
-                objectEllipsoid.get(3).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(3).rotateObject((float) Math.toRadians(-0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(3).translateObject(tmp.x, tmp.y, tmp.z);
-                objectEllipsoid.get(4).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(4).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(4).translateObject(tmp.x, tmp.y, tmp.z);
-                checkKaki++;
-            }
-            if(checkKaki > -30 && !checkArahKaki){
-                objectEllipsoid.get(3).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(3).rotateObject((float) Math.toRadians(0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(3).translateObject(tmp.x, tmp.y, tmp.z);
-                objectEllipsoid.get(4).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                objectEllipsoid.get(4).rotateObject((float) Math.toRadians(-0.5f), 1.0f, 0.0f, 0.0f);
-                objectEllipsoid.get(4).translateObject(tmp.x, tmp.y, tmp.z);
-                checkKaki--;
-            }
-            if(checkKaki >= 30){
-                checkKaki = 30;
-                checkArahKaki = false;
-            }
-            if(checkKaki <= -30){
-                checkKaki = -30;
-                checkArahKaki = true;
-            }
-        }
-    }
-
-    public void loop() {
-        while (window.isOpen()) {
-            window.update();
-            glClearColor(1.0f,
-                    0.3f, 0.95f,
-                    0.0f);
-            GL.createCapabilities();
-            input();
-
-            //code
-//            for(Object object: objects){
-//                object.draw();
-//            }
-            for(Sphere object: objectsSphere){
-                object.draw();
-            }
-            for(Ellipsoid object: objectEllipsoid){
-                object.draw();
-            }
-            for(EllipticParaboloid object: objectEP){
-                object.draw();
-            }
-            for(HalfSphere object: objectsHS){
-                object.draw();
-            }
-            for (Ryan.Object object: berzier1){
-                object.drawLine();
-            }
-            for (Ryan.Object object: berzier2){
-                object.drawLine();
-            }
-            // Restore state
-            glDisableVertexAttribArray(0);
-
-            // Poll for window events.
-            // The key callback above will only be
-            // invoked during this call.
-            glfwPollEvents();
-        }
-    }
-    public void run() {
-
-        init();
-        loop();
-
-        // Terminate GLFW and
-        // free the error callback
-        glfwTerminate();
-        glfwSetErrorCallback(null).free();
     }
 }
