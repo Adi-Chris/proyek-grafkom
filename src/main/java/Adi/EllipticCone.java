@@ -46,7 +46,7 @@ public class EllipticCone extends Object {
         setupIBO(sectorCount, stackCount);
     }
 
-    // Draw pakai Polygon
+    // Draw pakai Triangles
     @Override
     public void draw() {
         drawSetup();
@@ -65,6 +65,11 @@ public class EllipticCone extends Object {
         // POINT
         // Parameter first dan end itu, vertices yang digambar mulai dari index keberapa, terus dari first ngegambar berapa kali.
         // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
+
+        // Gambar child
+        for (Object child : getChildObject()) {
+            child.draw();
+        }
     }
 
     public List<Vector3f> calculateEllipticConeVertices(Vector3f center, float radiusX, float radiusY, float coneHeight, int sectorCount, int stackCount) {
@@ -137,7 +142,7 @@ public class EllipticCone extends Object {
 //            torusStacks.add(this.vertices.subList(sectorCount * i, sectorCount * (i + 1)));
 //        }
 
-        System.out.println("Size: " + this.vertices.size());
+//        System.out.println("Size: " + this.vertices.size());
         // Buat masukin ke indexnya
         for (int i = 0; i < stackCount; i++) {
             for (int j = 0; j < sectorCount; j++) {
@@ -203,7 +208,7 @@ public class EllipticCone extends Object {
 //        index.add(0 + j + 1);
 //        }
 
-        System.out.println(index);
+//        System.out.println(index);
 
         ibo = glGenBuffers();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);

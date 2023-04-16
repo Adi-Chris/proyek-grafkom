@@ -81,6 +81,33 @@ public class Main {
             pokeball.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
             regice.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
         }
+
+        if (window.isKeyPressed(GLFW_KEY_I)) {
+            // Translasi
+            pokeball.translateObject(0.0f, 0.1f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_J)) {
+            // Translasi
+            pokeball.translateObject(-0.1f, 0.0f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_K)) {
+            // Translasi
+            pokeball.translateObject(0.0f, -0.1f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_L)) {
+            // Translasi
+            pokeball.translateObject(0.1f, 0.0f, 0.0f);
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_T)) {
+            // Scale
+            pokeball.scaleObject(1.1f, 1.1f, 1.1f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_G)) {
+            // Scale
+            pokeball.scaleObject(0.9f, 0.9f, 0.9f);
+        }
+
 //        if (window.isKeyPressed(GLFW_KEY_W)) {
 //            countDegree++;
 //            //rotasi terhadap matahari
