@@ -34,6 +34,7 @@ public class MainGabung {
     */
     int drawState = 0;
     boolean battleState = false;
+    boolean changeState = false;
 
     // Object Adi
     private Regice regice = new Regice();
@@ -142,18 +143,23 @@ public class MainGabung {
     public void inputDrawState() {
         if (window.isKeyPressed(GLFW_KEY_Z)) {
             drawState = 0;
+            changeState = true;
         } else{
             if (window.isKeyPressed(GLFW_KEY_X)) {
                 drawState = 1;
+                changeState = true;
             } else {
                 if (window.isKeyPressed(GLFW_KEY_C)) {
                     drawState = 2;
+                    changeState = true;
                 } else {
                     if (window.isKeyPressed(GLFW_KEY_V)) {
                         drawState = 3;
+                        changeState = true;
                     } else {
                         if (window.isKeyPressed(GLFW_KEY_B)) {
                             drawState = 4;
+                            changeState = true;
                         }
                     }
                 }
@@ -857,11 +863,10 @@ public class MainGabung {
             switch (drawState) {
                 case 0:
                     // Adi
-                    regice.reset();
                     // Battle state
-                    if (battleState) {
+                    if (changeState) {
                         regice.reset();
-                        battleState = false;
+                        changeState = false;
                     }
                     glClearColor(1.0f,
                             0.3f, 0.95f,
@@ -871,15 +876,13 @@ public class MainGabung {
                     break;
                 case 1:
                     // Louis
-                    magnemite.deleteObject();
-                    magnemite.init();
                     // Battle state
-                    if (battleState) {
+                    if (changeState) {
                         magnemite.deleteObject();
                         magnemite.init();
                         keyPressed = false;
                         animated = false;
-                        battleState = false;
+                        changeState = false;
                     }
                     glClearColor(15f,192/255f,203/255f,0.0f);
                     inputLouis();
@@ -887,8 +890,7 @@ public class MainGabung {
                     break;
                 case 2:
                     // Ryan
-                    Oshawott.reset();
-                    if (battleState) {
+                    if (changeState) {
                         Oshawott.objects.clear();
                         Oshawott.objectsHS.clear();
                         Oshawott.objectEllipsoid.clear();
@@ -898,7 +900,7 @@ public class MainGabung {
                         Oshawott.berzier1.clear();
                         Oshawott.berzier2.clear();
                         Oshawott.init();
-                        battleState = false;
+                        changeState = false;
                     }
                     glClearColor(0.0f,
                             1.0f, 0.5f,
@@ -913,9 +915,9 @@ public class MainGabung {
                     break;
                 case 4:
                     // Battle state
-                    if (!battleState) {
+                    if (changeState) {
                         initBattleState();
-                        battleState = true;
+                        changeState = false;
                     }
 //                    inputAdi();
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q));
