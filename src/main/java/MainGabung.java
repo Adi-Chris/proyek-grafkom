@@ -19,7 +19,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class MainGabung {
     private Window window =
             new Window
-                    (800, 800, "Hello World");
+                    (800, 800, "Proyek Grafkom - Pokemon");
 
     // Object Engine
     private Environtment environtment = new Environtment();
@@ -30,8 +30,10 @@ public class MainGabung {
     1: Louis, tekan X untuk ke Louis
     2: Ryan, tekan C untuk ke Ryan
     3: Timotius, tekan V untuk ke Timotius
+    4: Battle state, tekan B untuk Battle state
     */
     int drawState = 0;
+    boolean battleState = false;
 
     // Object Adi
     private Regice regice = new Regice();
@@ -64,7 +66,7 @@ public class MainGabung {
         environtment.init();
 
         // Adi
-        pokeball.init();
+//        pokeball.init();
         regice.init();
 
         // Louis
@@ -80,6 +82,26 @@ public class MainGabung {
 
     }
 
+    public void initBattleState() {
+        // Code
+
+        // Adi
+//        pokeball.init();
+        regice.reset();
+        regice.rotateObject(215.0f,0.0f,1.0f,0.0f);
+        regice.scaleObject(0.5f, 0.5f, 0.5f);
+        regice.translateObject(-0.6f, -0.3f, 0.25f);
+
+//        // Louis
+//        // init object magnemite
+//        magnemite.init();
+//
+//        // Ryan
+//        pokeball.init();
+//        pokeball.translateObject(0.7825f, 0.81f, -0.5f);
+//        Oshawott.init();
+    }
+
     public void inputDrawState() {
         if (window.isKeyPressed(GLFW_KEY_Z)) {
             drawState = 0;
@@ -92,6 +114,10 @@ public class MainGabung {
                 } else {
                     if (window.isKeyPressed(GLFW_KEY_V)) {
                         drawState = 3;
+                    } else {
+                        if (window.isKeyPressed(GLFW_KEY_B)) {
+                            drawState = 4;
+                        }
                     }
                 }
             }
@@ -774,20 +800,45 @@ public class MainGabung {
             switch (drawState) {
                 case 0:
                     // Adi
+                    // Battle state
+                    if (battleState) {
+                        regice.reset();
+                        battleState = false;
+                    }
                     glClearColor(1.0f,
                             0.3f, 0.95f,
                             0.0f);
                     inputAdi();
-                    regice.loop(window.isKeyPressed(GLFW_KEY_B));
+                    regice.loop(window.isKeyPressed(GLFW_KEY_Q));
                     break;
                 case 1:
                     // Louis
+                    // Battle state
+                    if (battleState) {
+                        magnemite.deleteObject();
+                        magnemite.init();
+                        keyPressed = false;
+                        animated = false;
+                        battleState = false;
+                    }
                     glClearColor(15f,192/255f,203/255f,0.0f);
                     inputLouis();
                     magnemite.loop();
                     break;
                 case 2:
                     // Ryan
+                    if (battleState) {
+                        Oshawott.objects.clear();
+                        Oshawott.objectsHS.clear();
+                        Oshawott.objectEllipsoid.clear();
+                        Oshawott.objectsCylinder.clear();
+                        Oshawott.objectEP.clear();
+                        Oshawott.objectsSphere.clear();
+                        Oshawott.berzier1.clear();
+                        Oshawott.berzier2.clear();
+                        Oshawott.init();
+                        battleState = false;
+                    }
                     glClearColor(0.0f,
                             1.0f, 0.5f,
                             0.0f);
@@ -798,6 +849,20 @@ public class MainGabung {
                 case 3:
                     // Timotius
 
+                    break;
+                case 4:
+                    // Battle state
+                    if (!battleState) {
+                        initBattleState();
+                        battleState = true;
+                    }
+                    inputAdi();
+                    regice.loop(window.isKeyPressed(GLFW_KEY_Q));
+//                    inputLouis();
+//                    magnemite.loop();
+//                    inputRyan();
+//                    pokeball.loop();
+//                    Oshawott.loop();
                     break;
             }
 

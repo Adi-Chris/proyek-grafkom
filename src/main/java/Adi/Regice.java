@@ -15,6 +15,8 @@ public class Regice {
 
     int adiFrameCount = 0;
     boolean isAnimating = false;
+    int idleFrameCount = 0;
+    boolean idleBigger = true;
 
     public void init() {
         // Main Body
@@ -579,6 +581,7 @@ public class Regice {
     }
 
     public void loop(boolean trigger) {
+        idleAnimation();
         attackAnimation(trigger);
 
         for (Object object : objects) {
@@ -608,6 +611,7 @@ public class Regice {
         // Kalau trigger, tapi belum animating, reset adiFrameCount
         if (trigger && !isAnimating) {
             this.adiFrameCount = 0;
+            reset();
             isAnimating = true;
 //            System.out.println("Reset Regice Animation");
         }
@@ -690,6 +694,40 @@ public class Regice {
 
         // Ketika sudah selesai
         isAnimating = false;
+
+    }
+
+    public void idleAnimation() {
+        // Kalau sedang menjalankan attackAnimation, return
+        if (isAnimating) {
+            return;
+        }
+
+        int animationBound = 10;
+
+        if (idleBigger) {
+            idleFrameCount++;
+        } else {
+            idleFrameCount--;
+        }
+
+        if (idleFrameCount < animationBound && idleBigger) {
+            objects.get(0).scaleObject(1.001f, 1.001f, 1.001f);
+        }
+
+        if (idleFrameCount > -animationBound && !idleBigger) {
+            objects.get(0).scaleObject(0.999f, 0.999f, 0.999f);
+        }
+
+        if (idleFrameCount >= animationBound * 3) {
+            idleFrameCount = animationBound;
+            idleBigger = false;
+        }
+
+        if (idleFrameCount <= -animationBound * 3) {
+            idleFrameCount = -animationBound;
+            idleBigger = true;
+        }
 
     }
 
