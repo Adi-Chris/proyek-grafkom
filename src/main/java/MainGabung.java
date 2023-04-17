@@ -143,6 +143,7 @@ public class MainGabung {
         Oshawott.objectsCylinder.get(0).translateObject(0.39f, 0.3775f, 0.0f);
 
         // Timo
+        marill.reset();
         // Rotate
         for (int i = 0; i < marill.objectsSphere.size(); i++) {
             marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
@@ -1154,14 +1155,13 @@ public class MainGabung {
                     break;
                 case 3:
                     // Timotius
-                    marill.reset();
-                    if (battleState) {
+                    if (changeState) {
                         marill.objectsSphere.clear();
                         marill.objectsEllipsoid.clear();
                         marill.cylinder.clear();
                         marill.berzier.clear();
-                        Oshawott.init();
-                        battleState = false;
+                        marill.init();
+                        changeState = false;
                     }
                     glClearColor(0.0f,
                             1.0f, 0.5f,
