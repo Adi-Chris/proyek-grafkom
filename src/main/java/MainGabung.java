@@ -3,6 +3,7 @@ import Adi.*;
 import Louis.*;
 import Ryan.*;
 
+import Timotius.Marill;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -57,6 +58,7 @@ public class MainGabung {
     boolean battle = false;
 
     // Object Timotius
+    private Marill marill = new Marill();
 
 
     public void init() {
@@ -82,6 +84,7 @@ public class MainGabung {
         Oshawott.init();
 
         // Timotius
+        marill.init();
 
     }
 
@@ -137,6 +140,49 @@ public class MainGabung {
         }
         Oshawott.objectsHS.get(0).translateObject(0.39f, 0.3775f, 0.0f);
         Oshawott.objectsCylinder.get(0).translateObject(0.39f, 0.3775f, 0.0f);
+
+        // Timo
+        // Rotate
+        for (int i = 0; i < marill.objectsSphere.size(); i++) {
+            marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+        }
+        for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+            marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+        }
+        for (int i = 0; i < marill.berzier.size(); i++) {
+            marill.berzier.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+        }
+        for (int i = 0; i < marill.cylinder.size(); i++) {
+            marill.cylinder.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+        }
+
+        // Scale
+        for (int i = 0; i < marill.objectsSphere.size(); i++) {
+            marill.objectsSphere.get(i).scaleObject(0.5f,0.5f, 0.5f);
+        }
+        for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+            marill.objectsEllipsoid.get(i).scaleObject(0.5f,0.5f, 0.5f);
+        }
+        for (int i = 0; i < marill.berzier.size(); i++) {
+            marill.berzier.get(i).scaleObject(0.5f,0.5f, 0.5f);
+        }
+        for (int i = 0; i < marill.cylinder.size(); i++) {
+            marill.cylinder.get(i).scaleObject(0.5f,0.5f, 0.5f);
+        }
+
+        // Translate
+        for (int i = 0; i < marill.objectsSphere.size(); i++) {
+            marill.objectsSphere.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+        }
+        for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+            marill.objectsEllipsoid.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+        }
+        for (int i = 0; i < marill.berzier.size(); i++) {
+            marill.berzier.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+        }
+        for (int i = 0; i < marill.cylinder.size(); i++) {
+            marill.cylinder.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+        }
     }
 
     public void inputDrawState() {
@@ -839,6 +885,203 @@ public class MainGabung {
         }
     }
 
+    public void inputTimo(){
+        if (window.getMouseInput().isLeftButtonPressed()) {
+            Vector2f pos = window.getMouseInput().getCurrentPos();
+            System.out.println("x : " + pos.x + "y : " + pos.y);
+
+            // dinormalisasi biar titik 0,0 itu di tengah
+            pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
+            pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                marill.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                marill.objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.berzier.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                marill.berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.cylinder.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+        }
+        if (window.isKeyPressed(GLFW_KEY_D)) {
+            Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                marill.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                marill.objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.berzier.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                marill.berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.cylinder.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+        }
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                marill.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                marill.objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.berzier.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                marill.berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.cylinder.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+        }
+        if (window.isKeyPressed(GLFW_KEY_S)) {
+            Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                marill.objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                marill.objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.berzier.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                marill.berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                marill.cylinder.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_UP)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(0.00f,0.01f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).translateObject(0.00f,-0.01f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_1)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_2)) {
+            for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                marill.objectsSphere.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                marill.objectsEllipsoid.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < marill.berzier.size(); i++) {
+                marill.berzier.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < marill.cylinder.size(); i++) {
+                marill.cylinder.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+        }
+    }
+
     public void loop() {
         while (window.isOpen()) {
             window.update();
@@ -909,6 +1152,20 @@ public class MainGabung {
                     break;
                 case 3:
                     // Timotius
+                    marill.reset();
+                    if (battleState) {
+                        marill.objectsSphere.clear();
+                        marill.objectsEllipsoid.clear();
+                        marill.cylinder.clear();
+                        marill.berzier.clear();
+                        Oshawott.init();
+                        battleState = false;
+                    }
+                    glClearColor(0.0f,
+                            1.0f, 0.5f,
+                            0.0f);
+                    inputTimo();
+                    marill.loop();
 
                     break;
                 case 4:
@@ -924,6 +1181,8 @@ public class MainGabung {
 //                    inputRyan();
 //                    pokeball.loop();
                     Oshawott.loop();
+//                    inputTimo();
+                    marill.loop();
                     break;
             }
 
