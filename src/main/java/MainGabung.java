@@ -94,7 +94,11 @@ public class MainGabung {
 
 //        // Louis
 //        // init object magnemite
-//        magnemite.init();
+        magnemite.deleteObject();
+        magnemite.init();
+        magnemite.rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
+        magnemite.scaleMagnemite(0.5f, 0.5f, 0.5f);
+        magnemite.translateMagnemite(0.665f,  0.175f, 0.0f);
 //
 //        // Ryan
 //        pokeball.init();
@@ -856,10 +860,10 @@ public class MainGabung {
                         initBattleState();
                         battleState = true;
                     }
-                    inputAdi();
+//                    inputAdi();
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q));
 //                    inputLouis();
-//                    magnemite.loop();
+                    magnemite.loop();
 //                    inputRyan();
 //                    pokeball.loop();
 //                    Oshawott.loop();

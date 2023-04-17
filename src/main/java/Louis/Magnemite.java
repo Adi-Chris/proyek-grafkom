@@ -514,19 +514,19 @@ public class Magnemite {
         // hadap kiri
         if (offset == "yPlus") {
             y = 1.0f;
-        // hadap kanan
+            // hadap kanan
         } else if (offset == "yMin") {
             y = -1.0f;
-        // muter atas
+            // muter atas
         } else if (offset == "xPlus") {
             x = 1.0f;
-        // muter bawah
+            // muter bawah
         } else if (offset == "xMin") {
             x = -1.0f;
-        // muter kiri
+            // muter kiri
         } else if (offset == "zPlus") {
             z = 1.0f;
-        // muter kanan
+            // muter kanan
         } else if (offset == "zMin") {
             z = -1.0f;
         }
@@ -558,6 +558,40 @@ public class Magnemite {
         for (int i = 0; i < objectsCylinder.size(); i++) {
             objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
             objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
+            objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+    }
+
+    public void rotateMagnemite(Float degree, float x, float y, float z) {
+        Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+
+        for (int i = 0; i < objectsSphere.size(); i++) {
+            objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsSphere.get(i).rotateObject((float) Math.toRadians(degree), x, y, z);
+            objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsHalfTorus.size(); i++) {
+            objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(degree), x, y, z);
+            objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectCube.size(); i++) {
+            objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectCube.get(i).rotateObject((float) Math.toRadians(degree), x, y, z);
+            objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsHalfSphere.size(); i++) {
+            objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(degree), x, y, z);
+            objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+        }
+
+        for (int i = 0; i < objectsCylinder.size(); i++) {
+            objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
+            objectsCylinder.get(i).rotateObject((float) Math.toRadians(degree), x, y, z);
             objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
         }
     }
@@ -647,6 +681,29 @@ public class Magnemite {
         }
     }
 
+    public void translateMagnemite(Float x, Float y, Float z) {
+        for (int i = 0; i < objectsSphere.size(); i++) {
+            objectsSphere.get(i).translateObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsHalfTorus.size(); i++) {
+            objectsHalfTorus.get(i).translateObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectCube.size(); i++) {
+            objectCube.get(i).translateObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsHalfSphere.size(); i++) {
+            objectsHalfSphere.get(i).translateObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsCylinder.size(); i++) {
+            objectsCylinder.get(i).translateObject(x, y, z);
+        }
+    }
+
+
     // scale magnemite size
     public void scaleMagnemite(String keyword) {
         if (keyword == "smaller") {
@@ -691,6 +748,29 @@ public class Magnemite {
             }
         }
     }
+
+    public void scaleMagnemite(Float x, Float y, Float z) {
+        for (int i = 0; i < objectsSphere.size(); i++) {
+            objectsSphere.get(i).scaleObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsHalfTorus.size(); i++) {
+            objectsHalfTorus.get(i).scaleObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectCube.size(); i++) {
+            objectCube.get(i).scaleObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsHalfSphere.size(); i++) {
+            objectsHalfSphere.get(i).scaleObject(x, y, z);
+        }
+
+        for (int i = 0; i < objectsCylinder.size(); i++) {
+            objectsCylinder.get(i).scaleObject(x, y, z);
+        }
+    }
+
 
     // clear all arraylist
     public void deleteObject() {
@@ -745,7 +825,7 @@ public class Magnemite {
             objectsSphere.get(i).translateObject(0.0f, distance, 0.0f);
         }
 
-        for (int i = 0; i <objectsHalfTorus.size(); i++) {
+        for (int i = 0; i < objectsHalfTorus.size(); i++) {
             objectsHalfTorus.get(i).translateObject(0.0f, distance, 0.0f);
         }
 
