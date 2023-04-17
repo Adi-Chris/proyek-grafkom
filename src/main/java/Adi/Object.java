@@ -371,4 +371,17 @@ public class Object extends ShaderProgram {
     public void setCenterPoint(Vector3f centerPoint) {
         this.centerPoint = centerPoint;
     }
+
+    // Hanya agar bisa dioverride BezierCurve
+    public void recalculateBezier(Vector3f startPoint, Vector3f oppositePoint, int handlePointCount, int amountOfBezierVertices) {
+        System.out.println("Mohon Override function ini");
+    }
+
+    // Clear vertices
+    public void clearVertices() {
+        this.vertices = new ArrayList<>();
+
+        // Setup ulang VAO VBO
+        setupVAOVBO();
+    }
 }

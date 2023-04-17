@@ -526,7 +526,7 @@ public class Regice {
         objects.get(0).getChildObject().get(18).translateObject(-0.175f, 0.3f, 0.175f);
 
         // Ice Beam Attack
-        // (Awalnya memang kecil ukurannya)
+        // (Awalnya memang kecil ukurannya, hanya terlihat saat animasi)
         objects.get(0).getChildObject().add(new Sphere(
                 Arrays.asList(
                         new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
@@ -541,6 +541,41 @@ public class Regice {
                 new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
         ));
         objects.get(0).getChildObject().get(19).scaleObject(0.001f, 0.001f, 0.001f);
+
+        // Ice beam bezier
+        // (Awalnya memang kosong, hanya terlihat saat animasi)
+        // Kanan
+        objects.get(0).getChildObject().add(new BezierCurve(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
+        ));
+        // Atas
+        objects.get(0).getChildObject().add(new BezierCurve(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
+        ));
+        // Kiri
+        objects.get(0).getChildObject().add(new BezierCurve(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
+        ));
+        // Bawah
+        objects.get(0).getChildObject().add(new BezierCurve(
+                Arrays.asList(
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
+                ),
+                new Vector4f(0.1f, 0.5f, 1.0f, 0.0f)
+        ));
     }
 
     public void loop(boolean trigger) {
@@ -578,7 +613,6 @@ public class Regice {
             objects.get(0).getChildObject().get(13).rotateObject(-0.2f, 0, 1, 0);
             objects.get(0).getChildObject().get(14).rotateObject(0.2f, 0, 1, 0);
             this.adiFrameCount++;
-            System.out.println(adiFrameCount);
             return;
         }
 
@@ -586,20 +620,64 @@ public class Regice {
         if (this.adiFrameCount == 180) {
             objects.get(0).getChildObject().get(19).scaleObject(25f, 25f, 25f);
             objects.get(0).getChildObject().get(19).translateObject(0.0f, 0.35f, -0.5f);
-            System.out.println("Appear pls");
         }
 
         // Charging sphere ice beam
         if ((this.adiFrameCount >= 180) && (this.adiFrameCount <= 300)) {
             objects.get(0).getChildObject().get(19).scaleObjectByCenter(1.01f, 1.01f, 1.01f);
             adiFrameCount++;
+            return;
         }
 
         // Muncul Bezier ice beam
-        if ((this.adiFrameCount >= 180) && (this.adiFrameCount <= 300)) {
-            objects.get(0).getChildObject().get(19).scaleObjectByCenter(1.01f, 1.01f, 1.01f);
+        if ((this.adiFrameCount >= 300) && (this.adiFrameCount < 400)) {
+            // Ganti bezier tiap 5 frame
+            if (this.adiFrameCount % 10 == 0) {
+//                System.out.println("Sphere: " + objects.get(0).getChildObject().get(19).getCenterPoint());
+//                System.out.println("Main body: " + objects.get(0).getCenterPoint());
+                objects.get(0).getChildObject().get(20).recalculateBezier(objects.get(0).getChildObject().get(19).getCenterPoint(), objects.get(0).getCenterPoint(), 4, 25);
+//                System.out.println("Bezier: " + objects.get(0).getChildObject().get(20).vertices);
+                objects.get(0).getChildObject().get(21).recalculateBezier(objects.get(0).getChildObject().get(19).getCenterPoint(), objects.get(0).getCenterPoint(), 4, 25);
+                objects.get(0).getChildObject().get(22).recalculateBezier(objects.get(0).getChildObject().get(19).getCenterPoint(), objects.get(0).getCenterPoint(), 4, 25);
+                objects.get(0).getChildObject().get(23).recalculateBezier(objects.get(0).getChildObject().get(19).getCenterPoint(), objects.get(0).getCenterPoint(), 4, 25);
+            }
             adiFrameCount++;
+            return;
         }
+
+        // Ice beam selesai
+        if ((this.adiFrameCount == 400)) {
+            // Hapus bezier
+            objects.get(0).getChildObject().get(20).clearVertices();
+            objects.get(0).getChildObject().get(21).clearVertices();
+            objects.get(0).getChildObject().get(22).clearVertices();
+            objects.get(0).getChildObject().get(23).clearVertices();
+            System.out.println("Clear");
+        }
+
+        // Uncharge sphere ice beam
+        if ((this.adiFrameCount >= 400) && (this.adiFrameCount < 520)) {
+            objects.get(0).getChildObject().get(19).scaleObjectByCenter(0.99f, 0.99f, 0.99f);
+            adiFrameCount++;
+            return;
+        }
+
+        // Despawn sphere ice beam
+        if (this.adiFrameCount == 520) {
+            objects.get(0).getChildObject().get(19).translateObject(0.0f, -0.35f, 0.5f);
+            objects.get(0).getChildObject().get(19).scaleObject(0.04f, 0.04f, 0.04f);
+        }
+
+        // Tangan bergerak ke belakang
+        if ((this.adiFrameCount >= 520) && (this.adiFrameCount <= 700)) {
+            objects.get(0).getChildObject().get(13).rotateObject(0.2f, 0, 1, 0);
+            objects.get(0).getChildObject().get(14).rotateObject(-0.2f, 0, 1, 0);
+            this.adiFrameCount++;
+            return;
+        }
+
+        // Ketika sudah selesai
+        isAnimating = false;
 
     }
 }

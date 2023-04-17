@@ -114,12 +114,6 @@ public class Pokeball {
         }
     }
 
-    public void translateObject(float offsetX, float offsetY, float offsetZ) {
-        for (Object object : objects) {
-            object.translateObject(offsetX, offsetY, offsetZ);
-        }
-    }
-
     public void rotateObject(float degree, float x, float y, float z) {
         for (Object object : objects) {
             object.rotateObject(degree, x, y, z);
@@ -131,7 +125,7 @@ public class Pokeball {
             object.scaleObject(scaleX, scaleY, scaleZ);
         }
     }
-    
+
     public void translateObject(float x, float y, float z) {
         for (Object object : objects) {
             object.translateObject(x, y, z);
