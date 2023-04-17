@@ -42,6 +42,8 @@ public class MainGabung {
     private Magnemite magnemite = new Magnemite();
     boolean keyPressed = false;
     boolean animated = false;
+    int checkBeam = 0;
+    boolean arahBeam = true;
 
     // Object Ryan
     private Oshawott Oshawott = new Oshawott();
@@ -52,6 +54,7 @@ public class MainGabung {
     boolean checkArahKaki = true;
     int checkBadan = 0;
     boolean checkArahBadan = true;
+    boolean battle = false;
 
     // Object Timotius
 
@@ -94,12 +97,46 @@ public class MainGabung {
 
 //        // Louis
 //        // init object magnemite
-//        magnemite.init();
+        magnemite.deleteObject();
+        magnemite.init();
+        magnemite.rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
+        magnemite.scaleMagnemite(0.5f, 0.5f, 0.5f);
+        magnemite.translateMagnemite(0.665f,  0.175f, 0.0f);
 //
 //        // Ryan
 //        pokeball.init();
 //        pokeball.translateObject(0.7825f, 0.81f, -0.5f);
-//        Oshawott.init();
+        Oshawott.reset();
+        // Rotate
+        for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+            Oshawott.objectEllipsoid.get(i).rotateObject((float) Math.toRadians(15), 0.0f, 1.0f, 0.0f);
+        }
+        for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+            Oshawott.objectsSphere.get(i).rotateObject((float) Math.toRadians(15), 0.0f, 1.0f, 0.0f);
+        }
+        Oshawott.objectsHS.get(0).rotateObject((float) Math.toRadians(15), 0.0f, 1.0f, 0.0f);
+
+        Oshawott.objectsCylinder.get(0).rotateObject((float) Math.toRadians(15), 0.0f, 1.0f, 0.0f);
+
+        // Scale
+        for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+            Oshawott.objectEllipsoid.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+        }
+        for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+            Oshawott.objectsSphere.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+        }
+        Oshawott.objectsHS.get(0).scaleObject(0.5f, 0.5f, 0.5f);
+        Oshawott.objectsCylinder.get(0).scaleObject(0.5f, 0.5f, 0.5f);
+
+        // Translate
+        for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
+            Oshawott.objectEllipsoid.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+        }
+        for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
+            Oshawott.objectsSphere.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+        }
+        Oshawott.objectsHS.get(0).translateObject(0.39f, 0.3775f, 0.0f);
+        Oshawott.objectsCylinder.get(0).translateObject(0.39f, 0.3775f, 0.0f);
     }
 
     public void inputDrawState() {
@@ -780,6 +817,26 @@ public class MainGabung {
             Oshawott.berzier2.clear();
             Oshawott.init();
         }
+
+        if (window.isKeyPressed(GLFW_KEY_Q)) {
+            if (checkBeam < 1100 && arahBeam) {
+                Oshawott.objectsSphere.get(2).scaleObject(1.001f, 1.001f, 1.001f);
+                Oshawott.objectsSphere.get(2).translateObject(0.0f, -0.0003f, 0.0f);
+                checkBeam++;
+            }
+            if (checkBeam > -1100 && !arahBeam) {
+                Oshawott.objectsSphere.get(2).translateObject(0.0f, 0.0f, -10.0f);
+                checkBeam--;
+            }
+            if (checkBeam >= 1100) {
+                checkBeam = 1100;
+                arahBeam = false;
+            }
+            if (checkBeam <= -1100) {
+                checkBeam = -1100;
+                arahBeam = true;
+            }
+        }
     }
 
     public void loop() {
@@ -856,13 +913,13 @@ public class MainGabung {
                         initBattleState();
                         battleState = true;
                     }
-                    inputAdi();
+//                    inputAdi();
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q));
 //                    inputLouis();
-//                    magnemite.loop();
+                    magnemite.loop();
 //                    inputRyan();
 //                    pokeball.loop();
-//                    Oshawott.loop();
+                    Oshawott.loop();
                     break;
             }
 

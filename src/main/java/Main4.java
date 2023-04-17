@@ -28,12 +28,12 @@ public class Main4 {
     int tes;
 
     private static float[][] controlBerzier = {
-            { -0.0835f, 0.09f, -0.3f},
-            { 0.0835f, 0.09f, -0.3f}
+            {-0.0835f, 0.09f, -0.3f},
+            {0.0835f, 0.09f, -0.3f}
     };
     private static float[][] controlBerzier2 = {
-            { -0.0415f, 0.018f, -0.3f},
-            { 0.0415f, 0.018f, -0.3f}
+            {-0.0415f, 0.018f, -0.3f},
+            {0.0415f, 0.018f, -0.3f}
     };
 
     int idleFrameCount = 0;
@@ -298,8 +298,8 @@ public class Main4 {
                 ),
                 new Vector4f(0, 1f, 1f, 1.0f), 0.0f, -0.5f, 0.0f, 0.03f, 0.2f, 0.03f
         ));
-        cylinder.get(0).rotateObject((float)Math.toRadians(90f),1.0f,0.0f,0.0f);
-        cylinder.get(0).translateObject(0.0f,-0.2f,0.3f);
+        cylinder.get(0).rotateObject((float) Math.toRadians(90f), 1.0f, 0.0f, 0.0f);
+        cylinder.get(0).translateObject(0.0f, -0.2f, 0.3f);
     }
 
     public void input() {
@@ -311,64 +311,193 @@ public class Main4 {
             pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
             pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_D)){
-            for (int i = 0;i < objectsSphere.size();i++){
-                objectsSphere.get(i).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < objectsEllipsoid.size();i++){
-                objectsEllipsoid.get(i).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < berzier.size();i++){
-                berzier.get(i).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                berzier.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < cylinder.size();i++){
-                cylinder.get(i).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
-            }
-        }
-        if (window.isKeyPressed(GLFW_KEY_A)){
-            for (int i = 0;i < objectsSphere.size();i++){
-                objectsSphere.get(i).rotateObject((float)Math.toRadians(1f),0.0f,-1f,0.0f);
-            }
-            for (int i = 0;i < objectsEllipsoid.size();i++){
-                objectsEllipsoid.get(i).rotateObject((float)Math.toRadians(1f),0.0f,-1f,0.0f);
-            }
-            for (int i = 0;i < berzier.size();i++){
-                berzier.get(i).rotateObject((float)Math.toRadians(1f),0.0f,-1f,0.0f);
-            }
-            for (int i = 0;i < cylinder.size();i++){
-                cylinder.get(i).rotateObject((float)Math.toRadians(1f),0.0f,-1f,0.0f);
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                cylinder.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, 1f, 0.0f);
+                cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
         }
-        if (window.isKeyPressed(GLFW_KEY_W)){
-            for (int i = 0;i < objectsSphere.size();i++){
-                objectsSphere.get(i).rotateObject((float)Math.toRadians(1f),1f,0f,0f);
+        if (window.isKeyPressed(GLFW_KEY_D)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < objectsEllipsoid.size();i++){
-                objectsEllipsoid.get(i).rotateObject((float)Math.toRadians(1f),1f,0f,0f);
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < berzier.size();i++){
-                berzier.get(i).rotateObject((float)Math.toRadians(1f),1f,0f,0f);
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                berzier.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
-            for (int i = 0;i < cylinder.size();i++){
-                cylinder.get(i).rotateObject((float)Math.toRadians(1f),1f,0f,0f);
-            }
-        }
-        if (window.isKeyPressed(GLFW_KEY_S)){
-            for (int i = 0;i < objectsSphere.size();i++){
-                objectsSphere.get(i).rotateObject((float)Math.toRadians(1f),-1f,0f,0f);
-            }
-            for (int i = 0;i < objectsEllipsoid.size();i++){
-                objectsEllipsoid.get(i).rotateObject((float)Math.toRadians(1f),-1f,0f,0f);
-            }
-            for (int i = 0;i < berzier.size();i++){
-                berzier.get(i).rotateObject((float)Math.toRadians(1f),-1f,0f,0f);
-            }
-            for (int i = 0;i < cylinder.size();i++){
-                cylinder.get(i).rotateObject((float)Math.toRadians(1f),-1f,0f,0f);
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                cylinder.get(i).rotateObject((float) Math.toRadians(1f), 0.0f, -1f, 0.0f);
+                cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
         }
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                berzier.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                cylinder.get(i).rotateObject((float) Math.toRadians(1f), 1.0f, 0.0f, 0.0f);
+                cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+        }
+        if (window.isKeyPressed(GLFW_KEY_S)) {
+            Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
+
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsSphere.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                objectsEllipsoid.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                berzier.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                berzier.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(-tmp.x, -tmp.y, -tmp.z);
+                cylinder.get(i).rotateObject((float) Math.toRadians(1f), -1.0f, 0.0f, 0.0f);
+                cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
+            }
         }
 
+        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(-0.01f,0.0f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(0.01f,0.0f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_UP)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(0.0f,0.01f, 0.0f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(0.00f,0.01f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).translateObject(0.0f,-0.01f, 0.0f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).translateObject(0.00f,-0.01f, 0.0f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_1)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).scaleObject(0.999f,0.999f, 0.999f);
+            }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_2)) {
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < objectsEllipsoid.size(); i++) {
+                objectsEllipsoid.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < berzier.size(); i++) {
+                berzier.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+            for (int i = 0; i < cylinder.size(); i++) {
+                cylinder.get(i).scaleObject(1.001f,1.001f, 1.001f);
+            }
+        }
+    }
 
 
     public void loop() {
@@ -381,13 +510,13 @@ public class Main4 {
             for(Timotius.Object objects: objectsSphere) {
                 objects.draw();
             }
-            for (Timotius.Object objects: objectsEllipsoid){
+            for (Timotius.Object objects : objectsEllipsoid) {
                 objects.draw();
             }
-            for (Timotius.Object objects: berzier){
+            for (Timotius.Object objects : berzier) {
                 objects.drawLine();
             }
-            for (Timotius.Object objects: cylinder){
+            for (Timotius.Object objects : cylinder) {
                 objects.drawLine();
             }
             glDisableVertexAttribArray(0);
@@ -444,6 +573,7 @@ public class Main4 {
         glfwTerminate();
         glfwSetErrorCallback(null).free();
     }
+
     public void berzierMulut(float[][] floats, int pilihan) {
         int indexBerzier = 0;
         for (float t = 0; t <= 1; t += 0.01f) {
@@ -459,7 +589,7 @@ public class Main4 {
                 z += term * floats[i][2];
             }
             if (tes == 0) {
-                if (pilihan == 0){
+                if (pilihan == 0) {
                     berzier.get(0).addVertices(new Vector3f(x, y, z));
                 }
             }
