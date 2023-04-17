@@ -32,7 +32,7 @@ public class Sphere extends Object {
         setupVAOVBO();
     }
 
-    // Constructor untuk Sphere yang Egg Shell
+    // Constructor untuk Sphere yang Dipotong
     // Frustum = ada berapa row yang diambil
     // Asumsi: bottom frustum tidak negatif dan topfrustum < stackCount
     public Sphere(List<ShaderModuleData> shaderModuleDataList, Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, int bottomFrustum, int topFrustum, Vector4f color) {

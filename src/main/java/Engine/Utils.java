@@ -7,8 +7,10 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.math.BigInteger;
+import java.util.Random;
 
 public class Utils {
+    static Random random = new Random();
 
     public static String readFile(String filePath) {
         String str;
@@ -93,6 +95,14 @@ public class Utils {
         }
 
         return bezierCurvePoints;
+    }
+
+    public static int randomNum(int bound) {
+        return random.nextInt(bound);
+    }
+
+    public static float randomNum(float origin, float bound) {
+        return random.nextFloat(origin, bound);
     }
 
 }

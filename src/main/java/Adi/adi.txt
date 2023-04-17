@@ -1,7 +1,15 @@
 Adi Christian C14210091
 
 - Membuat Pokeball -> Kombinasi Sphere dengan frustum dan Torus
-- Membuat Pokemon-Regice -> Kombinasi Cone dengan frustum, Cylinder dengan frustum, dan Bezier Curve
+- Membuat Pokemon-Regice -> Kombinasi:
+Cone untuk kepala, kaki dan kristal punggung
+Cone dengan frustum untuk badan
+Cylinder untuk lengan, kaki, jari, dan kristal punggung
+Sphere untuk mata
+dan Bezier Curve untuk animasi attack ice-beam
+
+Model Regice terinspirasi dari:
+https://sketchfab.com/3d-models/regice-378-593cad4603314d1cb081db3faff0589d
 
 Catatan:
 Sphere:
@@ -10,3 +18,28 @@ sectorCount -> Lingkaran 2Dnya (O)
 Torus:
 sectorCount: Seberapa banyak sisi di lingkaran 2Dnya (O)
 stackCount: Seberapa banyak sisi di tiap sectornya
+
+EllipticCone:
+sectorCount: jumlah sisi di alas
+stackCount: jumlah stack dari alas sampai atap (+1 untuk ujung atasnya)
+Verticesnya mengular dari bawah ke atas
+
+Cylinder:
+IBO terinspirasi materi kelas dan https://faun.pub/draw-circle-in-opengl-c-2da8d9c2c103
+
+Referensi animasi attack ice-beam:
+https://youtu.be/MOrBeCIe24g?t=42 (Dari anime ori)
+https://www.artstation.com/artwork/zDNdx6 (Buatan artist)
+
+Hierarchy
+Main body
+    ..
+    Lengan kiri
+        jari 1
+        jari 2
+        jari 3
+    Lengan kanan
+        jari 1
+        jari 2
+        jari 3
+    ...

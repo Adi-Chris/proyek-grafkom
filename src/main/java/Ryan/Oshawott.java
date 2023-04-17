@@ -376,6 +376,21 @@ public class Oshawott {
         ));
         objectsCylinder.get(0).rotateObject((float) Math.toRadians(90), 0.0f, 1.0f, 0.0f);
         objectsCylinder.get(0).translateObject(0.0f,0.0f,0.3f);
+
+        // Bubble Beam
+        objectsSphere.add(new Sphere(
+                Arrays.asList(
+                        //shaderFile lokasi menyesuaikan objectnya
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                        new ShaderProgram.ShaderModuleData
+                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 1.0f, 1.0f, 0.0f),
+                0.0f, 0.0f, 0.0f, 0.06f, 0.06f, 0.06f
+        ));
+        objectsSphere.get(2).translateObject(0.0f,0.3f,-0.08f);
     }
     public void loop() {
         for (Sphere object : objectsSphere) {
