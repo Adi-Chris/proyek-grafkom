@@ -29,6 +29,9 @@ public class Main {
     private ArrayList<Object> objectsPointsControl
             = new ArrayList<>();
 
+    // Object Engine
+    private Environtment environtment = new Environtment();
+
     // Object Adi
     private Pokeball pokeball = new Pokeball();
     private Regice regice = new Regice();
@@ -41,6 +44,7 @@ public class Main {
         mouseInput = window.getMouseInput();
 
         //code
+        environtment.init();
         pokeball.init();
         regice.init();
 //        // Matahari
@@ -159,6 +163,7 @@ public class Main {
             input();
 
             //code
+            environtment.loop();
 //            pokeball.loop();
             regice.loop(window.isKeyPressed(GLFW_KEY_B));
 
