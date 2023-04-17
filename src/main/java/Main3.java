@@ -25,6 +25,8 @@ public class Main3 {
     boolean checkArahKaki = true;
     int checkBadan = 0;
     boolean checkArahBadan = true;
+    int checkBeam = 0;
+    boolean arahBeam = true;
     private MouseInput mouseInput;
 
     public void init() {
@@ -187,7 +189,7 @@ public class Main3 {
             // dinormalisasi biar titik 0,0 itu di tengah
             pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
             pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
-//            System.out.println(pos.x + "f, " + pos.y + "f, 0.0f");
+            System.out.println(pos.x + "f, " + pos.y + "f, 0.0f");
         }
 
         // Gerakan Tangan
@@ -375,7 +377,29 @@ public class Main3 {
             Oshawott.objectsSphere.clear();
             Oshawott.berzier1.clear();
             Oshawott.berzier2.clear();
+            checkBeam = 0;
             Oshawott.init();
+        }
+
+        // attack bubble beam
+        if (window.isKeyPressed(GLFW_KEY_B)){
+            if (checkBeam < 1100 && arahBeam) {
+                Oshawott.objectsSphere.get(2).scaleObject(1.001f,1.001f,1.001f);
+                Oshawott.objectsSphere.get(2).translateObject(0.0f,-0.0003f,0.0f);
+                checkBeam++;
+            }
+            if (checkBeam > -1100 && !arahBeam) {
+                Oshawott.objectsSphere.get(2).translateObject(0.0f,0.0f,-10.0f);
+                checkBeam--;
+            }
+            if (checkBeam >= 1100) {
+                checkBeam = 1100;
+                arahBeam = false;
+            }
+            if (checkBeam <= -1100) {
+                checkBeam = -1100;
+                arahBeam = true;
+            }
         }
     }
     public void loop() {
