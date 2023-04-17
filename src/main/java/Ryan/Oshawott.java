@@ -18,6 +18,9 @@ public class Oshawott {
     public ArrayList<Ryan.Object> berzier2 = new ArrayList<>();
     public ArrayList<Cylinder> objectsCylinder = new ArrayList<>();
     int tes;
+    boolean isAnimating = false;
+    int idleFrameCount = 0;
+    boolean idleBigger = true;
     public static float[][] controlBerzier1 = {
             { -0.0675f, 0.2925f, -0.2229f},
             { -0.01f, 0.3325f, -0.2229f}
@@ -393,6 +396,7 @@ public class Oshawott {
         objectsSphere.get(2).translateObject(0.0f,0.3f,-0.08f);
     }
     public void loop() {
+        idleAnimation();
         for (Sphere object : objectsSphere) {
             object.draw();
         }
@@ -450,5 +454,65 @@ public class Oshawott {
             koef /= (i + 1);
         }
         return koef;
+    }
+
+    public void reset(){
+        objects.clear();
+        objectsHS.clear();
+        objectEllipsoid.clear();
+        objectsCylinder.clear();
+        objectEP.clear();
+        objectsSphere.clear();
+        berzier1.clear();
+        berzier2.clear();
+        init();
+    }
+
+    public void idleAnimation() {
+        // Kalau sedang menjalankan attackAnimation, return
+        if (isAnimating) {
+            return;
+        }
+
+        int animationBound = 10;
+
+        if (idleBigger) {
+            idleFrameCount++;
+        } else {
+            idleFrameCount--;
+        }
+
+        if (idleFrameCount < animationBound && idleBigger) {
+            for (int i = 0; i < objectEllipsoid.size(); i++) {
+                objectEllipsoid.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
+            }
+            objectsHS.get(0).scaleObject(1.001f, 1.001f, 1.001f);
+            objectsCylinder.get(0).scaleObject(1.001f, 1.001f, 1.001f);
+        }
+
+        if (idleFrameCount > -animationBound && !idleBigger) {
+            for (int i = 0; i < objectEllipsoid.size(); i++) {
+                objectEllipsoid.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+            for (int i = 0; i < objectsSphere.size(); i++) {
+                objectsSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
+            }
+            objectsHS.get(0).scaleObject(0.999f, 0.999f, 0.999f);
+            objectsCylinder.get(0).scaleObject(0.999f, 0.999f, 0.999f);
+        }
+
+        if (idleFrameCount >= animationBound * 3) {
+            idleFrameCount = animationBound;
+            idleBigger = false;
+        }
+
+        if (idleFrameCount <= -animationBound * 3) {
+            idleFrameCount = -animationBound;
+            idleBigger = true;
+        }
+
     }
 }
