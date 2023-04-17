@@ -101,7 +101,7 @@ public class MainGabung {
         magnemite.init();
         magnemite.rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
         magnemite.scaleMagnemite(0.5f, 0.5f, 0.5f);
-        magnemite.translateMagnemite(0.665f,  0.175f, 0.0f);
+        magnemite.translateMagnemite(0.7225f, 0.1f, 0.0f);
 //
 //        // Ryan
 //        pokeball.init();
@@ -857,6 +857,7 @@ public class MainGabung {
             switch (drawState) {
                 case 0:
                     // Adi
+                    regice.reset();
                     // Battle state
                     if (battleState) {
                         regice.reset();
@@ -870,6 +871,8 @@ public class MainGabung {
                     break;
                 case 1:
                     // Louis
+                    magnemite.deleteObject();
+                    magnemite.init();
                     // Battle state
                     if (battleState) {
                         magnemite.deleteObject();
@@ -884,6 +887,7 @@ public class MainGabung {
                     break;
                 case 2:
                     // Ryan
+                    Oshawott.reset();
                     if (battleState) {
                         Oshawott.objects.clear();
                         Oshawott.objectsHS.clear();

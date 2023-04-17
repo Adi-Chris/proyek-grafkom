@@ -24,6 +24,10 @@ public class Magnemite {
     public ArrayList<Object> objectsBezier5 = new ArrayList<>();
     public ArrayList<Object> objectsBezier6 = new ArrayList<>();
 
+    boolean isAnimating = false;
+    int idleFrameCount = 0;
+    boolean idleBigger = true;
+
     public void init() {
         // badan
         objectsSphere.add(new Sphere(
@@ -413,6 +417,8 @@ public class Magnemite {
     }
 
     public void loop() {
+        idleAnimation();
+
         for (Object object : objects) {
             object.draw();
         }
@@ -840,5 +846,39 @@ public class Magnemite {
         for (int i = 0; i < objectsCylinder.size(); i++) {
             objectsCylinder.get(i).translateObject(0.0f, distance, 0.0f);
         }
+    }
+
+    public void idleAnimation() {
+        // Kalau sedang menjalankan attackAnimation, return
+        if (isAnimating) {
+            return;
+        }
+
+        int animationBound = 10;
+
+        if (idleBigger) {
+            idleFrameCount++;
+        } else {
+            idleFrameCount--;
+        }
+
+        if (idleFrameCount < animationBound && idleBigger) {
+            scaleMagnemite(1.001f, 1.001f, 1.001f);
+        }
+
+        if (idleFrameCount > -animationBound && !idleBigger) {
+            scaleMagnemite(0.999f, 0.999f, 0.999f);
+        }
+
+        if (idleFrameCount >= animationBound * 3) {
+            idleFrameCount = animationBound;
+            idleBigger = false;
+        }
+
+        if (idleFrameCount <= -animationBound * 3) {
+            idleFrameCount = -animationBound;
+            idleBigger = true;
+        }
+
     }
 }
