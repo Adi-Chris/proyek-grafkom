@@ -1112,9 +1112,10 @@ public class MainGabung {
                         regice.reset();
                         changeState = false;
                     }
-                    glClearColor(1.0f,
-                            0.3f, 0.95f,
-                            0.0f);
+//                    glClearColor(1.0f,
+//                            0.3f, 0.95f,
+//                            0.0f);
+                    glClearColor(116/255f, 189/255f, 34/255f, 0.0f);
                     inputAdi();
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q));
                     break;
@@ -1128,7 +1129,8 @@ public class MainGabung {
                         animated = false;
                         changeState = false;
                     }
-                    glClearColor(15f,192/255f,203/255f,0.0f);
+//                    glClearColor(15f,192/255f,203/255f,0.0f);
+                    glClearColor(116/255f, 189/255f, 34/255f, 0.0f);
                     inputLouis();
                     magnemite.loop();
                     break;
@@ -1146,9 +1148,10 @@ public class MainGabung {
                         Oshawott.init();
                         changeState = false;
                     }
-                    glClearColor(0.0f,
-                            1.0f, 0.5f,
-                            0.0f);
+//                    glClearColor(0.0f,
+//                            1.0f, 0.5f,
+//                            0.0f);
+                    glClearColor(116/255f, 189/255f, 34/255f, 0.0f);
                     inputRyan();
                     pokeball.loop();
                     Oshawott.loop();
@@ -1163,9 +1166,10 @@ public class MainGabung {
                         marill.init();
                         changeState = false;
                     }
-                    glClearColor(0.0f,
-                            1.0f, 0.5f,
-                            0.0f);
+//                    glClearColor(0.0f,
+//                            1.0f, 0.5f,
+//                            0.0f);
+                    glClearColor(116/255f, 189/255f, 34/255f, 0.0f);
                     inputTimo();
                     marill.loop();
 
@@ -1176,6 +1180,7 @@ public class MainGabung {
                         initBattleState();
                         changeState = false;
                     }
+                    glClearColor(116/255f, 189/255f, 34/255f, 0.0f);
 //                    inputAdi();
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q));
 //                    inputLouis();
