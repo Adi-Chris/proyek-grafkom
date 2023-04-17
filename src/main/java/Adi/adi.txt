@@ -4,9 +4,8 @@ Adi Christian C14210091
 - Membuat Pokemon-Regice -> Kombinasi:
 Cone untuk kepala, kaki dan kristal punggung
 Cone dengan frustum untuk badan
-Cylinder untuk lengan, kaki dan kristal punggung
+Cylinder untuk lengan, kaki, jari, dan kristal punggung
 Sphere untuk mata
-Cube untuk jari
 dan Bezier Curve untuk animasi attack ice-beam
 
 Model Regice terinspirasi dari:

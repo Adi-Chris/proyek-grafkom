@@ -21,13 +21,6 @@ public class Main {
     private Window window =
             new Window
                     (800, 800, "Hello World");
-    private ArrayList<Object> objects
-            = new ArrayList<>();
-    private ArrayList<Object> objectsRectangle
-            = new ArrayList<>();
-
-    private ArrayList<Object> objectsPointsControl
-            = new ArrayList<>();
 
     // Object Engine
     private Environtment environtment = new Environtment();
@@ -36,31 +29,15 @@ public class Main {
     private Pokeball pokeball = new Pokeball();
     private Regice regice = new Regice();
 
-    private MouseInput mouseInput;
-
     public void init() {
         window.init();
         GL.createCapabilities();
-        mouseInput = window.getMouseInput();
 
         //code
         environtment.init();
         pokeball.init();
         regice.init();
-//        // Matahari
-//        objects.add(new Sphere(
-//                Arrays.asList(
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.vert", GL_VERTEX_SHADER),
-//                        new ShaderProgram.ShaderModuleData("resources/shaders/sceneTransform.frag", GL_FRAGMENT_SHADER)
-//                ),
-//                new Vector3f(0, 0, 0),
-//                0.1f,
-//                0.1f,
-//                0.1f,
-//                36,
-//                36,
-//                new Vector4f(1.0f, 1.0f, 0.0f, 0.0f)
-//        ));
+
     }
 
     public void input() {
@@ -88,18 +65,22 @@ public class Main {
         if (window.isKeyPressed(GLFW_KEY_I)) {
             // Translasi
             pokeball.translateObject(0.0f, 0.1f, 0.0f);
+            regice.translateObject(0.0f, 0.01f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_J)) {
             // Translasi
             pokeball.translateObject(-0.1f, 0.0f, 0.0f);
+            regice.translateObject(-0.1f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_K)) {
             // Translasi
             pokeball.translateObject(0.0f, -0.1f, 0.0f);
+            regice.translateObject(0.0f, -0.01f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_L)) {
             // Translasi
             pokeball.translateObject(0.1f, 0.0f, 0.0f);
+            regice.translateObject(0.1f, 0.0f, 0.0f);
         }
 
         if (window.isKeyPressed(GLFW_KEY_T)) {
@@ -111,45 +92,10 @@ public class Main {
             pokeball.scaleObject(0.9f, 0.9f, 0.9f);
         }
 
-//        if (window.isKeyPressed(GLFW_KEY_W)) {
-//            countDegree++;
-//            //rotasi terhadap matahari
-//            objects.get(0).rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
-//            for(Object child:objects.get(0).getChildObject()){
-//                List<Float> temp = new ArrayList<>(child.getCenterPoint());
-//                //rotasi terhadap sumbu masing-masing planet
-//                child.translateObject(temp.get(0)*-1,temp.get(1)*-1,temp.get(2)*-1);
-//                child.rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
-//                child.translateObject(temp.get(0)*1,temp.get(1)*1,temp.get(2)*1);
-//                for(Object y:objects.get(0).getChildObject().get(1).getChildObject()){
-//                    //rotasi terhadap bumi
-//                    List<Float> temp1 = new ArrayList<>(objects.get(0).getChildObject().get(1).getCenterPoint());
-//                    y.translateObject(temp1.get(0)*-1,temp1.get(1)*-1,temp1.get(2)*-1);
-//                    y.rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
-//                    y.translateObject(temp1.get(0)*1,temp1.get(1)*1,temp1.get(2)*1);
-//                    //rotasi terhadap sumbunya sendiri
-//                    temp1 = new ArrayList<>(objects.get(0).getChildObject().get(1).getChildObject().get(0).getCenterPoint());
-//                    y.translateObject(temp1.get(0)*-1,temp1.get(1)*-1,temp1.get(2)*-1);
-//                    y.rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
-//                    y.translateObject(temp1.get(0)*1,temp1.get(1)*1,temp1.get(2)*1);
-//                }
-//                child.rotateObject((float) Math.toRadians(0.5f),0.0f,0.0f,1.0f);
-//            }
-//        }
-//        if(mouseInput.isLeftButtonPressed()){
-//            Vector2f pos = mouseInput.getCurrentPos();
-////            System.out.println("x : "+pos.x+" y : "+pos.y);
-//            pos.x = (pos.x - (window.getWidth())/2.0f) /
-//                    (window.getWidth()/2.0f);
-//            pos.y = (pos.y - (window.getHeight())/2.0f) /
-//                    (-window.getHeight()/2.0f);
-//            //System.out.println("x : "+pos.x+" y : "+pos.y);
-//
-//            if((!(pos.x > 1 || pos.x < -0.97) && !(pos.y > 0.97 || pos.y < -1))){
-//                System.out.println("x : "+pos.x+" y : "+pos.y);
-////                objectsPointsControl.get(0).addVertices(new Vector3f(pos.x,pos.y,0));
-//            }
-//        }
+        if (window.isKeyPressed(GLFW_KEY_R)) {
+            // Reset ke posisi awal
+            regice.reset();
+        }
 
     }
 
@@ -166,16 +112,6 @@ public class Main {
             environtment.loop();
 //            pokeball.loop();
             regice.loop(window.isKeyPressed(GLFW_KEY_B));
-
-//            for(Object object: objects){
-//                object.draw();
-//            }
-//            for(Object object: objectsRectangle){
-//                object.draw();
-//            }
-//            for(Object object: objectsPointsControl){
-//                object.drawLine();
-//            }
 
             // Restore state
             glDisableVertexAttribArray(0);

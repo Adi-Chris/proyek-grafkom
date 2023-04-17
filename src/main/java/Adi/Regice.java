@@ -592,17 +592,29 @@ public class Regice {
         }
     }
 
+    public void scaleObject(float scaleX, float scaleY, float scaleZ) {
+        for (Object object : objects) {
+            object.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
+
+    public void translateObject(float x, float y, float z) {
+        for (Object object : objects) {
+            object.translateObject(x, y, z);
+        }
+    }
+
     public void attackAnimation(boolean trigger) {
         // Kalau trigger, tapi belum animating, reset adiFrameCount
         if (trigger && !isAnimating) {
             this.adiFrameCount = 0;
             isAnimating = true;
-            System.out.println("Reset");
+//            System.out.println("Reset Regice Animation");
         }
 
         // Kalau tidak ditrigger dan tidak animating, langsung return saja (animasi tidak jalan)
         if (!trigger && !isAnimating) {
-            System.out.println("Donothing");
+//            System.out.println("Regice awaiting Animation");
             return;
         }
 
@@ -652,7 +664,7 @@ public class Regice {
             objects.get(0).getChildObject().get(21).clearVertices();
             objects.get(0).getChildObject().get(22).clearVertices();
             objects.get(0).getChildObject().get(23).clearVertices();
-            System.out.println("Clear");
+//            System.out.println("Clear");
         }
 
         // Uncharge sphere ice beam
@@ -679,5 +691,10 @@ public class Regice {
         // Ketika sudah selesai
         isAnimating = false;
 
+    }
+
+    public void reset() {
+        this.objects = new ArrayList<>();
+        init();
     }
 }
