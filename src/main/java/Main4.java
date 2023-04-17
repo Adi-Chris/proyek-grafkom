@@ -22,7 +22,6 @@ public class Main4 {
 
     private ArrayList<Timotius.Sphere> objectsSphere = new ArrayList<>();
     private ArrayList<Timotius.Ellipsoid> objectsEllipsoid = new ArrayList<>();
-    private ArrayList<Timotius.EllipticParaboloid> objectsEllipticParaboloid = new ArrayList<>();
     private ArrayList<Timotius.Cylinder> cylinder = new ArrayList<>();
     private ArrayList<Timotius.Object> berzier = new ArrayList<>();
 
@@ -36,6 +35,9 @@ public class Main4 {
             {-0.0415f, 0.018f, -0.3f},
             {0.0415f, 0.018f, -0.3f}
     };
+
+    int idleFrameCount = 0;
+    boolean idleBigger = true;
 
 
 //    Camera camera = new Camera();
@@ -282,7 +284,7 @@ public class Main4 {
                 new Vector4f(0.0f, 0.0f, 0.0f, 0.0f)
         ));
         berzierMulut(controlBerzier, 0);
-        // ekor
+       // buntut
         cylinder.add(new Timotius.Cylinder(Arrays.asList(
                 //shaderFile lokasi menyesuaikan objectnya
                 new ShaderProgram.ShaderModuleData
@@ -294,7 +296,7 @@ public class Main4 {
         ),
                 new ArrayList<>(
                 ),
-                new Vector4f(0f, 1f, 0f, 1.0f), 0.0f, -0.5f, 0.0f, 0.03f, 0.2f, 0.03f
+                new Vector4f(0, 1f, 1f, 1.0f), 0.0f, -0.5f, 0.0f, 0.03f, 0.2f, 0.03f
         ));
         cylinder.get(0).rotateObject((float) Math.toRadians(90f), 1.0f, 0.0f, 0.0f);
         cylinder.get(0).translateObject(0.0f, -0.2f, 0.3f);
@@ -504,9 +506,8 @@ public class Main4 {
             glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
             GL.createCapabilities();
             input();
-
-
-            for (Timotius.Object objects : objectsSphere) {
+            idleAnimation();
+            for(Timotius.Object objects: objectsSphere) {
                 objects.draw();
             }
             for (Timotius.Object objects : objectsEllipsoid) {
@@ -607,6 +608,58 @@ public class Main4 {
         return koef;
     }
 
+    public void idleAnimation(){
+        int animationBound = 10;
+
+        if (idleBigger) {
+            idleFrameCount++;
+        } else {
+            idleFrameCount--;
+        }
+
+        if (idleFrameCount < animationBound && idleBigger) {
+            for (Timotius.Sphere object : objectsSphere) {
+                object.scaleObject(1.001f, 1.001f, 1.001f);
+            }
+            for (Timotius.Ellipsoid object : objectsEllipsoid) {
+                object.scaleObject(1.001f, 1.001f, 1.001f);
+            }
+            for (Timotius.Cylinder object : cylinder) {
+                object.scaleObject(1.001f, 1.001f, 1.001f);
+            }for (Timotius.Object object : berzier) {
+                object.scaleObject(1.001f, 1.001f, 1.001f);
+            }
+            objectsSphere.get(5).rotateObject((float)Math.toRadians(-1f),0.0f,1f,0.0f);
+            cylinder.get(0).rotateObject((float)Math.toRadians(-1f),0.0f,1f,0.0f);
+        }
+
+        if (idleFrameCount > -animationBound && !idleBigger) {
+            for (Timotius.Sphere object : objectsSphere) {
+                object.scaleObject(0.999f, 0.999f, 0.999f);
+            }
+            for (Timotius.Ellipsoid object : objectsEllipsoid) {
+                object.scaleObject(0.999f, 0.999f, 0.999f);
+            }
+            for (Timotius.Cylinder object : cylinder) {
+                object.scaleObject(0.999f, 0.999f, 0.999f);
+            }for (Timotius.Object object : berzier) {
+                object.scaleObject(0.999f, 0.999f, 0.999f);
+            }
+            objectsSphere.get(5).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+            cylinder.get(0).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+
+        }
+
+        if (idleFrameCount >= animationBound * 3) {
+            idleFrameCount = animationBound;
+            idleBigger = false;
+        }
+
+        if (idleFrameCount <= -animationBound * 3) {
+            idleFrameCount = -animationBound;
+            idleBigger = true;
+        }
+    }
     public static void main(String[] args) {
         new Main4().run();
     }
