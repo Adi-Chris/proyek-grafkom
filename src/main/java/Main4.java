@@ -46,7 +46,7 @@ public class Main4 {
             pos.x = (pos.x - (window.getWidth()) / 2.0f) / (window.getWidth() / 2.0f);
             pos.y = (pos.y - (window.getHeight()) / 2.0f) / (-window.getHeight() / 2.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_A)) {
+        if (window.isKeyPressed(GLFW_KEY_J)) {
             Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
 
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
@@ -70,7 +70,8 @@ public class Main4 {
                 marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
         }
-        if (window.isKeyPressed(GLFW_KEY_D)) {
+
+        if (window.isKeyPressed(GLFW_KEY_L)) {
             Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
 
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
@@ -94,7 +95,8 @@ public class Main4 {
                 marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
         }
-        if (window.isKeyPressed(GLFW_KEY_W)) {
+
+        if (window.isKeyPressed(GLFW_KEY_I)) {
             Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
 
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
@@ -118,7 +120,8 @@ public class Main4 {
                 marill.cylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
             }
         }
-        if (window.isKeyPressed(GLFW_KEY_S)) {
+
+        if (window.isKeyPressed(GLFW_KEY_K)) {
             Vector3f tmp = marill.objectsSphere.get(0).updateCenterPoint();
 
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
@@ -143,7 +146,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+        if (window.isKeyPressed(GLFW_KEY_A)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).translateObject(-0.01f,0.0f, 0.0f);
             }
@@ -158,7 +161,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+        if (window.isKeyPressed(GLFW_KEY_D)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).translateObject(0.01f,0.0f, 0.0f);
             }
@@ -173,7 +176,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_UP)) {
+        if (window.isKeyPressed(GLFW_KEY_W)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).translateObject(0.0f,0.01f, 0.0f);
             }
@@ -188,7 +191,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+        if (window.isKeyPressed(GLFW_KEY_S)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).translateObject(0.0f,-0.01f, 0.0f);
             }
@@ -203,7 +206,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_1)) {
+        if (window.isKeyPressed(GLFW_KEY_G)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).scaleObject(0.999f,0.999f, 0.999f);
             }
@@ -218,7 +221,7 @@ public class Main4 {
             }
         }
 
-        if (window.isKeyPressed(GLFW_KEY_2)) {
+        if (window.isKeyPressed(GLFW_KEY_T)) {
             for (int i = 0; i < marill.objectsSphere.size(); i++) {
                 marill.objectsSphere.get(i).scaleObject(1.001f,1.001f, 1.001f);
             }
@@ -233,8 +236,6 @@ public class Main4 {
             }
         }
     }
-
-
     public void loop() {
         while (window.isOpen()) {
             window.update();

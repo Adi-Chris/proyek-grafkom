@@ -37,66 +37,66 @@ public class Main {
         environtment.init();
         pokeball.init();
         regice.init();
-
     }
 
     public void input() {
-        if (window.isKeyPressed(GLFW_KEY_W)) {
+        if (window.isKeyPressed(GLFW_KEY_I)) {
             // Rotasi
             pokeball.rotateObject(10f, 1.0f, 0.0f, 0.0f);
             regice.rotateObject(10f, 1.0f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_A)) {
+        if (window.isKeyPressed(GLFW_KEY_J)) {
             // Rotasi
             pokeball.rotateObject(10f, 0.0f, 1.0f, 0.0f);
             regice.rotateObject(10f, 0.0f, 1.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_S)) {
+        if (window.isKeyPressed(GLFW_KEY_K)) {
             // Rotasi
             pokeball.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
             regice.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_D)) {
+        if (window.isKeyPressed(GLFW_KEY_L)) {
             // Rotasi
             pokeball.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
             regice.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
         }
 
-        if (window.isKeyPressed(GLFW_KEY_I)) {
+        if (window.isKeyPressed(GLFW_KEY_W)) {
             // Translasi
             pokeball.translateObject(0.0f, 0.1f, 0.0f);
             regice.translateObject(0.0f, 0.01f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_J)) {
+        if (window.isKeyPressed(GLFW_KEY_A)) {
             // Translasi
             pokeball.translateObject(-0.1f, 0.0f, 0.0f);
-            regice.translateObject(-0.1f, 0.0f, 0.0f);
+            regice.translateObject(-0.01f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_K)) {
+        if (window.isKeyPressed(GLFW_KEY_S)) {
             // Translasi
             pokeball.translateObject(0.0f, -0.1f, 0.0f);
             regice.translateObject(0.0f, -0.01f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_L)) {
+        if (window.isKeyPressed(GLFW_KEY_D)) {
             // Translasi
             pokeball.translateObject(0.1f, 0.0f, 0.0f);
-            regice.translateObject(0.1f, 0.0f, 0.0f);
+            regice.translateObject(0.01f, 0.0f, 0.0f);
         }
 
         if (window.isKeyPressed(GLFW_KEY_T)) {
             // Scale
-            pokeball.scaleObject(1.1f, 1.1f, 1.1f);
+//            pokeball.scaleObject(1.1f, 1.1f, 1.1f);
+            regice.scaleObject(1.001f, 1.001f, 1.001f);
         }
         if (window.isKeyPressed(GLFW_KEY_G)) {
             // Scale
-            pokeball.scaleObject(0.9f, 0.9f, 0.9f);
+//            pokeball.scaleObject(0.9f, 0.9f, 0.9f);
+            regice.scaleObject(0.999f, 0.999f, 0.999f);
         }
 
         if (window.isKeyPressed(GLFW_KEY_R)) {
             // Reset ke posisi awal
             regice.reset();
         }
-
     }
 
     public void loop() {
@@ -111,7 +111,7 @@ public class Main {
             //code
             environtment.loop();
 //            pokeball.loop();
-            regice.loop(window.isKeyPressed(GLFW_KEY_B));
+            regice.loop(window.isKeyPressed(GLFW_KEY_Q), false);
 
             // Restore state
             glDisableVertexAttribArray(0);

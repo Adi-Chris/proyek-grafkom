@@ -511,89 +511,7 @@ public class Magnemite {
         }
     }
 
-    // rotate magnemite (offset +-1.0f)
-    public void rotateMagnemite(String offset) {
-        Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
-        float x = 0.0f;
-        float y = 0.0f;
-        float z = 0.0f;
-
-        // hadap kiri
-        if (offset == "yPlus") {
-            y = 1.0f;
-            // hadap kanan
-        } else if (offset == "yMin") {
-            y = -1.0f;
-            // muter atas
-        } else if (offset == "xPlus") {
-            x = 1.0f;
-            // muter bawah
-        } else if (offset == "xMin") {
-            x = -1.0f;
-            // muter kiri
-        } else if (offset == "zPlus") {
-            z = 1.0f;
-            // muter kanan
-        } else if (offset == "zMin") {
-            z = -1.0f;
-        }
-
-        for (int i = 0; i < objectsSphere.size(); i++) {
-            objectsSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsSphere.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-            objectsSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-
-        for (int i = 0; i < objectsHalfTorus.size(); i++) {
-            objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-            objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-
-        for (int i = 0; i < objectCube.size(); i++) {
-            objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectCube.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-            objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-
-        for (int i = 0; i < objectsHalfSphere.size(); i++) {
-            objectsHalfSphere.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-            objectsHalfSphere.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-
-        for (int i = 0; i < objectsCylinder.size(); i++) {
-            objectsCylinder.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-            objectsCylinder.get(i).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-            objectsCylinder.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-        }
-
-//        objectsBezier1.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier1.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier1.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-//
-//        objectsBezier2.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier2.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier2.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-//
-//        objectsBezier3.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier3.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier3.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-//
-//        objectsBezier4.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier4.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier4.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-//
-//        objectsBezier5.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier5.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier5.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-//
-//        objectsBezier6.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-//        objectsBezier6.get(0).rotateObject((float) Math.toRadians(0.5f), x, y, z);
-//        objectsBezier6.get(0).translateObject(tmp.x, tmp.y, tmp.z);
-    }
-
-    // rotate magnemite (custom x y z)
+    // rotate magnemite
     public void rotateMagnemite(Float degree, float x, float y, float z) {
         Vector3f tmp = objectsSphere.get(0).updateCenterPoint();
 
@@ -652,51 +570,7 @@ public class Magnemite {
 //        objectsBezier6.get(0).translateObject(tmp.x, tmp.y, tmp.z);
     }
 
-    // translate magnemite position (0.01f)
-    public void translateMagnemite(String keyword) {
-        float x = 0.0f;
-        float y = 0.0f;
-        float z = 0.0f;
-
-        if (keyword == "W") {
-            y = 0.01f;
-        } else if (keyword == "A") {
-            x = -0.01f;
-        } else if (keyword == "D") {
-            x = 0.01f;
-        } else if (keyword == "S") {
-            y = -0.01f;
-        }
-
-        for (int i = 0; i < objectsSphere.size(); i++) {
-            objectsSphere.get(i).translateObject(x, y, z);
-        }
-
-        for (int i = 0; i < objectsHalfTorus.size(); i++) {
-            objectsHalfTorus.get(i).translateObject(x, y, z);
-        }
-
-        for (int i = 0; i < objectCube.size(); i++) {
-            objectCube.get(i).translateObject(x, y, z);
-        }
-
-        for (int i = 0; i < objectsHalfSphere.size(); i++) {
-            objectsHalfSphere.get(i).translateObject(x, y, z);
-        }
-
-        for (int i = 0; i < objectsCylinder.size(); i++) {
-            objectsCylinder.get(i).translateObject(x, y, z);
-        }
-
-        objectsBezier1.get(0).translateObject(x, y, z);
-        objectsBezier2.get(0).translateObject(x, y, z);
-        objectsBezier3.get(0).translateObject(x, y, z);
-        objectsBezier4.get(0).translateObject(x, y, z);
-        objectsBezier5.get(0).translateObject(x, y, z);
-        objectsBezier6.get(0).translateObject(x, y, z);
-    }
-
-    // translate magnemite position (custom x y z)
+    // translate magnemite
     public void translateMagnemite(Float x, Float y, Float z) {
         for (int i = 0; i < objectsSphere.size(); i++) {
             objectsSphere.get(i).translateObject(x, y, z);
@@ -726,66 +600,7 @@ public class Magnemite {
         objectsBezier6.get(0).translateObject(x, y, z);
     }
 
-    // scale magnemite size (0.999f & 1.001f)
-    public void scaleMagnemite(String keyword) {
-        if (keyword == "smaller") {
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < objectsHalfTorus.size(); i++) {
-                objectsHalfTorus.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < objectCube.size(); i++) {
-                objectCube.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < objectsHalfSphere.size(); i++) {
-                objectsHalfSphere.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            for (int i = 0; i < objectsCylinder.size(); i++) {
-                objectsCylinder.get(i).scaleObject(0.999f, 0.999f, 0.999f);
-            }
-
-            objectsBezier1.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-            objectsBezier2.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-            objectsBezier3.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-            objectsBezier4.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-            objectsBezier5.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-            objectsBezier6.get(0).scaleObject(0.999f, 0.999f, 0.999f);
-        } else if (keyword == "bigger") {
-            for (int i = 0; i < objectsSphere.size(); i++) {
-                objectsSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < objectsHalfTorus.size(); i++) {
-                objectsHalfTorus.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < objectCube.size(); i++) {
-                objectCube.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < objectsHalfSphere.size(); i++) {
-                objectsHalfSphere.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            for (int i = 0; i < objectsCylinder.size(); i++) {
-                objectsCylinder.get(i).scaleObject(1.001f, 1.001f, 1.001f);
-            }
-
-            objectsBezier1.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-            objectsBezier2.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-            objectsBezier3.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-            objectsBezier4.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-            objectsBezier5.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-            objectsBezier6.get(0).scaleObject(1.001f, 1.001f, 1.001f);
-        }
-    }
-
-    // scale magnemite size (custom x y z)
+    // scale magnemite size
     public void scaleMagnemite(Float x, Float y, Float z) {
         for (int i = 0; i < objectsSphere.size(); i++) {
             objectsSphere.get(i).scaleObject(x, y, z);
@@ -920,6 +735,8 @@ public class Magnemite {
 
     // attack animation
     public void attackAnimation(boolean isKeyPressed, boolean isInBattleState) {
+//        Vector3f positionBeforeAnimating = objectsSphere.get(0).updateCenterPoint();
+
         if (isKeyPressed && !isAnimating) {
             this.frame = 0;
             deleteObject();
@@ -1076,6 +893,7 @@ public class Magnemite {
             rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
             scaleMagnemite(0.5f, 0.5f, 0.5f);
             translateMagnemite(0.7225f, 0.1f, 0.0f);
+//            translateMagnemite(positionBeforeAnimating.x, positionBeforeAnimating.y, positionBeforeAnimating.z);
         }
     }
 }

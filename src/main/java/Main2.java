@@ -28,64 +28,64 @@ public class Main2 {
     }
 
     public void input() {
-        // rotate offsetY (hadap kiri)
-        if (window.isKeyPressed(GLFW_KEY_1)) {
-            magnemite.rotateMagnemite("yPlus");
-        }
-
-        // rotate offsetY (hadap kanan)
-        if (window.isKeyPressed(GLFW_KEY_2)) {
-            magnemite.rotateMagnemite("yMin");
-        }
-
-        // rotate offsetX (muter atas)
-        if (window.isKeyPressed(GLFW_KEY_3)) {
-            magnemite.rotateMagnemite("xPlus");
-        }
-
-        // rotate offsetX (muter bawah)
-        if (window.isKeyPressed(GLFW_KEY_4)) {
-            magnemite.rotateMagnemite("xMin");
-        }
-
-        // rotate offsetZ (muter kiri)
-        if (window.isKeyPressed(GLFW_KEY_5)) {
-            magnemite.rotateMagnemite("zPlus");
-        }
-
-        // rotate offsetZ (muter kanan)
-        if (window.isKeyPressed(GLFW_KEY_6)) {
-            magnemite.rotateMagnemite("zMin");
-        }
-
         // geser atas
         if (window.isKeyPressed(GLFW_KEY_W)) {
-            magnemite.translateMagnemite("W");
+            magnemite.translateMagnemite(0.0f, 0.01f, 0.0f);
         }
 
         // geser kiri
         if (window.isKeyPressed(GLFW_KEY_A)) {
-            magnemite.translateMagnemite("A");
-        }
-
-        // geser kanan
-        if (window.isKeyPressed(GLFW_KEY_D)) {
-            magnemite.translateMagnemite("D");
+            magnemite.translateMagnemite(-0.01f, 0.0f, 0.0f);
         }
 
         // geser bawah
         if (window.isKeyPressed(GLFW_KEY_S)) {
-            magnemite.translateMagnemite("S");
+            magnemite.translateMagnemite(0.0f, -0.01f, 0.0f);
         }
 
-        // kecilin
-        if (window.isKeyPressed(GLFW_KEY_7)) {
-            magnemite.scaleMagnemite("smaller");
+        // geser kanan
+        if (window.isKeyPressed(GLFW_KEY_D)) {
+            magnemite.translateMagnemite(0.01f, 0.0f, 0.0f);
+
         }
 
-        // besarin
-        if (window.isKeyPressed(GLFW_KEY_8)) {
-            magnemite.scaleMagnemite("bigger");
+        if (window.isKeyPressed(GLFW_KEY_I)) {
+            magnemite.rotateMagnemite(0.5f, 1.0f, 0.0f, 0.0f);
+        }
+
+        // rotate offsetY (rotate kiri)
+        if (window.isKeyPressed(GLFW_KEY_J)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 1.0f, 0.0f);
+        }
+
+        // rotate offsetX (rotate bawah)
+        if (window.isKeyPressed(GLFW_KEY_K)) {
+            magnemite.rotateMagnemite(0.5f, -1.0f, 0.0f, 0.0f);
+        }
+
+        // rotate offsetY (rotate kanan)
+        if (window.isKeyPressed(GLFW_KEY_L)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, -1.0f, 0.0f);
+        }
+
+        // rotate offsetZ (kiri)
+        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 0.0f, 1.0f);
+        }
+
+        // rotate offsetZ (kanan)
+        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 0.0f, -1.0f);
+        }
+
+        // scale up
+        if (window.isKeyPressed(GLFW_KEY_T)) {
+            magnemite.scaleMagnemite(1.001f, 1.001f, 1.001f);
+        }
+
+        // scale down
+        if (window.isKeyPressed(GLFW_KEY_G)) {
+            magnemite.scaleMagnemite(0.999f, 0.999f, 0.999f);
         }
 
         // animasi bola mata gerak
