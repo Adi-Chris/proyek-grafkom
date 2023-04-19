@@ -45,9 +45,8 @@ public class Main3 {
     }
 
     public void input() {
-
         // Rotasi Atas
-        if (window.isKeyPressed(GLFW_KEY_UP)) {
+        if (window.isKeyPressed(GLFW_KEY_I)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -69,7 +68,7 @@ public class Main3 {
         }
 
         // Rotasi bawah
-        if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+        if (window.isKeyPressed(GLFW_KEY_K)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -91,7 +90,7 @@ public class Main3 {
         }
 
         // Rotasi kiri
-        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+        if (window.isKeyPressed(GLFW_KEY_J)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -113,7 +112,7 @@ public class Main3 {
         }
 
         // Rotasi kanan
-        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+        if (window.isKeyPressed(GLFW_KEY_L)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -254,7 +253,7 @@ public class Main3 {
             }
         }
         // Maju
-        if (window.isKeyPressed(GLFW_KEY_3)) {
+        if (window.isKeyPressed(GLFW_KEY_T)) {
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).scaleObject(1.001f, 1.001f, 1.001f);
             }
@@ -266,7 +265,7 @@ public class Main3 {
         }
 
         // Mandur
-        if (window.isKeyPressed(GLFW_KEY_4)) {
+        if (window.isKeyPressed(GLFW_KEY_G)) {
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).scaleObject(0.999f, 0.999f, 0.999f);
             }
@@ -278,7 +277,7 @@ public class Main3 {
         }
 
         // Gerakan Ekor
-        if (window.isKeyPressed(GLFW_KEY_5)) {
+        if (window.isKeyPressed(GLFW_KEY_3)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             if (checkBadan < 20 && checkArahBadan) {
                 Oshawott.objectsCylinder.get(0).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -303,7 +302,7 @@ public class Main3 {
         }
 
         // Muter 180 derajat
-        if (window.isKeyPressed(GLFW_KEY_6)) {
+        if (window.isKeyPressed(GLFW_KEY_4)) {
             Vector3f tmp = Oshawott.objectsSphere.get(1).updateCenterPoint();
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
@@ -328,7 +327,7 @@ public class Main3 {
         }
 
         // Masuk pokeball
-        if(window.isKeyPressed(GLFW_KEY_7)){
+        if(window.isKeyPressed(GLFW_KEY_5)){
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(0.01f, 0.01f, 0.0f);
             }
@@ -348,7 +347,7 @@ public class Main3 {
         }
 
         // Keluar pokeball
-        if(window.isKeyPressed(GLFW_KEY_8)){
+        if(window.isKeyPressed(GLFW_KEY_6)){
             for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
                 Oshawott.objectEllipsoid.get(i).translateObject(-0.01f, -0.01f, 0.0f);
             }
@@ -382,7 +381,7 @@ public class Main3 {
         }
 
         // attack bubble beam
-        if (window.isKeyPressed(GLFW_KEY_B)){
+        if (window.isKeyPressed(GLFW_KEY_7)){
             if (checkBeam < 1100 && arahBeam) {
                 Oshawott.objectsSphere.get(2).scaleObject(1.001f,1.001f,1.001f);
                 Oshawott.objectsSphere.get(2).translateObject(0.0f,-0.0003f,0.0f);

@@ -580,9 +580,9 @@ public class Regice {
         ));
     }
 
-    public void loop(boolean trigger) {
+    public void loop(boolean trigger, boolean isInBattleState) {
         idleAnimation();
-        attackAnimation(trigger);
+        attackAnimation(trigger, isInBattleState);
 
         for (Object object : objects) {
             object.draw();
@@ -619,7 +619,9 @@ public class Regice {
         }
     }
 
-    public void attackAnimation(boolean trigger) {
+    public void attackAnimation(boolean trigger, boolean isInBattleState) {
+//        Vector3f positionBeforeAnimating = objectsSphere.get(0).updateCenterPoint();
+
         // Kalau trigger, tapi belum animating, reset adiFrameCount
         if (trigger && !isAnimating) {
             this.adiFrameCount = 0;
@@ -706,7 +708,14 @@ public class Regice {
 
         // Ketika sudah selesai
         isAnimating = false;
+        reset();
 
+        if (isInBattleState) {
+            rotateObject(215.0f, 0.0f, 1.0f, 0.0f);
+            scaleObject(0.5f, 0.5f, 0.5f);
+            translateObject(-0.6f, -0.3f, 0.25f);
+//            translateObject(positionBeforeAnimating.x, positionBeforeAnimating.y, positionBeforeAnimating.z);
+        }
     }
 
     public void idleAnimation() {

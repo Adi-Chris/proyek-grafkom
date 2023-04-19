@@ -37,53 +37,49 @@ public class Main {
         environtment.init();
         pokeball.init();
         regice.init();
-
     }
 
     public void input() {
-        if (window.isKeyPressed(GLFW_KEY_W)) {
+        if (window.isKeyPressed(GLFW_KEY_I)) {
             // Rotasi
             pokeball.rotateObjectByCenter(0.01f, 1.0f, 0.0f, 0.0f);
             regice.rotateObjectByCenter(0.01f, 1.0f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_A)) {
+        if (window.isKeyPressed(GLFW_KEY_J)) {
             // Rotasi
             pokeball.rotateObjectByCenter(0.01f, 0.0f, 1.0f, 0.0f);
             regice.rotateObjectByCenter(0.01f, 0.0f, 1.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_S)) {
+        if (window.isKeyPressed(GLFW_KEY_K)) {
             // Rotasi
             pokeball.rotateObjectByCenter(-0.01f, 1.0f, 0.0f, 0.0f);
             regice.rotateObjectByCenter(-0.01f, 1.0f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_D)) {
+        if (window.isKeyPressed(GLFW_KEY_L)) {
             // Rotasi
             pokeball.rotateObjectByCenter(-0.01f, 0.0f, 1.0f, 0.0f);
             regice.rotateObjectByCenter(-0.01f, 0.0f, 1.0f, 0.0f);
         }
 
-        if (window.isKeyPressed(GLFW_KEY_I)) {
+        if (window.isKeyPressed(GLFW_KEY_W)) {
             // Translasi
             pokeball.translateObject(0.0f, 0.01f, 0.0f);
             regice.translateObject(0.0f, 0.01f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_J)) {
+        if (window.isKeyPressed(GLFW_KEY_A)) {
             // Translasi
             pokeball.translateObject(-0.01f, 0.0f, 0.0f);
             regice.translateObject(-0.01f, 0.0f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_K)) {
+        if (window.isKeyPressed(GLFW_KEY_S)) {
             // Translasi
             pokeball.translateObject(0.0f, -0.01f, 0.0f);
             regice.translateObject(0.0f, -0.01f, 0.0f);
         }
-        if (window.isKeyPressed(GLFW_KEY_L)) {
+        if (window.isKeyPressed(GLFW_KEY_D)) {
             // Translasi
             pokeball.translateObject(0.01f, 0.0f, 0.0f);
             regice.translateObject(0.01f, 0.0f, 0.0f);
-        }
-
-        if (window.isKeyPressed(GLFW_KEY_T)) {
             // Scale
             pokeball.scaleObjectByCenter(1.01f, 1.01f, 1.01f);
             regice.scaleObjectByCenter(1.01f, 1.01f, 1.01f);
@@ -99,7 +95,6 @@ public class Main {
             pokeball.reset();
             regice.reset();
         }
-
     }
 
     public void loop() {
@@ -114,7 +109,7 @@ public class Main {
             //code
             environtment.loop();
 //            pokeball.loop();
-            regice.loop(window.isKeyPressed(GLFW_KEY_Q));
+            regice.loop(window.isKeyPressed(GLFW_KEY_Q), false);
 
             // Restore state
             glDisableVertexAttribArray(0);

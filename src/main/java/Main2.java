@@ -8,12 +8,11 @@ import org.lwjgl.opengl.GL;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL30.*;
+
 public class Main2 {
     private Window window = new Window(800, 800, "Window");
     private Magnemite magnemite = new Magnemite();
     private Environtment environtment = new Environtment();
-    boolean keyPressed = false;
-    boolean animated = false;
 
     public void init() {
         window.init();
@@ -29,235 +28,64 @@ public class Main2 {
     }
 
     public void input() {
-        // rotate offsetY (hadap kiri)
-        if (window.isKeyPressed(GLFW_KEY_1) && animated == false) {
-            magnemite.rotateMagnemite("yPlus");
-        }
-
-        // rotate offsetY (hadap kanan)
-        if (window.isKeyPressed(GLFW_KEY_2) && animated == false) {
-            magnemite.rotateMagnemite("yMin");
-        }
-
-        // rotate offsetX (muter atas)
-        if (window.isKeyPressed(GLFW_KEY_3) && animated == false) {
-            magnemite.rotateMagnemite("xPlus");
-        }
-
-        // rotate offsetX (muter bawah)
-        if (window.isKeyPressed(GLFW_KEY_4) && animated == false) {
-            magnemite.rotateMagnemite("xMin");
-        }
-
-        // rotate offsetZ (muter kiri)
-        if (window.isKeyPressed(GLFW_KEY_5) && animated == false) {
-            magnemite.rotateMagnemite("zPlus");
-        }
-
-        // rotate offsetZ (muter kanan)
-        if (window.isKeyPressed(GLFW_KEY_6) && animated == false) {
-            magnemite.rotateMagnemite("zMin");
-        }
-
         // geser atas
-        if (window.isKeyPressed(GLFW_KEY_W) && animated == false) {
-            magnemite.translateMagnemite("W");
+        if (window.isKeyPressed(GLFW_KEY_W)) {
+            magnemite.translateMagnemite(0.0f, 0.01f, 0.0f);
         }
 
         // geser kiri
-        if (window.isKeyPressed(GLFW_KEY_A) && animated == false) {
-            magnemite.translateMagnemite("A");
-        }
-
-        // geser kanan
-        if (window.isKeyPressed(GLFW_KEY_D) && animated == false) {
-            magnemite.translateMagnemite("D");
+        if (window.isKeyPressed(GLFW_KEY_A)) {
+            magnemite.translateMagnemite(-0.01f, 0.0f, 0.0f);
         }
 
         // geser bawah
-        if (window.isKeyPressed(GLFW_KEY_S) && animated == false) {
-            magnemite.translateMagnemite("S");
+        if (window.isKeyPressed(GLFW_KEY_S)) {
+            magnemite.translateMagnemite(0.0f, -0.01f, 0.0f);
         }
 
-        // kecilin
-        if (window.isKeyPressed(GLFW_KEY_7) && animated == false) {
-            magnemite.scaleMagnemite("smaller");
+        // geser kanan
+        if (window.isKeyPressed(GLFW_KEY_D)) {
+            magnemite.translateMagnemite(0.01f, 0.0f, 0.0f);
+
         }
 
-        // besarin
-        if (window.isKeyPressed(GLFW_KEY_8) && animated == false) {
-            magnemite.scaleMagnemite("bigger");
+        if (window.isKeyPressed(GLFW_KEY_I)) {
+            magnemite.rotateMagnemite(0.5f, 1.0f, 0.0f, 0.0f);
         }
 
-        // animasi preparing to attack
-        // saat key 9 pertama kali dipencet
-        if (window.isKeyPressed(GLFW_KEY_9) && keyPressed == false) {
-            if (animated == false) {
-                keyPressed = true;
-                animated = true;
-
-                // magnemite terbang (naik dari posisi semula)
-                magnemite.fly(0.3f);
-
-                // bola mata membesar
-                magnemite.objectsSphere.get(2).scaleObject(1.1f, 1.1f, 1.0f);
-
-                // show listrik pakai bezier
-                Vector3f cubeAtasTanganKiri = magnemite.objectCube.get(2).updateCenterPoint();
-                Vector3f cubeBawahTanganKiri = magnemite.objectCube.get(3).updateCenterPoint();
-                float xKiri = (cubeAtasTanganKiri.x + cubeBawahTanganKiri.x) / 2;
-                float yKiri = (cubeAtasTanganKiri.y + cubeBawahTanganKiri.y) / 2;
-                float zKiri = (cubeAtasTanganKiri.z + cubeBawahTanganKiri.z) / 2;
-
-                Vector3f cubeAtasTanganKanan = magnemite.objectCube.get(6).updateCenterPoint();
-                Vector3f cubeBawahTanganKanan = magnemite.objectCube.get(7).updateCenterPoint();
-                float xKanan = (cubeAtasTanganKanan.x + cubeBawahTanganKanan.x) / 2;
-                float yKanan = (cubeAtasTanganKanan.y + cubeBawahTanganKanan.y) / 2;
-                float zKanan = (cubeAtasTanganKanan.z + cubeBawahTanganKanan.z) / 2;
-
-                float[][] bezierDots1 = {
-                        {xKiri - 0.1f, yKiri, zKiri},
-                        {xKiri - 0.2f, yKiri + 0.25f, zKiri},
-                        {xKiri - 0.3f, yKiri - 0.1f, zKiri},
-                        {xKiri - 0.4f, yKiri + 0.3f, zKiri}
-                };
-
-                float[][] bezierDots2 = {
-                        {xKanan + 0.1f, yKanan, zKanan},
-                        {xKanan + 0.2f, yKanan + 0.25f, zKanan},
-                        {xKanan + 0.3f, yKanan - 0.1f, zKanan},
-                        {xKanan + 0.4f, yKanan + 0.3f, zKanan}
-                };
-
-                float[][] bezierDots3 = {
-                        {xKiri - 0.1f, yKiri, zKiri},
-                        {xKiri - 0.2f, yKiri + 0.25f, zKiri},
-                        {xKiri - 0.3f, yKiri - 0.2f, zKiri},
-                        {xKiri - 0.4f, yKiri + 0.1f, zKiri}
-                };
-
-                float[][] bezierDots4 = {
-                        {xKanan + 0.1f, yKanan, zKanan},
-                        {xKanan + 0.2f, yKanan + 0.25f, zKanan},
-                        {xKanan + 0.3f, yKanan - 0.2f, zKanan},
-                        {xKanan + 0.4f, yKanan + 0.1f, zKanan}
-                };
-
-                float[][] bezierDots5 = {
-                        {xKiri - 0.1f, yKiri, zKiri},
-                        {xKiri - 0.2f, yKiri + 0.25f, zKiri},
-                        {xKiri - 0.3f, yKiri - 0.2f, zKiri},
-                        {xKiri - 0.4f, yKiri - 0.3f, zKiri}
-                };
-
-                float[][] bezierDots6 = {
-                        {xKanan + 0.1f, yKanan, zKanan},
-                        {xKanan + 0.2f, yKanan + 0.25f, zKanan},
-                        {xKanan + 0.3f, yKanan - 0.2f, zKanan},
-                        {xKanan + 0.4f, yKanan - 0.3f, zKanan}
-                };
-
-                magnemite.drawCurve(bezierDots1, 1);
-                magnemite.drawCurve(bezierDots2, 2);
-                magnemite.drawCurve(bezierDots3, 3);
-                magnemite.drawCurve(bezierDots4, 4);
-                magnemite.drawCurve(bezierDots5, 5);
-                magnemite.drawCurve(bezierDots6, 6);
-                // animasi saat key 9 telah dilepas lalu dihold lagi
-            } else {
-                // tangan gerak
-                Vector3f tmp = magnemite.objectsHalfTorus.get(0).updateCenterPoint();
-                Vector3f tmp2 = magnemite.objectsHalfTorus.get(1).updateCenterPoint();
-
-                for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                    if (i == 0) {
-                        magnemite.objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                        magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                        magnemite.objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-                    } else {
-                        magnemite.objectsHalfTorus.get(i).translateObject(tmp2.x * -1, tmp2.y * -1, tmp2.z * -1);
-                        magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                        magnemite.objectsHalfTorus.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
-                    }
-                }
-
-                for (int i = 0; i < 8; i++) {
-                    if (i <= 3) {
-                        magnemite.objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                        magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                        magnemite.objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-                    } else {
-                        magnemite.objectCube.get(i).translateObject(tmp2.x * -1, tmp2.y * -1, tmp2.z * -1);
-                        magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                        magnemite.objectCube.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
-                    }
-                }
-
-                // antena rotate pada poros
-                Vector3f tmp3 = magnemite.objectsCylinder.get(0).updateCenterPoint();
-                Vector3f tmp4 = magnemite.objectsHalfSphere.get(0).updateCenterPoint();
-                for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                    magnemite.objectsCylinder.get(i).translateObject(tmp3.x * -1, tmp3.y * -1, tmp3.z * -1);
-                    magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
-                    magnemite.objectsCylinder.get(i).translateObject(tmp3.x, tmp3.y, tmp3.z);
-                }
-
-                for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                    magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x * -1, tmp4.y * -1, tmp4.z * -1);
-                    magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
-                    magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x, tmp4.y, tmp4.z);
-                }
-            }
+        // rotate offsetY (rotate kiri)
+        if (window.isKeyPressed(GLFW_KEY_J)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 1.0f, 0.0f);
         }
 
-        // animasi saat key 9 dihold
-        if (keyPressed) {
-            // tangan gerak
-            Vector3f tmp = magnemite.objectsHalfTorus.get(0).updateCenterPoint();
-            Vector3f tmp2 = magnemite.objectsHalfTorus.get(1).updateCenterPoint();
-
-            for (int i = 0; i < magnemite.objectsHalfTorus.size(); i++) {
-                if (i == 0) {
-                    magnemite.objectsHalfTorus.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                    magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                    magnemite.objectsHalfTorus.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-                } else {
-                    magnemite.objectsHalfTorus.get(i).translateObject(tmp2.x * -1, tmp2.y * -1, tmp2.z * -1);
-                    magnemite.objectsHalfTorus.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                    magnemite.objectsHalfTorus.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
-                }
-            }
-
-            for (int i = 0; i < 8; i++) {
-                if (i <= 3) {
-                    magnemite.objectCube.get(i).translateObject(tmp.x * -1, tmp.y * -1, tmp.z * -1);
-                    magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                    magnemite.objectCube.get(i).translateObject(tmp.x, tmp.y, tmp.z);
-                } else {
-                    magnemite.objectCube.get(i).translateObject(tmp2.x * -1, tmp2.y * -1, tmp2.z * -1);
-                    magnemite.objectCube.get(i).rotateObject((float) Math.toRadians(10f), 1.0f, 0.0f, 0.0f);
-                    magnemite.objectCube.get(i).translateObject(tmp2.x, tmp2.y, tmp2.z);
-                }
-            }
-
-            // antena rotate pada poros
-            Vector3f tmp3 = magnemite.objectsCylinder.get(0).updateCenterPoint();
-            Vector3f tmp4 = magnemite.objectsHalfSphere.get(0).updateCenterPoint();
-            for (int i = 0; i < magnemite.objectsCylinder.size(); i++) {
-                magnemite.objectsCylinder.get(i).translateObject(tmp3.x * -1, tmp3.y * -1, tmp3.z * -1);
-                magnemite.objectsCylinder.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
-                magnemite.objectsCylinder.get(i).translateObject(tmp3.x, tmp3.y, tmp3.z);
-            }
-
-            for (int i = 0; i < magnemite.objectsHalfSphere.size(); i++) {
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x * -1, tmp4.y * -1, tmp4.z * -1);
-                magnemite.objectsHalfSphere.get(i).rotateObject((float) Math.toRadians(10f), 0.0f, 1.0f, .0f);
-                magnemite.objectsHalfSphere.get(i).translateObject(tmp4.x, tmp4.y, tmp4.z);
-            }
+        // rotate offsetX (rotate bawah)
+        if (window.isKeyPressed(GLFW_KEY_K)) {
+            magnemite.rotateMagnemite(0.5f, -1.0f, 0.0f, 0.0f);
         }
 
-        if (window.isKeyReleased(GLFW_KEY_9)) {
-            keyPressed = false;
+        // rotate offsetY (rotate kanan)
+        if (window.isKeyPressed(GLFW_KEY_L)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, -1.0f, 0.0f);
+        }
+
+        // rotate offsetZ (kiri)
+        if (window.isKeyPressed(GLFW_KEY_LEFT)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 0.0f, 1.0f);
+        }
+
+        // rotate offsetZ (kanan)
+        if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
+            magnemite.rotateMagnemite(0.5f, 0.0f, 0.0f, -1.0f);
+        }
+
+        // scale up
+        if (window.isKeyPressed(GLFW_KEY_T)) {
+            magnemite.scaleMagnemite(1.001f, 1.001f, 1.001f);
+        }
+
+        // scale down
+        if (window.isKeyPressed(GLFW_KEY_G)) {
+            magnemite.scaleMagnemite(0.999f, 0.999f, 0.999f);
         }
 
         // animasi bola mata gerak
@@ -284,9 +112,9 @@ public class Main2 {
         if (window.isKeyPressed(GLFW_KEY_R)) {
             magnemite.deleteObject();
             magnemite.init();
-            keyPressed = false;
-            animated = false;
         }
+
+        // untuk attack animation, klik 9
     }
 
     public void loop() {
@@ -299,7 +127,7 @@ public class Main2 {
             input();
 
             environtment.loop();
-            magnemite.loop();
+            magnemite.loop(window.isKeyPressed(GLFW_KEY_9), false);
 
             glDisableVertexAttribArray(0);
             glfwPollEvents();
