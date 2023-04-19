@@ -527,7 +527,7 @@ public class Regice {
         objects.get(0).getChildObject().get(18).rotateObject(-60.0f, 0, 1, 0);
         objects.get(0).getChildObject().get(18).translateObject(-0.175f, 0.3f, 0.175f);
 
-        // Ice Beam Attack
+        // Ice Beam Attack Sphere
         // (Awalnya memang kecil ukurannya, hanya terlihat saat animasi)
         objects.get(0).getChildObject().add(new Sphere(
                 Arrays.asList(
@@ -595,9 +595,21 @@ public class Regice {
         }
     }
 
+    public void rotateObjectByCenter(float degree, float x, float y, float z) {
+        for (Object object : objects) {
+            object.rotateObjectByCenter(degree, x, y, z, objects.get(0));
+        }
+    }
+
     public void scaleObject(float scaleX, float scaleY, float scaleZ) {
         for (Object object : objects) {
             object.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
+
+    public void scaleObjectByCenter(float scaleX, float scaleY, float scaleZ) {
+        for (Object object : objects) {
+            object.scaleObjectByCenter(scaleX, scaleY, scaleZ, objects.get(0));
         }
     }
 
@@ -626,8 +638,8 @@ public class Regice {
 
         // Tangan bergerak ke depan
         if (this.adiFrameCount < 180) {
-            objects.get(0).getChildObject().get(13).rotateObject(-0.2f, 0, 1, 0);
-            objects.get(0).getChildObject().get(14).rotateObject(0.2f, 0, 1, 0);
+            objects.get(0).getChildObject().get(13).rotateObjectByCenter(-0.005f, 0, 1, 0, objects.get(0));
+            objects.get(0).getChildObject().get(14).rotateObjectByCenter(0.005f, 0, 1, 0, objects.get(0));
             this.adiFrameCount++;
             return;
         }
@@ -647,7 +659,7 @@ public class Regice {
 
         // Muncul Bezier ice beam
         if ((this.adiFrameCount >= 300) && (this.adiFrameCount < 400)) {
-            // Ganti bezier tiap 5 frame
+            // Ganti bezier tiap 10 frame
             if (this.adiFrameCount % 10 == 0) {
 //                System.out.println("Sphere: " + objects.get(0).getChildObject().get(19).getCenterPoint());
 //                System.out.println("Main body: " + objects.get(0).getCenterPoint());
@@ -686,8 +698,8 @@ public class Regice {
 
         // Tangan bergerak ke belakang
         if ((this.adiFrameCount >= 520) && (this.adiFrameCount <= 700)) {
-            objects.get(0).getChildObject().get(13).rotateObject(0.2f, 0, 1, 0);
-            objects.get(0).getChildObject().get(14).rotateObject(-0.2f, 0, 1, 0);
+            objects.get(0).getChildObject().get(13).rotateObjectByCenter(0.005f, 0, 1, 0, objects.get(0));
+            objects.get(0).getChildObject().get(14).rotateObjectByCenter(-0.005f, 0, 1, 0, objects.get(0));
             this.adiFrameCount++;
             return;
         }
@@ -734,5 +746,9 @@ public class Regice {
     public void reset() {
         this.objects = new ArrayList<>();
         init();
+    }
+
+    public boolean isAnimating() {
+        return isAnimating;
     }
 }

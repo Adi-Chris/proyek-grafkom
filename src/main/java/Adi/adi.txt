@@ -31,7 +31,7 @@ Referensi animasi attack ice-beam:
 https://youtu.be/MOrBeCIe24g?t=42 (Dari anime ori)
 https://www.artstation.com/artwork/zDNdx6 (Buatan artist)
 
-Hierarchy
+Hierarchy (Selebihnya bisa dilihat di laporan)
 Main body
     ..
     Lengan kiri

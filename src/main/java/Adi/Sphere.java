@@ -113,7 +113,6 @@ public class Sphere extends Object {
         return sphereVertices;
     }
 
-    // TODO: Ini coba seperti rumus ellipsoid dipaskan v dan u rangenya
     public List<Vector3f> calculateSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount, float sectorAngleRadian, float stackAngleRadian) {
         ArrayList<Vector3f> sphereVertices = new ArrayList<>();
 

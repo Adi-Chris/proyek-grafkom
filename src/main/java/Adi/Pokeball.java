@@ -120,9 +120,21 @@ public class Pokeball {
         }
     }
 
+    public void rotateObjectByCenter(float degree, float x, float y, float z) {
+        for (Object object : objects) {
+            object.rotateObjectByCenter(degree, x, y, z, objects.get(0));
+        }
+    }
+
     public void scaleObject(float scaleX, float scaleY, float scaleZ) {
         for (Object object : objects) {
             object.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
+
+    public void scaleObjectByCenter(float scaleX, float scaleY, float scaleZ) {
+        for (Object object : objects) {
+            object.scaleObjectByCenter(scaleX, scaleY, scaleZ, objects.get(0));
         }
     }
 
@@ -130,5 +142,10 @@ public class Pokeball {
         for (Object object : objects) {
             object.translateObject(x, y, z);
         }
+    }
+
+    public void reset() {
+        this.objects = new ArrayList<>();
+        init();
     }
 }

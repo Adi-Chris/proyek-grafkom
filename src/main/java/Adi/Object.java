@@ -259,48 +259,53 @@ public class Object extends ShaderProgram {
 //        model = new Matrix4f().rotate(degree, x, y, z).mul(new Matrix4f(model));
 //        this.translateObject(other.centerPoint.x, other.centerPoint.y, other.centerPoint.z);
 
-        // DIBAWAH INI MUNGKIN BISA MENJADI BENAR, TAPI MASIH NGEBUG
+        // DIBAWAH INI MUNGKIN BISA MENJADI BENAR
         // Cari Translation
-        System.out.println("Initial: ");
-        System.out.println(model);
+//        System.out.println("Initial: ");
+//        System.out.println(model);
         Vector3f translationMinus = new Vector3f();
         Vector3f translation = new Vector3f();
         other.model.getTranslation(translation); // Ini udah dicoba pakai new tetep gak bisa
         translationMinus = new Vector3f(new Vector3f(translation).mul(-1.0f));
-        System.out.println("Translation: ");
-        System.out.println(translation);
-        System.out.println("TranslationMinus: ");
-        System.out.println(translationMinus);
+//        System.out.println("Translation: ");
+//        System.out.println(translation);
+//        System.out.println("TranslationMinus: ");
+//        System.out.println(translationMinus);
 
         // Kembalikan ke origin
 //        model = new Matrix4f(model).translate(translationMinus);
 //        // For some reason, .translate() itu ngebug ketika menambah row 03, 13, dan 23, hahaha
 //        // Lebih baik dimanual saja :))
-        System.out.println(model.get(0, 3));
+//        System.out.println(model.get(0, 3));
         model.setRowColumn(0, 3, model.get(3, 0) + translationMinus.x);
         model.setRowColumn(1, 3, model.get(3, 1) + translationMinus.y);
         model.setRowColumn(2, 3, model.get(3, 2) + translationMinus.z);
-        System.out.println("Back to origin: ");
-        System.out.println(model);
+//        System.out.println("Back to origin: ");
+//        System.out.println(model);
 
         // Dirotasi
         model = new Matrix4f().rotate(degree, x, y, z).mul(new Matrix4f(model));
-        System.out.println("Rotate: ");
-        System.out.println(model);
+//        System.out.println("Rotate: ");
+//        System.out.println(model);
 
         // Kembalikan ke awal
 //        model = new Matrix4f(model).translate(translation.x, translation.y, translation.z);
         // For some reason, .translate() itu ngebug ketika menambah row 03, 13, dan 23, hahaha
         // Lebih baik dimanual saja :))
-        System.out.println("Translation: ");
-        System.out.println(translation);
-        System.out.println("TranslationMinus: ");
-        System.out.println(translationMinus);
+//        System.out.println("Translation: ");
+//        System.out.println(translation);
+//        System.out.println("TranslationMinus: ");
+//        System.out.println(translationMinus);
         model.setRowColumn(0, 3, model.get(3, 0) + translation.x);
         model.setRowColumn(1, 3, model.get(3, 1) + translation.y);
         model.setRowColumn(2, 3, model.get(3, 2) + translation.z);
-        System.out.println("New + Rotated: ");
-        System.out.println(model);
+//        System.out.println("New + Rotated: ");
+//        System.out.println(model);
+
+        updateCenterPoint();
+        for (Object child : childObject) {
+            child.rotateObjectByCenter(degree, x, y, z, other);
+        }
     }
 
     // Buat Scale
@@ -346,6 +351,61 @@ public class Object extends ShaderProgram {
         updateCenterPoint();
         for (Object child : childObject) {
             child.scaleObject(scaleX, scaleY, scaleZ);
+        }
+    }
+
+    // Buat Rotasi berdasarkan titik pusat object lain (Untuk bulan)
+    public void scaleObjectByCenter(float scaleX, float scaleY, float scaleZ, Object other) {
+//        this.translateObject(-other.centerPoint.x, -other.centerPoint.y, -other.centerPoint.z);
+//        model = new Matrix4f().rotate(degree, x, y, z).mul(new Matrix4f(model));
+//        this.translateObject(other.centerPoint.x, other.centerPoint.y, other.centerPoint.z);
+
+        // DIBAWAH INI MUNGKIN BISA MENJADI BENAR
+        // Cari Translation
+//        System.out.println("Initial: ");
+//        System.out.println(model);
+        Vector3f translationMinus = new Vector3f();
+        Vector3f translation = new Vector3f();
+        other.model.getTranslation(translation); // Ini udah dicoba pakai new tetep gak bisa
+        translationMinus = new Vector3f(new Vector3f(translation).mul(-1.0f));
+//        System.out.println("Translation: ");
+//        System.out.println(translation);
+//        System.out.println("TranslationMinus: ");
+//        System.out.println(translationMinus);
+
+        // Kembalikan ke origin
+//        model = new Matrix4f(model).translate(translationMinus);
+//        // For some reason, .translate() itu ngebug ketika menambah row 03, 13, dan 23, hahaha
+//        // Lebih baik dimanual saja :))
+//        System.out.println(model.get(0, 3));
+        model.setRowColumn(0, 3, model.get(3, 0) + translationMinus.x);
+        model.setRowColumn(1, 3, model.get(3, 1) + translationMinus.y);
+        model.setRowColumn(2, 3, model.get(3, 2) + translationMinus.z);
+//        System.out.println("Back to origin: ");
+//        System.out.println(model);
+
+        // Discale
+        model = new Matrix4f().scale(scaleX, scaleY, scaleZ).mul(new Matrix4f(model));
+//        System.out.println("Rotate: ");
+//        System.out.println(model);
+
+        // Kembalikan ke awal
+//        model = new Matrix4f(model).translate(translation.x, translation.y, translation.z);
+        // For some reason, .translate() itu ngebug ketika menambah row 03, 13, dan 23, hahaha
+        // Lebih baik dimanual saja :))
+//        System.out.println("Translation: ");
+//        System.out.println(translation);
+//        System.out.println("TranslationMinus: ");
+//        System.out.println(translationMinus);
+        model.setRowColumn(0, 3, model.get(3, 0) + translation.x);
+        model.setRowColumn(1, 3, model.get(3, 1) + translation.y);
+        model.setRowColumn(2, 3, model.get(3, 2) + translation.z);
+//        System.out.println("New + Rotated: ");
+//        System.out.println(model);
+
+        updateCenterPoint();
+        for (Object child : childObject) {
+            child.scaleObjectByCenter(scaleX, scaleY, scaleZ, other);
         }
     }
 
