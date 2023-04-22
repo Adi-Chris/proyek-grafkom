@@ -34,7 +34,7 @@ public class Main4 {
         window.init();
         GL.createCapabilities();
         marill.init();
-        envi.init();
+        envi.init(false);
     }
 
     public void input() {
@@ -234,6 +234,10 @@ public class Main4 {
             for (int i = 0; i < marill.cylinder.size(); i++) {
                 marill.cylinder.get(i).scaleObject(1.001f,1.001f, 1.001f);
             }
+        }
+
+        if (window.isKeyPressed(GLFW_KEY_R)) {
+            marill.reset();
         }
     }
     public void loop() {

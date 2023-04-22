@@ -67,7 +67,7 @@ public class MainGabung {
 
         // Code
         // Engine
-        environtment.init();
+        environtment.init(false);
 
         // Adi
 //        pokeball.init();
@@ -88,13 +88,12 @@ public class MainGabung {
 
     public void initBattleState() {
         // Code
-
         // Adi
 //        pokeball.init();
         regice.reset();
         regice.rotateObject(215.0f, 0.0f, 1.0f, 0.0f);
-        regice.scaleObject(0.5f, 0.5f, 0.5f);
-        regice.translateObject(-0.6f, -0.3f, 0.25f);
+        regice.scaleObject(0.75f, 0.75f, 0.75f);
+        regice.translateObject(-0.45f, -0.4f, 0.25f);
 
 //        // Louis
 //        // init object magnemite
@@ -102,7 +101,7 @@ public class MainGabung {
         magnemite.init();
         magnemite.rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
         magnemite.scaleMagnemite(0.5f, 0.5f, 0.5f);
-        magnemite.translateMagnemite(0.7225f, 0.1f, 0.0f);
+        magnemite.translateMagnemite(0.3f, 0.2f, 0.0f);
 //
 //        // Ryan
 //        pokeball.init();
@@ -131,56 +130,56 @@ public class MainGabung {
 
         // Translate
         for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
-            Oshawott.objectEllipsoid.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+            Oshawott.objectEllipsoid.get(i).translateObject(0.5f, 0.5f, 0.0f);
         }
         for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
-            Oshawott.objectsSphere.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+            Oshawott.objectsSphere.get(i).translateObject(0.5f, 0.5f, 0.0f);
         }
-        Oshawott.objectsHS.get(0).translateObject(0.39f, 0.3775f, 0.0f);
-        Oshawott.objectsCylinder.get(0).translateObject(0.39f, 0.3775f, 0.0f);
+        Oshawott.objectsHS.get(0).translateObject(0.5f, 0.5f, 0.0f);
+        Oshawott.objectsCylinder.get(0).translateObject(0.5f, 0.5f, 0.0f);
 
         // Timo
         marill.reset();
         // Rotate
         for (int i = 0; i < marill.objectsSphere.size(); i++) {
-            marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+            marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
         }
         for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
-            marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+            marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
         }
         for (int i = 0; i < marill.berzier.size(); i++) {
-            marill.berzier.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+            marill.berzier.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
         }
         for (int i = 0; i < marill.cylinder.size(); i++) {
-            marill.cylinder.get(i).rotateObject((float) Math.toRadians(215.0f), 0.0f, 1f, 0.0f);
+            marill.cylinder.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
         }
 
         // Scale
         for (int i = 0; i < marill.objectsSphere.size(); i++) {
-            marill.objectsSphere.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+            marill.objectsSphere.get(i).scaleObject(0.4f, 0.4f, 0.4f);
         }
         for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
-            marill.objectsEllipsoid.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+            marill.objectsEllipsoid.get(i).scaleObject(0.4f, 0.4f, 0.4f);
         }
         for (int i = 0; i < marill.berzier.size(); i++) {
-            marill.berzier.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+            marill.berzier.get(i).scaleObject(0.4f, 0.4f, 0.4f);
         }
         for (int i = 0; i < marill.cylinder.size(); i++) {
-            marill.cylinder.get(i).scaleObject(0.5f, 0.5f, 0.5f);
+            marill.cylinder.get(i).scaleObject(0.4f, 0.4f, 0.4f);
         }
 
         // Translate
         for (int i = 0; i < marill.objectsSphere.size(); i++) {
-            marill.objectsSphere.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+            marill.objectsSphere.get(i).translateObject(0.7f, 0.2f, 0.15f);
         }
         for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
-            marill.objectsEllipsoid.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+            marill.objectsEllipsoid.get(i).translateObject(0.7f, 0.2f, 0.15f);
         }
         for (int i = 0; i < marill.berzier.size(); i++) {
-            marill.berzier.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+            marill.berzier.get(i).translateObject(0.7f, 0.2f, 0.15f);
         }
         for (int i = 0; i < marill.cylinder.size(); i++) {
-            marill.cylinder.get(i).translateObject(-0.38f, -0.6f, 0.15f);
+            marill.cylinder.get(i).translateObject(0.7f, 0.2f, 0.15f);
         }
     }
 
@@ -219,43 +218,43 @@ public class MainGabung {
     public void inputAdi() {
         if (window.isKeyPressed(GLFW_KEY_I)) {
             // Rotasi
-//            pokeball.rotateObject(10f, 1.0f, 0.0f, 0.0f);
-            regice.rotateObject(10f, 1.0f, 0.0f, 0.0f);
+//            pokeball.rotateObjectByCenter(0.01f, 1.0f, 0.0f, 0.0f);
+            regice.rotateObjectByCenter(0.01f, 1.0f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_J)) {
             // Rotasi
-//            pokeball.rotateObject(10f, 0.0f, 1.0f, 0.0f);
-            regice.rotateObject(10f, 0.0f, 1.0f, 0.0f);
+//            pokeball.rotateObjectByCenter(0.01f, 0.0f, 1.0f, 0.0f);
+            regice.rotateObjectByCenter(0.01f, 0.0f, 1.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_K)) {
             // Rotasi
-//            pokeball.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
-            regice.rotateObject(-10f, 1.0f, 0.0f, 0.0f);
+//            pokeball.rotateObjectByCenter(-0.01f, 1.0f, 0.0f, 0.0f);
+            regice.rotateObjectByCenter(-0.01f, 1.0f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_L)) {
             // Rotasi
-//            pokeball.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
-            regice.rotateObject(-10f, 0.0f, 1.0f, 0.0f);
+//            pokeball.rotateObjectByCenter(-0.01f, 0.0f, 1.0f, 0.0f);
+            regice.rotateObjectByCenter(-0.01f, 0.0f, 1.0f, 0.0f);
         }
 
         if (window.isKeyPressed(GLFW_KEY_W)) {
             // Translasi
-//            pokeball.translateObject(0.0f, 0.1f, 0.0f);
+//            pokeball.translateObject(0.0f, 0.01f, 0.0f);
             regice.translateObject(0.0f, 0.01f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
             // Translasi
-//            pokeball.translateObject(-0.1f, 0.0f, 0.0f);
+//            pokeball.translateObject(-0.01f, 0.0f, 0.0f);
             regice.translateObject(-0.01f, 0.0f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_S)) {
             // Translasi
-//            pokeball.translateObject(0.0f, -0.1f, 0.0f);
+//            pokeball.translateObject(0.0f, -0.01f, 0.0f);
             regice.translateObject(0.0f, -0.01f, 0.0f);
         }
         if (window.isKeyPressed(GLFW_KEY_D)) {
             // Translasi
-//            pokeball.translateObject(0.1f, 0.0f, 0.0f);
+//            pokeball.translateObject(0.01f, 0.0f, 0.0f);
             regice.translateObject(0.01f, 0.0f, 0.0f);
         }
 
@@ -270,14 +269,16 @@ public class MainGabung {
             regice.scaleObject(0.999f, 0.999f, 0.999f);
         }
 
-        if (window.isKeyPressed(GLFW_KEY_R)) {
+        // Untuk attack animation, tekan Q
+
+        if (window.isKeyPressed(GLFW_KEY_R)  && !regice.isAnimating()) {
             // Reset ke posisi awal
             regice.reset();
 
             if (battleState) {
                 regice.rotateObject(215.0f, 0.0f, 1.0f, 0.0f);
-                regice.scaleObject(0.5f, 0.5f, 0.5f);
-                regice.translateObject(-0.6f, -0.3f, 0.25f);
+                regice.scaleObject(0.75f, 0.75f, 0.75f);
+                regice.translateObject(-0.45f, -0.4f, 0.25f);
             }
         }
     }
@@ -372,7 +373,7 @@ public class MainGabung {
             if (battleState) {
                 magnemite.rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
                 magnemite.scaleMagnemite(0.5f, 0.5f, 0.5f);
-                magnemite.translateMagnemite(0.7225f, 0.1f, 0.0f);
+                magnemite.translateMagnemite(0.3f, 0.2f, 0.0f);
             }
         }
 
@@ -727,13 +728,13 @@ public class MainGabung {
 
                 // Translate
                 for (int i = 0; i < Oshawott.objectEllipsoid.size(); i++) {
-                    Oshawott.objectEllipsoid.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+                    Oshawott.objectEllipsoid.get(i).translateObject(0.5f, 0.5f, 0.0f);
                 }
                 for (int i = 0; i < Oshawott.objectsSphere.size(); i++) {
-                    Oshawott.objectsSphere.get(i).translateObject(0.39f, 0.3775f, 0.0f);
+                    Oshawott.objectsSphere.get(i).translateObject(0.5f, 0.5f, 0.0f);
                 }
-                Oshawott.objectsHS.get(0).translateObject(0.39f, 0.3775f, 0.0f);
-                Oshawott.objectsCylinder.get(0).translateObject(0.39f, 0.3775f, 0.0f);
+                Oshawott.objectsHS.get(0).translateObject(0.5f, 0.5f, 0.0f);
+                Oshawott.objectsCylinder.get(0).translateObject(0.5f, 0.5f, 0.0f);
             }
         }
 
@@ -949,6 +950,54 @@ public class MainGabung {
                 marill.cylinder.get(i).scaleObject(1.001f, 1.001f, 1.001f);
             }
         }
+
+        if (window.isKeyPressed(GLFW_KEY_R)) {
+            marill.reset();
+
+            if (battleState) {
+                // Rotate
+                for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                    marill.objectsSphere.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
+                }
+                for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                    marill.objectsEllipsoid.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
+                }
+                for (int i = 0; i < marill.berzier.size(); i++) {
+                    marill.berzier.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
+                }
+                for (int i = 0; i < marill.cylinder.size(); i++) {
+                    marill.cylinder.get(i).rotateObject((float) Math.toRadians(15.0f), 0.0f, 1f, 0.0f);
+                }
+
+                // Scale
+                for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                    marill.objectsSphere.get(i).scaleObject(0.4f, 0.4f, 0.4f);
+                }
+                for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                    marill.objectsEllipsoid.get(i).scaleObject(0.4f, 0.4f, 0.4f);
+                }
+                for (int i = 0; i < marill.berzier.size(); i++) {
+                    marill.berzier.get(i).scaleObject(0.4f, 0.4f, 0.4f);
+                }
+                for (int i = 0; i < marill.cylinder.size(); i++) {
+                    marill.cylinder.get(i).scaleObject(0.4f, 0.4f, 0.4f);
+                }
+
+                // Translate
+                for (int i = 0; i < marill.objectsSphere.size(); i++) {
+                    marill.objectsSphere.get(i).translateObject(0.7f, 0.2f, 0.15f);
+                }
+                for (int i = 0; i < marill.objectsEllipsoid.size(); i++) {
+                    marill.objectsEllipsoid.get(i).translateObject(0.7f, 0.2f, 0.15f);
+                }
+                for (int i = 0; i < marill.berzier.size(); i++) {
+                    marill.berzier.get(i).translateObject(0.7f, 0.2f, 0.15f);
+                }
+                for (int i = 0; i < marill.cylinder.size(); i++) {
+                    marill.cylinder.get(i).translateObject(0.7f, 0.2f, 0.15f);
+                }
+            }
+        }
     }
 
     public void loop() {
@@ -969,8 +1018,8 @@ public class MainGabung {
             switch (drawState) {
                 case 0:
                     // Adi
-                    // Battle state
                     if (changeState) {
+                        environtment.reset(false);
                         regice.reset();
                         changeState = false;
                     }
@@ -978,25 +1027,36 @@ public class MainGabung {
 //                            0.3f, 0.95f,
 //                            0.0f);
                     glClearColor(116 / 255f, 189 / 255f, 34 / 255f, 0.0f);
-                    inputAdi();
+
+                    // Tidak bisa bergerak ketika animating
+                    if (!regice.isAnimating()) {
+                        inputAdi();
+                    }
+
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q), false);
                     break;
                 case 1:
                     // Louis
-                    // Battle state
                     if (changeState) {
+                        environtment.reset(false);
                         magnemite.deleteObject();
                         magnemite.init();
                         changeState = false;
                     }
 //                    glClearColor(15f,192/255f,203/255f,0.0f);
                     glClearColor(116 / 255f, 189 / 255f, 34 / 255f, 0.0f);
-                    inputLouis();
+
+                    // Tidak bisa bergerak ketika animating
+                    if (magnemite.getFrame() <= 0) {
+                        inputLouis();
+                    }
+
                     magnemite.loop(window.isKeyPressed(GLFW_KEY_9), false);
                     break;
                 case 2:
                     // Ryan
                     if (changeState) {
+                        environtment.reset(false);
                         Oshawott.objects.clear();
                         Oshawott.objectsHS.clear();
                         Oshawott.objectEllipsoid.clear();
@@ -1019,6 +1079,7 @@ public class MainGabung {
                 case 3:
                     // Timotius
                     if (changeState) {
+                        environtment.reset(false);
                         marill.objectsSphere.clear();
                         marill.objectsEllipsoid.clear();
                         marill.cylinder.clear();
@@ -1037,18 +1098,24 @@ public class MainGabung {
                 case 4:
                     // Battle state
                     if (changeState) {
+                        environtment.reset(true);
                         initBattleState();
                         changeState = false;
                     }
                     glClearColor(116 / 255f, 189 / 255f, 34 / 255f, 0.0f);
-                    inputAdi();
+
+                    // Tidak bisa bergerak ketika regice atau magnemite sedang animating
+                    if (!regice.isAnimating() && magnemite.getFrame() <= 0) {
+                        inputAdi();
+                        inputLouis();
+                        inputRyan();
+                        inputTimo();
+                    }
+
                     regice.loop(window.isKeyPressed(GLFW_KEY_Q), true);
-                    inputLouis();
                     magnemite.loop(window.isKeyPressed(GLFW_KEY_9), true);
-                    inputRyan();
 //                    pokeball.loop();
                     Oshawott.loop();
-                    inputTimo();
                     marill.loop();
                     break;
             }

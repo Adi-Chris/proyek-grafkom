@@ -37,7 +37,7 @@ public class Main3 {
         pokeball.init();
         pokeball.translateObject(0.7825f, 0.81f, -0.5f);
         Oshawott.init();
-        envi.init();
+        envi.init(false);
     }
 
     public static void main(String[] args) {

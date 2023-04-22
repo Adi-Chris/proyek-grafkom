@@ -892,8 +892,12 @@ public class Magnemite {
         if (isInBattleState) {
             rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
             scaleMagnemite(0.5f, 0.5f, 0.5f);
-            translateMagnemite(0.7225f, 0.1f, 0.0f);
+            translateMagnemite(0.3f, 0.2f, 0.0f);
 //            translateMagnemite(positionBeforeAnimating.x, positionBeforeAnimating.y, positionBeforeAnimating.z);
         }
+    }
+
+    public int getFrame() {
+        return frame;
     }
 }

@@ -42,35 +42,7 @@ public class Environtment {
             {-0.9175f, 0.295f, 0.0f}
     };
 
-    public void init() {
-        objectsSphere.add(new Sphere(
-                Arrays.asList(
-                        //shaderFile lokasi menyesuaikan objectnya
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-                ), new ArrayList<>(),
-                new Vector4f(0.0f, 0.5f, 0.3f, 0.0f),
-                0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.3f
-        ));
-        objectsSphere.get(0).rotateObject((float) Math.toRadians(60), 1.0f, 1.0f, 0.0f);
-        objectsSphere.get(0).translateObject(-0.5f, -0.6f, 0.6f);
-
-        objectsSphere.add(new Sphere(
-                Arrays.asList(
-                        //shaderFile lokasi menyesuaikan objectnya
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                        new ShaderProgram.ShaderModuleData
-                                ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-                ), new ArrayList<>(),
-                new Vector4f(0.0f, 0.5f, 0.3f, 0.0f),
-                0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.3f
-        ));
-        objectsSphere.get(1).rotateObject((float) Math.toRadians(60), 1.0f, 1.0f, 0.0f);
-        objectsSphere.get(1).translateObject(0.5f, 0.2f, 0.6f);
-
+    public void init(boolean spawnStageSphere) {
         // matahari
         objectsSphere.add(new Sphere(
                 Arrays.asList(
@@ -83,7 +55,38 @@ public class Environtment {
                 new Vector4f(1.0f, 0.769f, 0.212f, 0.0f),
                 0.0f, 0.0f, 0.0f, 0.4f, 0.4f, 0.4f
         ));
-        objectsSphere.get(2).translateObject(-1.0f, 1.0f, 0.6f);
+        objectsSphere.get(0).translateObject(-1.0f, 1.0f, 0.6f);
+
+        // Stage
+        if (spawnStageSphere) {
+            objectsSphere.add(new Sphere(
+                    Arrays.asList(
+                            //shaderFile lokasi menyesuaikan objectnya
+                            new ShaderProgram.ShaderModuleData
+                                    ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                            new ShaderProgram.ShaderModuleData
+                                    ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                    ), new ArrayList<>(),
+                    new Vector4f(0.0f, 0.5f, 0.3f, 0.0f),
+                    0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.3f
+            ));
+            objectsSphere.get(1).rotateObject((float) Math.toRadians(60), 1.0f, 1.0f, 0.0f);
+            objectsSphere.get(1).translateObject(-0.5f, -0.6f, 0.6f);
+
+            objectsSphere.add(new Sphere(
+                    Arrays.asList(
+                            //shaderFile lokasi menyesuaikan objectnya
+                            new ShaderProgram.ShaderModuleData
+                                    ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                            new ShaderProgram.ShaderModuleData
+                                    ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                    ), new ArrayList<>(),
+                    new Vector4f(0.0f, 0.5f, 0.3f, 0.0f),
+                    0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.3f
+            ));
+            objectsSphere.get(2).rotateObject((float) Math.toRadians(60), 1.0f, 1.0f, 0.0f);
+            objectsSphere.get(2).translateObject(0.5f, 0.2f, 0.6f);
+        }
 
         berzier1.add(new Ryan.Object(
                 Arrays.asList(
@@ -242,5 +245,15 @@ public class Environtment {
                 berzier4.get(0).addVertices(new Vector3f(x, y, z));
             }
         }
+    }
+
+    public void reset(boolean spawnStageSphere) {
+        objectsSphere.clear();
+        berzier1.clear();
+        berzier2.clear();
+        berzier3.clear();
+        berzier4.clear();
+        objectsCube.clear();
+        init(spawnStageSphere);
     }
 }

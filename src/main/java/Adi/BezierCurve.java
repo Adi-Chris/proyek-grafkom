@@ -36,6 +36,10 @@ public class BezierCurve extends Object {
         // Parameter first dan end itu, vertices yang digambar mulai dari index keberapa, terus dari first ngegambar berapa kali.
         // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
 
+        // Gambar child
+        for (Object child : getChildObject()) {
+            child.draw();
+        }
     }
 
     // startPoint = titik mulai bezier, yaitu sphere ice beam

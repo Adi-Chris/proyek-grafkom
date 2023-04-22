@@ -21,7 +21,7 @@ public class Main2 {
         MouseInput mouseInput = window.getMouseInput();
 
         // init environment
-        environtment.init();
+        environtment.init(false);
 
         // init object magnemite
         magnemite.init();
@@ -124,7 +124,11 @@ public class Main2 {
             glClearColor(15f,192/255f,203/255f,0.0f);
             GL.createCapabilities();
             glEnable(GL_DEPTH_TEST);
-            input();
+
+            // Tidak bisa bergerak ketika animating
+            if (magnemite.getFrame() <= 0) {
+                input();
+            }
 
             environtment.loop();
             magnemite.loop(window.isKeyPressed(GLFW_KEY_9), false);

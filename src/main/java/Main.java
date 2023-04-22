@@ -34,7 +34,7 @@ public class Main {
         GL.createCapabilities();
 
         //code
-        environtment.init();
+        environtment.init(false);
         pokeball.init();
         regice.init();
     }
@@ -80,6 +80,8 @@ public class Main {
             // Translasi
             pokeball.translateObject(0.01f, 0.0f, 0.0f);
             regice.translateObject(0.01f, 0.0f, 0.0f);
+        }
+        if (window.isKeyPressed(GLFW_KEY_T)) {
             // Scale
             pokeball.scaleObjectByCenter(1.01f, 1.01f, 1.01f);
             regice.scaleObjectByCenter(1.01f, 1.01f, 1.01f);
@@ -100,14 +102,21 @@ public class Main {
     public void loop() {
         while (window.isOpen()) {
             window.update();
-            glClearColor(1.0f,
-                    0.3f, 0.95f,
+//            glClearColor(1.0f,
+//                    0.3f, 0.95f,
+//                    0.0f);
+            glClearColor(0.7f,
+                    0.7f, 0.7f,
                     0.0f);
             GL.createCapabilities();
-            input();
+
+            // Tidak bisa bergerak ketika animating
+            if (!regice.isAnimating()) {
+                input();
+            }
 
             //code
-            environtment.loop();
+//            environtment.loop();
 //            pokeball.loop();
             regice.loop(window.isKeyPressed(GLFW_KEY_Q), false);
 

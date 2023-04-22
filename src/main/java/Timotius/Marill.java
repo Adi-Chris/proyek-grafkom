@@ -335,6 +335,8 @@ public class Marill {
         }
 
         if (idleFrameCount > -animationBound && !idleBigger) {
+            objectsSphere.get(5).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
+            cylinder.get(0).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
             for (Timotius.Sphere object : objectsSphere) {
                 object.scaleObject(0.999f, 0.999f, 0.999f);
             }
@@ -346,9 +348,6 @@ public class Marill {
             }for (Timotius.Object object : berzier) {
                 object.scaleObject(0.999f, 0.999f, 0.999f);
             }
-            objectsSphere.get(5).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
-            cylinder.get(0).rotateObject((float)Math.toRadians(1f),0.0f,1f,0.0f);
-
         }
 
         if (idleFrameCount >= animationBound * 3) {
