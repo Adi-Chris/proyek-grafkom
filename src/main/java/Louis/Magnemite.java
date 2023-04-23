@@ -27,6 +27,7 @@ public class Magnemite {
     boolean isAnimating = false;
     int idleFrameCount = 0;
     boolean idleBigger = true;
+    Vector3f positionBeforeAnimating = null;
 
     public void init() {
         // badan
@@ -735,7 +736,9 @@ public class Magnemite {
 
     // attack animation
     public void attackAnimation(boolean isKeyPressed, boolean isInBattleState) {
-//        Vector3f positionBeforeAnimating = objectsSphere.get(0).updateCenterPoint();
+        if (!isAnimating) {
+            positionBeforeAnimating = objectsSphere.get(0).updateCenterPoint();
+        }
 
         if (isKeyPressed && !isAnimating) {
             this.frame = 0;
@@ -751,19 +754,20 @@ public class Magnemite {
         // terbang
         if (this.frame < 300) {
             fly(0.001f);
+            translateMagnemite(0.0f, 0.0f, -0.001f);
             this.frame++;
             return;
         }
 
         // bola mata membesar
-        if(this.frame >= 300 && this.frame <= 400) {
+        if (this.frame >= 300 && this.frame <= 400) {
             objectsSphere.get(2).scaleObject(1.001f, 1.001f, 1.001f);
             this.frame++;
             return;
         }
 
 
-        if(this.frame >= 400 && this.frame <= 1000) {
+        if (this.frame >= 400 && this.frame <= 1000) {
             // posisi center tangan kiri dan tangan kanan
             Vector3f cubeAtasTanganKiri = objectCube.get(2).updateCenterPoint();
             Vector3f cubeBawahTanganKiri = objectCube.get(3).updateCenterPoint();
@@ -888,13 +892,14 @@ public class Magnemite {
         isAnimating = false;
         deleteObject();
         init();
+        this.frame = 0;
 
+        // mengembalikan ke posisi awal sebelum animasi
         if (isInBattleState) {
             rotateMagnemite(15f, 0.0f, 1.0f, 0.0f);
             scaleMagnemite(0.5f, 0.5f, 0.5f);
-            translateMagnemite(0.3f, 0.2f, 0.0f);
-//            translateMagnemite(positionBeforeAnimating.x, positionBeforeAnimating.y, positionBeforeAnimating.z);
         }
+        translateMagnemite(positionBeforeAnimating.x, positionBeforeAnimating.y, positionBeforeAnimating.z);
     }
 
     public int getFrame() {
