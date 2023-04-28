@@ -75,15 +75,6 @@ public class EllipticCone extends Object {
     public List<Vector3f> calculateEllipticConeVertices(Vector3f center, float radiusX, float radiusY, float coneHeight, int sectorCount, int stackCount) {
         ArrayList<Vector3f> ellipticConeVertices = new ArrayList<>();
 
-//        for(double v = -Math.PI/2; v<= Math.PI/2; v+=Math.PI/stackCount){
-//            for(double u = -Math.PI; u<= Math.PI; u+=Math.PI/sectorCount){
-//                float x = center.x + radiusX * (float)(v * Math.cos(u));
-//                float y = center.y + radiusY * (float)(v * Math.sin(u));
-//                float z = center.z + radiusZ * (float)(v);
-//                ellipticConeVertices.add(new Vector3f(x,y,z)); // Kalau mau lihat dari perspektif lain, coba y dan z dituker
-//            }
-//        }
-
         float pi = (float) Math.PI;
 
         float sectorStep = 2 * pi / sectorCount;
@@ -133,15 +124,6 @@ public class EllipticCone extends Object {
 
     public void setupIBO(int sectorCount, int stackCount) {
         // Setup urutan index dan ibo
-//        index = Arrays.asList(0, 3, 3, 1, 1, 4, 4, 2, 2, 0);
-
-        // Stack = Rownya (Yang melingkar searah putaran donut)
-        // Sector = Columnnya (Yang melingkar tegak lurus putaran donut)
-//        List<List<Vector3f>> torusStacks = new ArrayList<>();
-//        for (int i = 0; i < stackCount - 1; i++) {
-//            torusStacks.add(this.vertices.subList(sectorCount * i, sectorCount * (i + 1)));
-//        }
-
 //        System.out.println("Size: " + this.vertices.size());
         // Buat masukin ke indexnya
         for (int i = 0; i < stackCount; i++) {
@@ -174,40 +156,8 @@ public class EllipticCone extends Object {
                     // Kalau bukan sector terakhir, kaitkan dengan stack selanjutnya
                     index.add(((sectorCount) * (i + 1)) + j + 1);
                 }
-
-
             }
-
-//            System.out.println("First:");
-//            System.out.printf("%d, %d, %d\n", (sectorCount * (i + 1)) - 1, ((sectorCount * (i + 2)) - 1), (stackCount * i));
-//            // Jadi agar sector akhir ke awalnya ngeloop
-//            // Titiknya: Stack sekarang sector terakhir, stack selanjutnya sector terakhir, stack sekarang sector pertama
-//            index.add((sectorCount * (i + 1)) - 1);
-//            index.add((sectorCount * (i + 2)) - 1);
-//            index.add(stackCount * i);
-//
-//            System.out.println("First2:");
-//            System.out.printf("%d, %d, %d\n", ((sectorCount * (i + 2)) - 1), (stackCount * i), sectorCount * (i + 1));
-//            // Titiknya: Stack selanjutnya sector terakhir, stack sekarang sector pertama, stack selanjutnya sector pertama
-//            index.add((sectorCount * (i + 2)) - 1);
-//            index.add(stackCount * i);
-//            index.add(sectorCount * (i + 1));
         }
-
-//        // Untuk stack terakhir dan pertama
-//        // Jadi agar stack terakhir dan pertama ngeloop
-//        for (int j = 0; j < sectorCount; j++) {
-//        // Titiknya: stack terakhir sector sekarang, stack pertama sector sekarang, stack terakhir sector selanjutnya
-//        index.add((stackCount * (stackCount - 1)) + j);
-//        index.add(0 + j);
-//        index.add((stackCount * (stackCount - 1)) + j + 1);
-//
-//        // Titiknya: stack pertama sector selanjutnya, stack terakhir sector selanjutnya, stack pertama sector selanjutnya
-//        index.add(0 + j);
-//        index.add((stackCount * (stackCount - 1)) + j + 1);
-//        index.add(0 + j + 1);
-//        }
-
 //        System.out.println(index);
 
         ibo = glGenBuffers();

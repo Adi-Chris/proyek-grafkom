@@ -60,26 +60,6 @@ public class Torus extends Object {
         setupIBO(sectorCount, stackCount, startSector, endSector);
     }
 
-//    // Draw pakai biasa
-//    @Override
-//    public void draw() {
-//        drawSetup();
-//        // Draw the vertices
-//        // Optional
-//        glLineWidth(10);
-//        glPointSize(3);
-//        // Wajib
-//        glDrawArrays(GL_TRIANGLE_STRIP, 0, vertices.size());
-//        // Pilihan draw:
-//        // LINES
-//        // LINE_STRIP
-//        // TRIANGLES
-//        // TRIANGLE_FAN
-//        // POINT
-//        // Parameter first dan end itu, vertices yang digambar mulai dari index keberapa, terus dari first ngegambar berapa kali.
-//        // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
-//    }
-
     // Draw pakai ibo
     @Override
     public void draw() {

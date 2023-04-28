@@ -24,26 +24,6 @@ public class HalfSphere extends Object {
         setupVAOVBO();
     }
 
-//    // Draw pakai Polygon
-//    @Override
-//    public void draw() {
-//        drawSetup();
-//        // Draw the vertices
-//        // Optional
-//        glLineWidth(1);
-//        glPointSize(2);
-//        // Wajib
-//        glDrawArrays(GL_POLYGON, 0, vertices.size());
-//        // Pilihan draw:
-//        // LINES
-//        // LINE_STRIP
-//        // TRIANGLES
-//        // TRIANGLE_FAN
-//        // POINT
-//        // Parameter first dan end itu, vertices yang digambar mulai dari index keberapa, terus dari first ngegambar berapa kali.
-//        // Misal 0, 2. Berarti, digambar index 0, 1, 2. Soalnya dari index 0 maju 2x
-//    }
-
     public List<Vector3f> calculateHalfSphereVertices(Vector3f center, float radiusX, float radiusY, float radiusZ, int sectorCount, int stackCount) {
         ArrayList<Vector3f> sphereVertices = new ArrayList<>();
 
