@@ -5,6 +5,7 @@ Louis Arthur - C14210048 [KELAS B] -> Membuat Magnemite
 Ryan David - C14210262 [KELAS B] -> Membuat Oshawott
 Timutius Alvin - C14210172 [KELAS B] -> Membuat Marill
 Adi Christian - C14210091 [KELAS A] -> Membuat Regice
+CATATAN: Kami tetap memakai nomor kelompok 34, sebab pada saat presentasi kami nomor 34. Di sheetsnya sekarang kami berubah jadi kelompok nomor 31 entah mengapa.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Main.java hanya berisi pokemon Regice
 Main2.java hanya berisi pokemon Magnemite
